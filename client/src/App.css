@@ -29,3 +29,18 @@ h1 {
 .more:active {
   background-color: #FFEFA9;
 }
+
+.flex-grid {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+
+.leftCol {
+  text-align: left;
+}
+
+.rightCol {
+  text-align: right;
+}
