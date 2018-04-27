@@ -30,7 +30,7 @@ app.get('/api/events', (req, res) => {
                   {Id:5, Name:'Assist', Type:'Other2'},
                   {Id:6, Name:'Medic', Type:'Own1'},
                   {Id:7, Name:'Offside', Type:'Own1'}]);
-}
+});
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
