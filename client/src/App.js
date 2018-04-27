@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Participant from './participants/participant';
 
 class App extends Component {
   // Initialize state
@@ -39,6 +40,9 @@ class App extends Component {
                 </li>
               )}
             </ul>
+            <div>
+              <Participant />
+            </div>
             <button
               className="more"
               onClick={this.getPasswords}>
