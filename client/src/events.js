@@ -13,9 +13,9 @@ export default class Events extends React.Component {
     //Fetches all events correctly, but state is not updated in time for render() to know about the events.
     var self = this;
 
-    //Connector.getEvents().then(function(result) {
-    //  self.setState({events:result});
-    //});
+    Connector.getEvents().then(function(result) {
+      self.setState({events:result});
+    });
   }
 
   render() {
