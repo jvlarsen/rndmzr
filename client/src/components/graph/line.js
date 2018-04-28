@@ -1,7 +1,21 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
 
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
 
 const data = {
   labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
@@ -55,7 +69,7 @@ export default class MyLine extends React.Component {
   render() {
     return (
       <div>
-        <Line data={data} />
+        <Line data={data} id='graph2'/>
       </div>
     );
   }

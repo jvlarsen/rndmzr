@@ -10,7 +10,7 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
   for (var i = 0; i < playersToAllocate; i++) {
     var playerIndex = i%10;
     var participantIndex = indexStart%numberOfParticipants;
-    console.log('participantIndex is: ' + participantIndex + ', and player index is: ' + playerIndex);
+    //console.log('participantIndex is: ' + participantIndex + ', and player index is: ' + playerIndex);
     indexStart++;
 //    document.getElementById('playerHome' + i).setAttribute('allocationKey',indexStart);
   }
@@ -20,6 +20,10 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
 //vil gerne have hele elementet med.
 const randomize = (selectedPlayer, selectedEvent) => {
   console.log(selectedPlayer + selectedEvent);
+
+  var ele = document.getElementById('graph');
+  console.log(ele);
+
   return Connector.randomize(selectedPlayer, selectedEvent);
 }
 

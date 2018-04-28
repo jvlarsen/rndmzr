@@ -3,7 +3,7 @@ import React from 'react';
 export default class ParticipantAdder extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {value: ''};
+      this.state = {value: '',};
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,7 @@ export default class ParticipantAdder extends React.Component {
     render() {
       return (
         <form onSubmit={this.handleSubmit}>
-            <input type='text' value={this.state.value} onChange={this.handleChange} placeholder='Deltagernavn'/>
+            <input id='participantNameInput' type='text' value={this.state.value} onChange={this.handleChange} placeholder='Deltagernavn'/>
             <input type="submit" value="Opret ny deltager" />
         </form>
       );

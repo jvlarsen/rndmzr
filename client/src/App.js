@@ -21,27 +21,17 @@ class App extends Component {
       minute: 0,
       includeReferee: false,
       participantNames:[],
-      passwords: []
+      passwords: [],
+      gameId: null
     }
   }
 
-  // Fetch passwords after first mount
-  componentDidMount() {
-    this.getPasswords();
-  }
-
-  getPasswords = () => {
-    // Get the passwords and store them in state
-    fetch('/api/passwords')
-      .then(res => res.json())
-      .then(passwords => this.setState({ passwords }));
-  }
-
   render() {
-    const { passwords } = this.state;
 
     return (
       <div className="App">
+      <label id='gameId'>Unique game ID: {this.state.gameId}</label>
+      <br/>
           <div className="flex-grid">
             <div className="col leftCol" >
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent}/>
@@ -60,12 +50,9 @@ class App extends Component {
           </div>
 
           <div className="flex-grid">
-            <ParticipantBox participantAdded={this.addParticipantToGraph.bind(this)} addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
-            <input type='button' onClick={this.allocatePlayers} value='Fordel holdene' />
+            <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
+            <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Fordel holdene' />
           </div>
-
-
-
       </div>
     );
   }
@@ -77,8 +64,10 @@ class App extends Component {
     this.updateWhatToDrink(randomizerResult);
   }
 
-  allocatePlayers = () => {
+  allocatePlayers = (e) => {
     Engine.allocatePlayers(this.state.participantNames.length, this.state.includeReferee);
+    this.setState({gameId:123456});
+    ElementsHelper.lockGame();
     /*Lav noget med en property på hhv. Participants og Players, der mapper mellem
     de to.
     Eksempelvis <Participant allocationKey=1 ... />

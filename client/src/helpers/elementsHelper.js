@@ -8,7 +8,13 @@ const getBank = (index) => {
   return bankElement || null;
 }
 
+const lockGame = () => {
+  document.getElementById('allocateButton').disabled = true;
+  document.getElementById('participantNameInput').disabled = true;
+}
+
 export default {
   getStatus,
   getBank,
+  lockGame,
 }
