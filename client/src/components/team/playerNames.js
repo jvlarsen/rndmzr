@@ -9,8 +9,8 @@ export default class PlayerNames extends React.Component {
             var playerValue = this.props.team + i;
             options.push(
             <div key={playerValue}>
-                <input className="bigradio" type="radio" id={'player'+playerValue} key={playerValue} value={playerValue} checked={this.props.selectedOption === playerValue} onChange={this.props.onChange}/>
-                <input type="text" />
+                <input className="bigradio" type="radio" id={'player'+playerValue+'Radio'} key={playerValue} value={playerValue} checked={this.props.selectedOption === playerValue} onChange={this.props.onChange}/>
+                <input type="text" id={'player'+playerValue}/>
                 <br/>
             </div>)
         }

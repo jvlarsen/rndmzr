@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Participant from './participants/participant';
 import Events from './events';
 import TeamBox from './components/team/teamBox';
 import Randomize from './components/randomize';

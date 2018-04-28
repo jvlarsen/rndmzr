@@ -44,3 +44,66 @@ h1 {
 .rightCol {
   text-align: right;
 }
+
+input[allocationKey='0'] {
+    background-color: #85adad;
+}
+
+input[allocationKey='1'] {
+    background-color: #00ffcc;
+}
+
+input[allocationKey='2'] {
+    background-color: #ccccff;
+}
+input[allocationKey='3'] {
+    background-color: #cc00ff;
+}
+input[allocationKey='4'] {
+    background-color: #cc0000;
+}
+input[allocationKey='5'] {
+    background-color: #ffcc00;
+}
+input[allocationKey='6'] {
+    background-color: #66ff33;
+}
+input[allocationKey='7'] {
+    background-color: yellow;
+}
+input[allocationKey='8'] {
+    background-color: yellow;
+}
+input[allocationKey='9'] {
+    background-color: yellow;
+}
+input[allocationKey='10'] {
+    background-color: yellow;
+}
+input[allocationKey='11'] {
+    background-color: yellow;
+}
+input[allocationKey='12'] {
+    background-color: yellow;
+}
+input[allocationKey='13'] {
+    background-color: yellow;
+}
+input[allocationKey='14'] {
+    background-color: yellow;
+}
+input[allocationKey='15'] {
+    background-color: yellow;
+}
+input[allocationKey='16'] {
+    background-color: yellow;
+}
+input[allocationKey='17'] {
+    background-color: yellow;
+}
+input[allocationKey='18'] {
+    background-color: yellow;
+}
+input[allocationKey='19'] {
+    background-color: yellow;
+}
