@@ -7,6 +7,7 @@ import Line from './components/graph/line';
 import ParticipantBox from './components/participantComponents/participantBox';
 import Engine from './helpers/randomizer';
 import ElementsHelper from './helpers/elementsHelper';
+import DataSetGenerator from './components/graph/dataSetGenerator';
 
 class App extends Component {
 
@@ -21,8 +22,13 @@ class App extends Component {
       includeReferee: false,
       participantNames:[],
       passwords: [],
-      gameId: null
+      gameId: null,
+      dataSet:null,
     }
+  }
+
+  componentWillMount() {
+    this.setState({dataSet: DataSetGenerator.getDataSet()})
   }
 
   render() {
@@ -41,11 +47,8 @@ class App extends Component {
             <div className="col">
               <Randomize selectedEvent={this.state.selectedEvent} selectedPlayer={this.state.selectedPlayer} onClick={this.onClickRandomize.bind(this)}/>
 
-              <Line participants={this.state.participantNames}/>
+              <Line participants={this.state.participantNames} data={this.state.dataSet}/>
             </div>
-          </div>
-          <div className="flex-grid">
-            <br/>
           </div>
 
           <div className="flex-grid">
@@ -107,6 +110,8 @@ class App extends Component {
     const newState = !this.state.refereeIncluded;
     this.setState({refereeIncluded:newState})
   }
+
+
 }
 
 export default App;
