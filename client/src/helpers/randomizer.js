@@ -6,22 +6,30 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
   //så det ikke er de den samme deltager, der starter med at få tildelt spillere
   var indexStart = Math.floor(Math.random() * numberOfParticipants) +1;
 
-  var playersToAllocate = includeReferee ? 21 : 20;
-  for (var i = 0; i < playersToAllocate; i++) {
-    var playerIndex = i%10;
+  var playersToAllocate = getPlayersArrayForAllocation();
+  while (playersToAllocate.length > 0)
+  //for (var i = 0; i < playersToAllocate.length; i++)
+  {
+    var playerIndex = Math.floor(Math.random() * playersToAllocate.length);
     var participantIndex = indexStart%numberOfParticipants;
-    console.log('participantIndex is: ' + participantIndex + ', and player index is: ' + playerIndex);
-    if (i < 10) {
-      document.getElementById('playerHome' + playerIndex).setAttribute('allocationKey', participantIndex);
-    }
-    else {
-      document.getElementById('playerAway' + playerIndex).setAttribute('allocationKey', participantIndex);
-    }
+    var playerToAllocate = playersToAllocate[playerIndex];
+
+    console.log('participantIndex is: ' + participantIndex + ', and player is: ' + playerToAllocate);
+
+    document.getElementById(playerToAllocate).setAttribute('allocationKey', participantIndex);
     document.getElementById('status'+participantIndex).setAttribute('allocationKey', participantIndex);
     indexStart++;
+    var deleteIndex = playersToAllocate.indexOf(playerToAllocate);
+    playersToAllocate.splice(deleteIndex, 1);
+    console.log(playersToAllocate.length);
 //    document.getElementById('playerHome' + i).setAttribute('allocationKey',indexStart);
   }
 
+}
+
+const getPlayersArrayForAllocation = () => {
+  var players = ['playerHome0','playerHome1', 'playerHome2', 'playerHome3', 'playerHome4', 'playerHome5', 'playerHome6', 'playerHome7', 'playerHome8', 'playerHome9', 'playerAway0', 'playerAway1', 'playerAway2', 'playerAway3', 'playerAway4', 'playerAway5', 'playerAway6', 'playerAway7', 'playerAway8', 'playerAway9'];
+  return players;
 }
 
 //vil gerne have hele elementet med.
