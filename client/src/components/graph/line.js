@@ -4,7 +4,9 @@ import {Line} from 'react-chartjs-2';
 function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
+      if (dataset.label === 'Participant 1') {
         dataset.data.push(data);
+      }
     });
     chart.update();
 }
@@ -17,38 +19,58 @@ function removeData(chart) {
     chart.update();
 }
 
-const data = {
-  labels: [10, 20, 30, 40, 50, 60, 70, 80, 90, '90+'],
-  datasets: [
-    {
-      data: [0, 5, 8, 13, 20, 25, 25, 25, 32, 33, 40, 40, 40, 40, 45],
-      label: 'Participant 1',
-      fill: false,
-      lineTension: 0,
-      borderColor: 'rgba(75,192,192,1)',
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointRadius: 1,
-      pointHitRadius: 10,
-    },
-    {
-      data: [0, 20, 20, 20, 40, 42, 48, 55, 62, 75],
-      label: 'Participant 2',
-      fill: false,
-      lineTension: 0,
-      borderColor: 'rgba(150,100,100,1)',
-      pointHoverBackgroundColor: 'rgba(150,100,100,1)',
-      pointRadius: 1,
-      pointHitRadius: 10,
-    }
-  ]
-};
-
 export default class MyLine extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      labels:[],
+      participantGraph: {'Participant 1': {data:[1, 3, 5, 6, 7, 9], graphColor:'rgba(0,0,255,1)'},
+                  'Participant 2': {data:[2, 4, 6, 7, 8, 8, 10], graphColor:'rgba(0,255,0,1)'}},
+    }
+  }
+
   render() {
+    var data = this.getData();
     return (
       <div>
-        <Line data={this.props.data} id='graph2'/>
+        <Line data={data} id='graph2'/>
       </div>
     );
   }
+
+  getData = () => { return {
+    labels: this.getLabels(),
+    datasets: [
+        this.getDataSet('Participant 1'),
+        this.getDataSet('Participant 2'),
+    ]
+  };
+  }
+
+  getLabels = () => {
+    return [10, 20, 30, 40, 50, 60, 70, 80, 90, '90+'];
+  }
+
+  getDataSet = (participant) => {
+    var participantGraph = this.getParticipantGraph(participant);
+    return {
+      data: participantGraph.data,
+      label: 'Participant 1',
+      borderColor: participantGraph.graphColor,
+      fill: false,
+      lineTension: 0,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointRadius: 1,
+      pointHitRadius: 10,
+    }
+  }
+
+  getParticipantGraph = (participant) => {
+      var participantGraph = this.state.participantGraph;
+      console.log(participantGraph);
+      return participantGraph[participant];
+  }
+
 };
