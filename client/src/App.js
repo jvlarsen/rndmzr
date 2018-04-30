@@ -17,6 +17,7 @@ class App extends Component {
       selectedEvent: null,
       selectedParticipant: null,
       selectedPlayer:null,
+      refereeSelected:false,
       refereeIncluded: false,
       minute: 0,
       includeReferee: false,
@@ -42,7 +43,7 @@ class App extends Component {
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent}/>
             </div>
             <div className="col">
-              <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer}/>
+              <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>
             </div>
             <div className="col">
               <Randomize selectedEvent={this.state.selectedEvent} selectedPlayer={this.state.selectedPlayer} onClick={this.onClickRandomize.bind(this)}/>
@@ -60,8 +61,12 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
+    var selectedPlayer = 'referee';
+    if (!this.state.refereeSelected) {
+      selectedPlayer = this.state.selectedPlayer;
+    }
     var selectedEvent = this.state.selectedEvent;
-    var selectedPlayer = this.state.selectedPlayer;
+
     var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer);
     this.updateWhatToDrink(randomizerResult);
   }
@@ -103,7 +108,11 @@ class App extends Component {
   }
 
   onPlayerChange(e) {
-    this.setState({selectedPlayer:e.target.value});
+    this.setState({selectedPlayer:e.target.value, refereeSelected:false});
+  }
+
+  onRefereeSelect(e) {
+    this.setState({selectedPlayer:null, refereeSelected:true});
   }
 
   onRefereeToggle(e) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PlayerNames from './playerNames';
 import Team from './teamName';
+import Referee from './referee';
 
 export default class TeamBox extends React.Component {
     render() {
@@ -13,6 +14,9 @@ export default class TeamBox extends React.Component {
                 <div className="col leftCol">
                     <Team placeholder='Away' />
                     <PlayerNames selectedOption={this.props.selectedPlayer} onChange={this.props.onChange} team='Away'/>
+                </div>
+                <div className='col centerCol'>
+                  <Referee onRefereeSelect={this.props.onRefereeSelect} refereeSelected={this.props.refereeSelected}/>
                 </div>
             </div>
         );

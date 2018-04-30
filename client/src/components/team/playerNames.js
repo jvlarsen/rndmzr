@@ -20,8 +20,4 @@ export default class PlayerNames extends React.Component {
             </div>
         );
     }
-
-    onPlayerChange(e) {
-        this.setState({selectedOption:e.target.value});
-    }
 }
