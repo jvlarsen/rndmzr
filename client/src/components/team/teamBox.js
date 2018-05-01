@@ -6,6 +6,7 @@ import Referee from './referee';
 export default class TeamBox extends React.Component {
     render() {
         return(
+          <div>
             <div className="flex-grid">
                 <div className="col leftCol">
                     <Team placeholder='Home' />
@@ -15,9 +16,11 @@ export default class TeamBox extends React.Component {
                     <Team placeholder='Away' />
                     <PlayerNames selectedOption={this.props.selectedPlayer} onChange={this.props.onChange} team='Away'/>
                 </div>
-                <div className='col centerCol'>
-                  <Referee onRefereeSelect={this.props.onRefereeSelect} refereeSelected={this.props.refereeSelected}/>
-                </div>
+            </div>
+            <br />
+            <div className='col centerCol'>
+              <input type='checkbox' id='refereeCheckbox'/>Include referee?<Referee onRefereeSelect={this.props.onRefereeSelect} refereeSelected={this.props.refereeSelected}/>
+            </div>
             </div>
         );
     }

@@ -54,7 +54,7 @@ class App extends Component {
 
           <div className="flex-grid">
             <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
-            <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Fordel holdene' />
+            <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' toolTip='Der kan ikke tilføjes deltagere eller ændres på dommerdeltagelse efterfølgende.' />
           </div>
       </div>
     );
@@ -69,10 +69,12 @@ class App extends Component {
 
     var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer);
     this.updateWhatToDrink(randomizerResult);
+
   }
 
   allocatePlayers = (e) => {
-    Engine.allocatePlayers(this.state.participantNames.length, this.state.includeReferee);
+    var refereeCheckbox = document.getElementById('refereeCheckbox');
+    Engine.allocatePlayers(this.state.participantNames.length, refereeCheckbox.checked);
     this.setState({gameId:123456});
     ElementsHelper.lockGame();
     /*Lav noget med en property på hhv. Participants og Players, der mapper mellem

@@ -20,18 +20,19 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
     var deleteIndex = playersToAllocate.indexOf(playerToAllocate);
     playersToAllocate.splice(deleteIndex, 1);
   }
-
+  if (!includeReferee) {
+    document.getElementById('refereeName').removeAttribute('allocationKey');
+  }
 }
 
 const getPlayersArrayForAllocation = (includeReferee) => {
   var players = ['playerHome0','playerHome1', 'playerHome2', 'playerHome3', 'playerHome4', 'playerHome5', 'playerHome6', 'playerHome7', 'playerHome8', 'playerHome9', 'playerAway0', 'playerAway1', 'playerAway2', 'playerAway3', 'playerAway4', 'playerAway5', 'playerAway6', 'playerAway7', 'playerAway8', 'playerAway9'];
   if (includeReferee) {
-    players.push('referee');
+    players.push('refereeName');
   }
   return players;
 }
 
-//vil gerne have hele elementet med.
 const randomize = (selectedPlayer, selectedEvent) => {
   console.log(selectedPlayer + selectedEvent);
 
