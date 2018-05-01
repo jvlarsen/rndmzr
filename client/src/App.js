@@ -76,7 +76,7 @@ class App extends Component {
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(this.state.participantNames.length, refereeCheckbox.checked);
     this.setState({gameId:123456});
-    ElementsHelper.lockGame();
+    //ElementsHelper.lockGame();
     /*Lav noget med en property på hhv. Participants og Players, der mapper mellem
     de to.
     Eksempelvis <Participant allocationKey=1 ... />
