@@ -9,11 +9,4 @@ render() {
     </div>
     );
   }
-
-  clickHandler() {
-    const selectedEvent = this.props.selectedEvent;
-    const selectedPlayer = this.props.selectedPlayer;
-    console.log('Randomizer clicked');
-    console.log(selectedEvent + ' - ' + selectedPlayer);
-  }
 }

@@ -24,12 +24,8 @@ class App extends Component {
       participantNames:[],
       passwords: [],
       gameId: null,
-      dataSet:null,
+      dataSet:{},
     }
-  }
-
-  componentWillMount() {
-    this.setState({dataSet: DataSetGenerator.getDataSet()})
   }
 
   render() {
@@ -69,7 +65,14 @@ class App extends Component {
 
     var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer);
     this.updateWhatToDrink(randomizerResult);
+    this.addRandomizerResultToGraph(randomizerResult);
 
+  }
+
+  addRandomizerResultToGraph = (result) => {
+      var currDataSet = this.state.dataSet;
+      currDataSet.labels = ['a', 'b', 'c'];
+      currDataSet.datasets = {}
   }
 
   allocatePlayers = (e) => {
@@ -88,6 +91,7 @@ class App extends Component {
   addParticipantToGraph = (participantName) => {
     var participants = this.state.participantNames;
     participants.push(participantName);
+    console.log(participants);
     this.setState({participantNames:participants});
   }
 
