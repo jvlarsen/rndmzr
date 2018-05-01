@@ -1,24 +1,6 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-      if (dataset.label === 'Participant 1') {
-        dataset.data.push(data);
-      }
-    });
-    chart.update();
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
-
 export default class MyLine extends React.Component {
 
   constructor(props) {
@@ -40,11 +22,14 @@ export default class MyLine extends React.Component {
     );
   }
 
+  //Måske skal hele getDatas return værdi flyttes op i state.
+  //Så kan der trækkes derfra, og pushed når der oprettes nye deltagere.
   getData = () => { return {
     labels: this.getLabels(),
     datasets: [
         this.getDataSet('Participant 1'),
         this.getDataSet('Participant 2'),
+        this.createDataSet('Participant 3'),
     ]
   };
   }
@@ -71,6 +56,29 @@ export default class MyLine extends React.Component {
       var participantGraph = this.state.participantGraph;
       console.log(participantGraph);
       return participantGraph[participant];
+  }
+
+  createNewData = (participant) => {
+    var data = {};
+    data.labels = [];
+    data.dataSets = this.createDataSet(participant);
+
+    return data;
+  }
+
+  createDataSet = (participant) => {
+    var dataSet = {
+          fill: false,
+          lineTension: 0,
+          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+          pointRadius: 1,
+          pointHitRadius: 10
+        }
+    dataSet.label = participant;
+    dataSet.data = [1, 2, 3, 6];
+    dataSet.borderColor = 'rgba(255, 100, 0, 1)';
+
+    return dataSet;
   }
 
 };
