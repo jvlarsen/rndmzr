@@ -74,6 +74,7 @@ class App extends Component {
 
   onClickRandomize(e) {
     var selectedEvent = this.state.selectedEvent;
+    console.log(selectedEvent);
     var d = new Date();
     var newLabel = '' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 
@@ -139,7 +140,6 @@ class App extends Component {
   }
 
   updateWhatToDrink(randomizerResult) {
-    console.log('updateWhatToDrink called');
     var currDataSets = this.state.dataSets;
 
     for (var i = 0; i < randomizerResult.length; i++) {

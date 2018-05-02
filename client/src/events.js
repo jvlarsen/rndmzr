@@ -10,7 +10,6 @@ export default class Events extends React.Component {
   }
 
   componentWillMount() {
-    //Fetches all events correctly, but state is not updated in time for render() to know about the events.
     var self = this;
 
     Connector.getEvents().then(function(result) {
@@ -24,9 +23,9 @@ export default class Events extends React.Component {
     var allEvents = this.state.events;
     const onOptionChange = this.props.onOptionChange;
     allEvents.map((event) => {
-      eventRadios.push(<div className="radio" key={event.Id}>
+      eventRadios.push(<div className="radio" key={event.Id} >
               <label>
-                <input className='bigradio' type="radio" value={event.Name} key={event.Id} checked={selectedOption === event.Name} onChange={onOptionChange}/>
+                <input className='bigradio' type="radio" value={event.Name} measure={event.Type} key={event.Id} checked={selectedOption === event.Name} onChange={onOptionChange}/>
                 {event.Name}
               </label>
             </div>);
