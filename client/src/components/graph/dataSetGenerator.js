@@ -1,6 +1,7 @@
 
 const get = (participant, participantsGraph) => {
   var participantGraph = getParticipantGraph(participant, participantsGraph);
+  console.log(participant);
   return {
     data: participantGraph.data,
     label: participant,
@@ -30,7 +31,10 @@ const create = (participant) => {
 
 const getParticipantGraph = (participant, participantsGraph) => {
     console.log(participantsGraph);
-    return participantsGraph[participant];
+    if (participantsGraph[participant]) {
+      return participantsGraph[participant];
+    }
+    return {participant: {data:[]}};
 }
 
 export default {

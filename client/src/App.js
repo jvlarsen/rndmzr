@@ -73,12 +73,14 @@ class App extends Component {
 
   addRandomizerResultToGraph = (result) => {
       var events = {};
+      var i = 1;
       for (var key in result) {
         if (result.hasOwnProperty(key)) {
           var index = result[key].status;
-          var participant = 'Participant ' + index;
+          var participant = 'Participant ' + i;
           var measure = result[key].value;
           events[participant] = measure;
+          i++;
         }
       }
       this.setState({latestEvents:events});

@@ -28,7 +28,7 @@ export default class MyLine extends React.Component {
   }
 
   render() {
-    var data = this.getData();
+    var data = this.getData(this.props.events);
     return (
       <div>
         <Line data={data} id='graph2'/>
@@ -38,15 +38,27 @@ export default class MyLine extends React.Component {
 
   //Måske skal hele getData's return værdi flyttes op i state.
   //Så kan der trækkes derfra, og pushed når der oprettes nye deltagere.
-  getData = () => {
+  getData = (results) => {
+    var allGraphs = this.state.participantsGraph;
+        var dataSetsUpdated = [];
+    for (var key in results) {
+      if (results.hasOwnProperty(key)) {
+        var graph = DataSetGenerator.get(key, allGraphs);
+        if (graph.data) graph.data.push(results[key]);
+        dataSetsUpdated.push(graph);
+      }
+    }
+
+
+
+
     var graphs = this.state.participantsGraph;
+    //var p1 = DataSetGenerator.get('Participant 1', graphs);
+    //p1.data.push(13);
+    //console.log(p1);
     return {
     labels: this.getLabels(),
-    datasets: [
-        DataSetGenerator.get('Participant 1', graphs),
-        DataSetGenerator.get('Participant 2', graphs),
-        DataSetGenerator.create('Participant 3'),
-    ]
+    datasets: dataSetsUpdated
   };
   }
 
