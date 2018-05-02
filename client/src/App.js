@@ -3,11 +3,10 @@ import './App.css';
 import Events from './events';
 import TeamBox from './components/team/teamBox';
 import Randomize from './components/randomize';
-import Line from './components/graph/line';
 import ParticipantBox from './components/participantComponents/participantBox';
 import Engine from './helpers/randomizer';
 import ElementsHelper from './helpers/elementsHelper';
-import DataSetGenerator from './components/graph/dataSetGenerator';
+import LineSample from './components/graph/linesample';
 
 class App extends Component {
 
@@ -25,7 +24,9 @@ class App extends Component {
       passwords: [],
       gameId: null,
       dataSet:{},
-      latestEvents:{}
+      latestEvents:{},
+      labels:[],
+      dataSets:[]
     }
   }
 
@@ -35,6 +36,9 @@ class App extends Component {
       <div className="App">
       <label id='gameId'>Unique game ID: {this.state.gameId}</label>
       <br/>
+      <div className="graph">
+        <LineSample labels={this.state.labels} dataSets={this.state.dataSets}/>
+      </div>
           <div className="flex-grid">
             <div className="col leftCol" >
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent}/>
@@ -45,25 +49,31 @@ class App extends Component {
             <div className="col">
               <Randomize selectedEvent={this.state.selectedEvent} selectedPlayer={this.state.selectedPlayer} onClick={this.onClickRandomize.bind(this)}/>
 
-              <Line participants={this.state.participantNames} data={this.state.dataSet} events={this.state.latestEvents}/>
+
             </div>
           </div>
 
           <div className="flex-grid">
             <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
-            <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' toolTip='Der kan ikke tilføjes deltagere eller ændres på dommerdeltagelse efterfølgende.' />
+            <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' tooltip='Der kan ikke tilføjes deltagere eller ændres på dommerdeltagelse efterfølgende.' />
           </div>
       </div>
     );
   }
 
   onClickRandomize(e) {
-    this.setState({latestEvents:{}});
+    var selectedEvent = this.state.selectedEvent;
+    var d = new Date();
+    var newLabel = '' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+
+    this.setState(prevState => ({
+      labels: [...prevState.labels, newLabel] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
+    }))
+
     var selectedPlayer = 'referee';
     if (!this.state.refereeSelected) {
       selectedPlayer = this.state.selectedPlayer;
     }
-    var selectedEvent = this.state.selectedEvent;
 
     var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer);
     this.updateWhatToDrink(randomizerResult);
@@ -72,18 +82,7 @@ class App extends Component {
   }
 
   addRandomizerResultToGraph = (result) => {
-      var events = {};
-      var i = 1;
-      for (var key in result) {
-        if (result.hasOwnProperty(key)) {
-          var index = result[key].status;
-          var participant = 'Participant ' + i;
-          var measure = result[key].value;
-          events[participant] = measure;
-          i++;
-        }
-      }
-      this.setState({latestEvents:events});
+
   }
 
   allocatePlayers = (e) => {
@@ -103,16 +102,59 @@ class App extends Component {
     var participants = this.state.participantNames;
     participants.push(participantName);
     this.setState({participantNames:participants});
+    console.log('parti added ' + participantName);
+
+    var newDataSetForParticipant = {
+      dataset:{
+        label:participantName,
+        data:[],
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10}
+      }
+
+      this.setState(prevState => ({dataSets:[...prevState.dataSets, newDataSetForParticipant]}));
   }
 
   updateWhatToDrink(randomizerResult) {
+    console.log(this.state.dataSets);
+    var currDataSets = this.state.dataSets;
+
+    for (var i = 0; i < randomizerResult.length; i++) {
+      console.log(randomizerResult[i]);
+      console.log(currDataSets[i].dataset);
+      currDataSets[i].dataset.data.push(randomizerResult[i].value);
+    }
+
+    console.log(currDataSets);
+
     randomizerResult.map(result => {
+      console.log(result);
       var currStatus = ElementsHelper.getStatus(result.status);
       if (currStatus !== undefined && currStatus !== null) {
         currStatus.value = result.value;
       }
+
+
       return 1;
     })
+
+
+
   }
 
   onEventChange(e) {

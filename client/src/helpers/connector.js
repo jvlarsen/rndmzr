@@ -4,7 +4,14 @@ const randomize = (selectedEvent, selectedPlayer) => {
   //var participants = getParticipants();
   //console.log(parts);
   console.log(selectedEvent + ' - ' + selectedPlayer + ' printed from Connector.');
-  var result = [{status:'0',value: 3}, {status:'1', value:2}, {status:'2', value:8}];
+
+  var result = [];
+  for (var i = 0; i < 3; i++) {
+    var measure = 1 + Math.floor(Math.random() * 12);
+    result.push({status:i, value:measure})
+  }
+
+  //var result = [{status:'0',value: 3}, {status:'1', value:2}, {status:'2', value:8}];
   return result;
 }
 

@@ -34,11 +34,6 @@ const getPlayersArrayForAllocation = (includeReferee) => {
 }
 
 const randomize = (selectedPlayer, selectedEvent) => {
-  console.log(selectedPlayer + selectedEvent);
-
-  var ele = document.getElementById('graph');
-  console.log(ele);
-
   return Connector.randomize(selectedPlayer, selectedEvent);
 }
 
