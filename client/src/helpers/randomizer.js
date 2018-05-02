@@ -34,7 +34,8 @@ const getPlayersArrayForAllocation = (includeReferee) => {
 }
 
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
-  console.log('randomize got ' + selectedEvent);
+  console.log(selectedEvent);
+  if (!selectedPlayer || !selectedEvent) {return [];}
   return Connector.randomize(selectedPlayer, selectedEvent, numberOfParticipants);
 }
 

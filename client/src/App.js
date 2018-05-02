@@ -58,7 +58,7 @@ class App extends Component {
               <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>
             </div>
             <div className="col">
-              <Randomize selectedEvent={this.state.selectedEvent} selectedPlayer={this.state.selectedPlayer} onClick={this.onClickRandomize.bind(this)}/>
+              <Randomize onClick={this.onClickRandomize.bind(this)}/>
 
 
             </div>
@@ -73,23 +73,22 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
-    var selectedEvent = this.state.selectedEvent;
-    console.log(selectedEvent);
+    var selectedEvent = (this.state.selectedEvent) ? this.state.selectedEvent.value : null;
     var d = new Date();
     var newLabel = '' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-
-    this.setState(prevState => ({
-      labels: [...prevState.labels, selectedEvent] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
-    }))
 
     var selectedPlayer = 'referee';
     if (!this.state.refereeSelected) {
       selectedPlayer = this.state.selectedPlayer;
     }
 
-    var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer, this.state.participantNames.length);
-    this.updateWhatToDrink(randomizerResult);
+    if (!selectedEvent || !selectedPlayer) {return;}
 
+    this.setState(prevState => ({
+      labels: [...prevState.labels, selectedEvent] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
+    }))
+    var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, this.state.participantNames.length);
+    this.updateWhatToDrink(randomizerResult);
   }
 
   allocatePlayers = (e) => {
@@ -109,8 +108,6 @@ class App extends Component {
     var participants = this.state.participantNames;
     participants.push(participantName);
     this.setState({participantNames:participants});
-    console.log('parti added ' + participantName);
-    console.log(this.state.graphColors[participants.length-1]);
     var color = this.state.graphColors[participants.length-1].color;
     var borderColor = this.state.graphColors[participants.length-1].borderColor;
     var newDataSetForParticipant = {
@@ -159,7 +156,7 @@ class App extends Component {
   }
 
   onEventChange(e) {
-    this.setState({selectedEvent:e.target.value});
+    this.setState({selectedEvent:e.target});
   }
 
   onParticipantChange(e) {
@@ -178,8 +175,6 @@ class App extends Component {
     const newState = !this.state.refereeIncluded;
     this.setState({refereeIncluded:newState})
   }
-
-
 }
 
 export default App;

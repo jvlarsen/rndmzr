@@ -1,6 +1,6 @@
 
 
-const randomize = (selectedEvent, selectedPlayer, numberOfParticipants) => {
+const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   //var participants = getParticipants();
   //console.log(parts);
   console.log(selectedEvent + ' - ' + selectedPlayer + ' printed from Connector.');

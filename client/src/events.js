@@ -19,7 +19,7 @@ export default class Events extends React.Component {
 
   render() {
     var eventRadios = [];
-    var selectedOption = this.props.selectedOption;
+    var selectedOption = (this.props.selectedOption) ? this.props.selectedOption.value : null;
     var allEvents = this.state.events;
     const onOptionChange = this.props.onOptionChange;
     allEvents.map((event) => {
