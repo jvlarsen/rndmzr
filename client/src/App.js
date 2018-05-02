@@ -26,7 +26,18 @@ class App extends Component {
       dataSet:{},
       latestEvents:{},
       labels:[],
-      dataSets:[]
+      dataSets:[],
+      graphColors:[
+          {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'},
+          {color: 'rgba(0,255,0,0.4)', borderColor: 'rgba(0,255,0,1)'},
+          {color: 'rgba(0,0,255,0.4)', borderColor: 'rgba(0,0,255,1)'},
+          {color: 'rgba(100,0,0,0.4)', borderColor: 'rgba(100,0,0,1)'},
+          {color: 'rgba(0,100,0,0.4)', borderColor: 'rgba(0,100,0,1)'},
+          {color: 'rgba(0,0,100,0.4)', borderColor: 'rgba(0,0,100,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},]
     }
   }
 
@@ -67,7 +78,7 @@ class App extends Component {
     var newLabel = '' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 
     this.setState(prevState => ({
-      labels: [...prevState.labels, newLabel] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
+      labels: [...prevState.labels, selectedEvent] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
     }))
 
     var selectedPlayer = 'referee';
@@ -75,7 +86,7 @@ class App extends Component {
       selectedPlayer = this.state.selectedPlayer;
     }
 
-    var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer);
+    var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer, this.state.participantNames.length);
     this.updateWhatToDrink(randomizerResult);
     this.addRandomizerResultToGraph(randomizerResult);
 
@@ -103,24 +114,26 @@ class App extends Component {
     participants.push(participantName);
     this.setState({participantNames:participants});
     console.log('parti added ' + participantName);
-
+    console.log(this.state.graphColors[participants.length-1]);
+    var color = this.state.graphColors[participants.length-1].color;
+    var borderColor = this.state.graphColors[participants.length-1].borderColor;
     var newDataSetForParticipant = {
       dataset:{
         label:participantName,
         data:[],
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: color,
+        borderColor: borderColor,
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBorderColor: color,
         pointBackgroundColor: '#fff',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBackgroundColor: color,
         pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
         pointRadius: 1,
@@ -131,30 +144,19 @@ class App extends Component {
   }
 
   updateWhatToDrink(randomizerResult) {
-    console.log(this.state.dataSets);
     var currDataSets = this.state.dataSets;
 
     for (var i = 0; i < randomizerResult.length; i++) {
-      console.log(randomizerResult[i]);
-      console.log(currDataSets[i].dataset);
       currDataSets[i].dataset.data.push(randomizerResult[i].value);
     }
 
-    console.log(currDataSets);
-
     randomizerResult.map(result => {
-      console.log(result);
       var currStatus = ElementsHelper.getStatus(result.status);
       if (currStatus !== undefined && currStatus !== null) {
         currStatus.value = result.value;
       }
-
-
       return 1;
-    })
-
-
-
+    });
   }
 
   onEventChange(e) {

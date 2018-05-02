@@ -33,8 +33,8 @@ const getPlayersArrayForAllocation = (includeReferee) => {
   return players;
 }
 
-const randomize = (selectedPlayer, selectedEvent) => {
-  return Connector.randomize(selectedPlayer, selectedEvent);
+const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
+  return Connector.randomize(selectedPlayer, selectedEvent, numberOfParticipants);
 }
 
 export default {
