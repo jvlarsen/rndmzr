@@ -18,6 +18,12 @@ export default class MyLine extends React.Component {
 
   componentDidUpdate() {
     var participantNames = this.props.participants;
+    var events = this.props.events; //json {'Participant 1': 3, 'Participant 2': 4}
+    for (var key in events) {
+      if (events.hasOwnProperty(key)) {
+        console.log(key + ' must drink ' + events[key]);
+      }
+    }
     console.log(participantNames);
   }
 

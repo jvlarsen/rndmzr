@@ -25,6 +25,7 @@ class App extends Component {
       passwords: [],
       gameId: null,
       dataSet:{},
+      latestEvents:{}
     }
   }
 
@@ -44,7 +45,7 @@ class App extends Component {
             <div className="col">
               <Randomize selectedEvent={this.state.selectedEvent} selectedPlayer={this.state.selectedPlayer} onClick={this.onClickRandomize.bind(this)}/>
 
-              <Line participants={this.state.participantNames} data={this.state.dataSet}/>
+              <Line participants={this.state.participantNames} data={this.state.dataSet} events={this.state.latestEvents}/>
             </div>
           </div>
 
@@ -57,6 +58,7 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
+    this.setState({latestEvents:{}});
     var selectedPlayer = 'referee';
     if (!this.state.refereeSelected) {
       selectedPlayer = this.state.selectedPlayer;
@@ -70,9 +72,16 @@ class App extends Component {
   }
 
   addRandomizerResultToGraph = (result) => {
-      var currDataSet = this.state.dataSet;
-      currDataSet.labels = ['a', 'b', 'c'];
-      currDataSet.datasets = {}
+      var events = {};
+      for (var key in result) {
+        if (result.hasOwnProperty(key)) {
+          var index = result[key].status;
+          var participant = 'Participant ' + index;
+          var measure = result[key].value;
+          events[participant] = measure;
+        }
+      }
+      this.setState({latestEvents:events});
   }
 
   allocatePlayers = (e) => {
@@ -91,7 +100,6 @@ class App extends Component {
   addParticipantToGraph = (participantName) => {
     var participants = this.state.participantNames;
     participants.push(participantName);
-    console.log(participants);
     this.setState({participantNames:participants});
   }
 
