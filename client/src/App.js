@@ -25,7 +25,7 @@ class App extends Component {
       gameId: null,
       dataSet:{},
       latestEvents:{},
-      labels:[],
+      labels:['Start'],
       dataSets:[],
       graphColors:[
           {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'},
@@ -88,11 +88,6 @@ class App extends Component {
 
     var randomizerResult = Engine.randomize(selectedEvent, selectedPlayer, this.state.participantNames.length);
     this.updateWhatToDrink(randomizerResult);
-    this.addRandomizerResultToGraph(randomizerResult);
-
-  }
-
-  addRandomizerResultToGraph = (result) => {
 
   }
 
@@ -120,7 +115,7 @@ class App extends Component {
     var newDataSetForParticipant = {
       dataset:{
         label:participantName,
-        data:[],
+        data:[0],
         fill: false,
         lineTension: 0.1,
         backgroundColor: color,
@@ -144,10 +139,14 @@ class App extends Component {
   }
 
   updateWhatToDrink(randomizerResult) {
+    console.log('updateWhatToDrink called');
     var currDataSets = this.state.dataSets;
 
     for (var i = 0; i < randomizerResult.length; i++) {
-      currDataSets[i].dataset.data.push(randomizerResult[i].value);
+      var endIndex = currDataSets[i].dataset.data.length-1;
+      var latestTotal = currDataSets[i].dataset.data[endIndex];
+      var newTotal = latestTotal + randomizerResult[i].value;
+      currDataSets[i].dataset.data.push(newTotal);
     }
 
     randomizerResult.map(result => {

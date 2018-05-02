@@ -7,7 +7,7 @@ const randomize = (selectedEvent, selectedPlayer, numberOfParticipants) => {
 
   var result = [];
   for (var i = 0; i < numberOfParticipants; i++) {
-    var measure = 1 + Math.floor(Math.random() * 12);
+    var measure = Math.floor(Math.random() * 12);
     result.push({status:i, value:measure})
   }
 
