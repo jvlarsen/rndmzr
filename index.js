@@ -23,14 +23,53 @@ app.get('/api/passwords', (req, res) => {
 });
 
 app.get('/api/events', (req, res) => {
-  res.json([{Id:1, Name:'Goal', Type:'Other3'},
-                  {Id:2, Name:'Free kick committed', Type:'Own1'},
-                  {Id:3, Name:'Yellow card', Type:'Own2'},
-                  {Id:4, Name:'Shot on target', Type:'Other1'},
-                  {Id:5, Name:'Assist', Type:'Other2'},
-                  {Id:6, Name:'Medic', Type:'Own1'},
-                  {Id:7, Name:'Offside', Type:'Own1'}]);
+  res.json([      {Id:1, Name:'Goal!!!', RefereeName:'Ball in but not approved', Type:'Other3'},
+                  {Id:2, Name:'Assist', RefereeName:'Separates players', Type:'Other2'},
+                  {Id:3, Name:'Shot on target', RefereeName:'1H 3+ min ET', Type:'Other1'},
+                  {Id:4, Name:'Corner taken', RefereeName:'Talk, no card', Type:'Other1'},
+                  {Id:5, Name:'Medic!', RefereeName:'1H 2- min ET', Type:'Own1'},
+                  {Id:6, Name:'Offside', RefereeName:'2H 5+', Type:'Own1'},
+                  {Id:7, Name:'Foul committed', RefereeName:'Dictates placing of ball', Type:'Own1'},
+                  {Id:8, Name:'Shot off target', RefereeName:'2H 0-2min ET', Type:'Own1'},
+                  {Id:9, Name:'Penalty committed', RefereeName:'2H 3-4min ET', Type:'Own2'},
+                  {Id:10, Name:'Yellow card', RefereeName:'Uses spray', Type:'Own2'},
+                  {Id:11, Name:'Substituted', RefereeName:'Hit by ball', Type:'Own2'},
+                  {Id:12, Name:'Own goal', RefereeName:'Consults other referees', Type:'Own3'},
+                  {Id:13, Name:'Penalty missed', RefereeName:'Falls', Type:'Own3'},
+                  {Id:14, Name:'Red card', RefereeName:'Injured', Type:'Own3'}]);
 });
+
+/*
+--Goal
+--Assist
+--Shot on target
+--Corner taken
+--Medic
+--Offside
+--Foul committed
+--Shot off target
+--Penalty committed
+--Yellow card
+--Substituted
+--Own Goal
+--Penalty missed
+--Red card
+-------------------
+--Goal cancelled
+--Separates players
+--Talk no card
+--1st half 0-2
+--1st half 3+ minutes
+--Dictates placing of ball
+--2H 0-2min ET
+2H 5+
+--Consults other referees
+--2nd half 3-4
+--Falls
+---Hit by ball
+--Injured
+--Uses spray
+*/
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
