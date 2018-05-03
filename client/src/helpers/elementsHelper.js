@@ -8,6 +8,11 @@ const getBank = (index) => {
   return bankElement || null;
 }
 
+const getWalterCount = (index) => {
+  var walterEle = document.getElementById('walterLabel' + index);
+  return walterEle || null;
+}
+
 const lockGame = () => {
   document.getElementById('allocateButton').disabled = true;
   document.getElementById('participantNameInput').disabled = true;
@@ -16,5 +21,6 @@ const lockGame = () => {
 export default {
   getStatus,
   getBank,
+  getWalterCount,
   lockGame,
 }

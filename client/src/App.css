@@ -45,6 +45,11 @@ h1 {
   text-align: right;
 }
 
+.labelInput {
+  width:10px;
+  text-align: center;
+}
+
 
 
 input[allocationKey='0'] {

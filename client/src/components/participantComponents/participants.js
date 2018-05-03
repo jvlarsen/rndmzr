@@ -27,6 +27,7 @@ class ParticipantsRadio extends React.Component {
     var onOptionChange = this.onOptionChange.bind(this);
     var onAddBank = this.onAddBank.bind(this);
     var onDrink = this.onDrink.bind(this);
+    var onDrinkBank = this.onDrinkBank.bind(this);
     this.props.participants.map(function(participantName, index) {
         participantRadios.push(<div className='radio' key={index}>
           <label>
@@ -35,7 +36,9 @@ class ParticipantsRadio extends React.Component {
             <input type='text' key={'status'+index} id={'status'+index} ref={'status'+index} readOnly />
             <input type="button" key={'drink'+index} id={'drink'+index} value='Skål' onClick={onDrink}/>
             <input type='button' key={'addBank'+index} id={'addBank'+index} value='Sæt i banken' onClick={onAddBank}/>
-            <input type="text" key={'bank'+index} id={'bank'+index} readOnly />
+            <input type="text" key={'bank'+index} id={'bank'+index} value="0" readOnly />
+            <input type="text" id={'walterLabel' + index} value="0" readOnly className="labelInput"/>
+            <input type="button" key={'drinkBank' + index} id={'drinkBank' + index} value="Hæv i banken" onClick={onDrinkBank} />
           </label>
         </div>);
         return participantRadios;
@@ -73,5 +76,14 @@ class ParticipantsRadio extends React.Component {
     var status = ElementHelper.getStatus(index);
     this.clearElementValue(status);
     status.value = '';
+  }
+
+  onDrinkBank(e) {
+    var index = e.target.id.substring(9);
+    var currBank = ElementHelper.getBank(index);
+    var walterCount = ElementHelper.getWalterCount(index);
+    console.log(currBank); //Tag currBank.value for at se hvad der står.
+    console.log(walterCount);
+
   }
 }
