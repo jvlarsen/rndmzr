@@ -11,27 +11,35 @@ export default class Events extends React.Component {
 
   componentWillMount() {
     var self = this;
-
     Connector.getEvents().then(function(result) {
       self.setState({events:result});
     });
   }
 
+  componentWillUpdate() {
+    console.log(1);
+  }
+
   render() {
+    console.log(2);
     var eventRadios = [];
     var selectedOption = (this.props.selectedOption) ? this.props.selectedOption.value : null;
     var allEvents = this.state.events;
+
     const onOptionChange = this.props.onOptionChange;
     allEvents.map((event) => {
+      var value = this.props.refereeSelected ? event.RefereeName : event.Name;
+      console.log(value);
       eventRadios.push(<div className="radio" key={event.Id} >
               <label>
-                <input className='bigradio' type="radio" value={event.Name} measure={event.Type} key={event.Id} checked={selectedOption === event.Name} onChange={onOptionChange}/>
-                {event.Name}
+                <input className='bigradio' type="radio" value={value} measure={event.Type} key={event.Id} checked={selectedOption === event.Name || selectedOption === event.RefereeName} onChange={onOptionChange}/>
+                {value}
               </label>
             </div>);
             return eventRadios;
           }
         );
+
     return (
       <form>
        {eventRadios}
