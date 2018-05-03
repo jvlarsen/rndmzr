@@ -16,12 +16,7 @@ export default class Events extends React.Component {
     });
   }
 
-  componentWillUpdate() {
-    console.log(1);
-  }
-
   render() {
-    console.log(2);
     var eventRadios = [];
     var selectedOption = (this.props.selectedOption) ? this.props.selectedOption.value : null;
     var allEvents = this.state.events;
@@ -29,7 +24,7 @@ export default class Events extends React.Component {
     const onOptionChange = this.props.onOptionChange;
     allEvents.map((event) => {
       var value = this.props.refereeSelected ? event.RefereeName : event.Name;
-      console.log(value);
+
       eventRadios.push(<div className="radio" key={event.Id} >
               <label>
                 <input className='bigradio' type="radio" value={value} measure={event.Type} key={event.Id} checked={selectedOption === event.Name || selectedOption === event.RefereeName} onChange={onOptionChange}/>

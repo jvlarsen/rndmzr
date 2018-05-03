@@ -1,9 +1,9 @@
 
-
+//Hele Player og hele Event elementet sendes med her.
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
-  //var participants = getParticipants();
-  //console.log(parts);
-  console.log(selectedEvent + ' - ' + selectedPlayer + ' printed from Connector.');
+
+  var measureType = selectedEvent.getAttribute("measure");
+  var measure = getMeasures()[measureType];
 
   var result = [];
   for (var i = 0; i < numberOfParticipants; i++) {

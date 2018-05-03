@@ -166,7 +166,7 @@ class App extends Component {
   }
 
   onPlayerChange(e) {
-    this.setState({selectedPlayer:e.target.value, refereeSelected:false});
+    this.setState({selectedPlayer:e.target, refereeSelected:false});
   }
 
   onRefereeSelect(e) {
