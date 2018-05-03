@@ -1,17 +1,79 @@
 
 //Hele Player og hele Event elementet sendes med her.
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
-
+  //Brug selectedPlayer.getAttribute("allocationKey") til at finde ud af hvem ejeren er.
   var measureType = selectedEvent.getAttribute("measure");
   var measure = getMeasures()[measureType];
-
   var result = [];
+  var givenMeasure = 0;
+  console.log(selectedPlayer);
+  var allocationKey = selectedPlayer.getAttribute("allocationKey");
+  var isOwn = measureType.substring(0,3) === "Own";
+  var randomNumber = Math.floor(Math.random() * 100);
+
+  console.log(isOwn);
   for (var i = 0; i < numberOfParticipants; i++) {
-    var measure = Math.floor(Math.random() * 12);
-    result.push({status:i, value:measure})
+    debugger;
+    if (isOwn && i === allocationKey) {
+      result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
+    }
+    if (isOwn && i !== allocationKey) {
+      result.push({status:i, value: getNoneMeasure()});
+    }
+    if (!isOwn && i === allocationKey) {
+      result.push({status:i, value: getNoneMeasure()});
+    }
+    if (!isOwn && i !== allocationKey) {
+      result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
+    }
+    randomNumber = Math.floor(Math.random() * 100);
   }
 
+
+  console.log(result);
+  /*
+  if (measureType.substring(0,3) === "Own") {
+    console.log('Own drink');
+    result.push({status:0, value: getMeasureFromRandom(randomNumber, measure)});
+    return result;
+  }
+  */
+  /*
+  for (var i = 0; i < numberOfParticipants; i++) {
+    if (selectedPlayer.getAttribute("allocationKey") === i) {
+      result.push({status:0, value: getMeasureFromRandom(randomNumber, measure)});
+    }
+
+    randomNumber = Math.floor(Math.random() * 100);
+    givenMeasure = getMeasureFromRandom(randomNumber, measure);
+    console.log(givenMeasure);
+    result.push({status:i, value:{NumericMeasure: givenMeasure['NumericMeasure'], StringMeasure:givenMeasure['StringMeasure']}});
+  }
+  */
   return result;
+}
+
+const getMeasureFromRandom = (randomNumber, measure) => {
+  var givenMeasure = null;
+
+    if (randomNumber <= measure['Small']) {
+      givenMeasure = {NumericMeasure: 1, StringMeasure:'Small'};
+    }
+    if (randomNumber > measure['Small'] && randomNumber <= measure['Medium']) {
+      givenMeasure = {NumericMeasure: 3, StringMeasure:'Medium'};
+    }
+    if (randomNumber > measure['Medium'] && randomNumber <= measure['Large']) {
+      givenMeasure = {NumericMeasure: 6, StringMeasure:'Large'};
+    }
+    if (randomNumber > measure['Large']) {
+      givenMeasure = {NumericMeasure: 11, StringMeasure:'Walter'};
+    }
+
+  return givenMeasure;
+}
+
+const getNoneMeasure = () => {
+  return {NumericMeasure: 0, StringMeasure: ''};
 }
 
 const getParticipants = () => {
