@@ -33,8 +33,13 @@ h1 {
 .flex-grid {
   display: flex;
 }
+
 .col {
   flex: 1;
+}
+
+.colwide {
+  flex: 8;
 }
 
 .leftCol {
