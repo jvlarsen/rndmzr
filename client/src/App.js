@@ -64,13 +64,13 @@ class App extends Component {
               <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
               <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' tooltip='Der kan ikke tilføjes deltagere eller ændres på dommerdeltagelse efterfølgende.' />
             </div>
-            <div className="col">
+            <div className="colmedium">
               <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>
             </div>
-            <div className="col leftCol" >
+            <div className="leftCol">
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
             </div>
-            <div className="col">
+            <div >
               <Randomize onClick={this.onClickRandomize.bind(this)}/>
             </div>
           </div>

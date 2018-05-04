@@ -39,7 +39,11 @@ h1 {
 }
 
 .colwide {
-  flex: 8;
+  flex: 5;
+}
+
+.colmedium {
+  flex: 3;
 }
 
 .leftCol {
@@ -56,6 +60,10 @@ h1 {
 }
 
 
+.participantLabel {
+  width: 70px;
+  text-overflow: ellipsis;
+}
 
 input[allocationKey='0'] {
     background-color: red;
