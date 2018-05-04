@@ -22,6 +22,7 @@ class ParticipantsRadio extends React.Component {
   }
 
   render() {
+    console.log('participant render');
     var participantRadios = [];
     var selectedOption = this.state.selectedOption;
     var onOptionChange = this.onOptionChange.bind(this);
@@ -33,11 +34,11 @@ class ParticipantsRadio extends React.Component {
           <label>
             <input type='radio' value={participantName} key={index} checked={selectedOption === participantName} onChange={onOptionChange} />
             {participantName}
-            <input type='text' key={'status'+index} id={'status'+index} ref={'status'+index} readOnly />
+            <input type='text' key={'status'+index} id={'status'+index} numericvalue='0' ref={'status'+index} readOnly />
             <input type="button" key={'drink'+index} id={'drink'+index} value='Skål' onClick={onDrink}/>
             <input type='button' key={'addBank'+index} id={'addBank'+index} value='Sæt i banken' onClick={onAddBank}/>
-            <input type="text" key={'bank'+index} id={'bank'+index} value="0" readOnly />
-            <input type="text" id={'walterLabel' + index} value="0" readOnly className="labelInput"/>
+            <input type="text" key={'bank'+index} id={'bank'+index} readOnly />
+            <input type="text" id={'walterLabel' + index} readOnly className="labelInput"/>
             <input type="button" key={'drinkBank' + index} id={'drinkBank' + index} value="Hæv i banken" onClick={onDrinkBank} />
           </label>
         </div>);
@@ -52,26 +53,34 @@ class ParticipantsRadio extends React.Component {
   }
 
   onOptionChange(e) {
-    this.setState({selectedOption:e.target.value})
+    this.setState({selectedOption:e.target.value});
   }
 
   onAddBank(e) {
+
     var index = e.target.id.substring(7);
     var status = ElementHelper.getStatus(index);
     var currBank = ElementHelper.getBank(index);
 
-    var statusValue = parseInt(status.value, 10) || 0;
+    //Large konverteres til 6.
+    //var measure = Connector.getMeasure(status.value);
+
+    var statusValue = parseInt(status.numericvalue, 10) || 0;
+    // parseInt(status.value, 10) || 0;
+    console.log(currBank);
     var currBankValue =  parseInt(currBank.value, 10) || 0;
     var newBank = statusValue + currBankValue;
     currBank.value = newBank;
-    this.clearElementValue(status);
+    //this.clearElementValue(status);
   }
 
   clearElementValue(element) {
     element.value = null;
+    element.numericvalue = null;
   }
 
   onDrink(e) {
+    console.log(1);
     var index = e.target.id.substring(5);
     var status = ElementHelper.getStatus(index);
     this.clearElementValue(status);

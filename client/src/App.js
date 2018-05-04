@@ -151,7 +151,9 @@ class App extends Component {
       var newTotal = latestTotal + randomizerResult[i].value.NumericMeasure;
       currDataSets[i].dataset.data.push(newTotal);
       var currStatus = ElementsHelper.getStatus(randomizerResult[i].status);
+
       currStatus.value = randomizerResult[i].value.StringMeasure;
+      currStatus.numericvalue = randomizerResult[i].value.NumericMeasure;
     }
   }
 

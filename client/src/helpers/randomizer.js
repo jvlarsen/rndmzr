@@ -16,7 +16,7 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
     var playerRadioToAllocate = playerToAllocate + 'Radio';
 
     document.getElementById(playerToAllocate).setAttribute('allocationKey', participantIndex);
-    console.log(document.getElementById(playerRadioToAllocate));
+
     document.getElementById(playerRadioToAllocate).setAttribute('allocationKey', participantIndex);
 
     document.getElementById('status'+participantIndex).setAttribute('allocationKey', participantIndex);
@@ -38,7 +38,6 @@ const getPlayersArrayForAllocation = (includeReferee) => {
 }
 
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
-  console.log(selectedEvent);
   if (!selectedPlayer || !selectedEvent) {return [];}
   return Connector.randomize(selectedPlayer, selectedEvent, numberOfParticipants);
 }
