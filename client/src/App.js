@@ -35,7 +35,18 @@ class App extends Component {
           {color: 'rgba(100,255,100,0.4)', borderColor: 'rgba(100,255,100,1)'},
           {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
           {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},]
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'},
+          {color: 'rgba(0,255,0,0.4)', borderColor: 'rgba(0,255,0,1)'},
+          {color: 'rgba(0,0,255,0.4)', borderColor: 'rgba(0,0,255,1)'},
+          {color: 'rgba(100,0,0,0.4)', borderColor: 'rgba(100,0,0,1)'},
+          {color: 'rgba(0,100,0,0.4)', borderColor: 'rgba(0,100,0,1)'},
+          {color: 'rgba(0,0,100,0.4)', borderColor: 'rgba(0,0,100,1)'},
+          {color: 'rgba(100,255,100,0.4)', borderColor: 'rgba(100,255,100,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'}]
     }
   }
 
