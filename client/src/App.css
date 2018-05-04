@@ -53,64 +53,67 @@ h1 {
 
 
 input[allocationKey='0'] {
-    background-color: #85adad;
+    background-color: red;
 }
 
 input[allocationKey='1'] {
-    background-color: #00ffcc;
+    background-color: coral;
 }
 
 input[allocationKey='2'] {
-    background-color: #ccccff;
+    background-color: yellow;
 }
 input[allocationKey='3'] {
-    background-color: #cc00ff;
+    background-color: olive;
 }
 input[allocationKey='4'] {
-    background-color: #cc0000;
+    background-color: lime;
 }
 input[allocationKey='5'] {
-    background-color: #ffcc00;
+    background-color: cyan;
 }
 input[allocationKey='6'] {
-    background-color: #66ff33;
+    background-color: teal;
 }
 input[allocationKey='7'] {
-    background-color: yellow;
+    background-color: lavender;
 }
 input[allocationKey='8'] {
-    background-color: yellow;
+    background-color: magenta;
 }
 input[allocationKey='9'] {
-    background-color: yellow;
+    background-color: brown;
 }
 input[allocationKey='10'] {
-    background-color: yellow;
+    background-color: beige;
 }
 input[allocationKey='11'] {
-    background-color: yellow;
+    background-color: mint;
 }
 input[allocationKey='12'] {
-    background-color: yellow;
+    background-color: maroon;
 }
 input[allocationKey='13'] {
-    background-color: yellow;
+    background-color: pink;
 }
 input[allocationKey='14'] {
-    background-color: yellow;
+    background-color: orange;
 }
 input[allocationKey='15'] {
-    background-color: yellow;
+    background-color: olive;
 }
 input[allocationKey='16'] {
-    background-color: yellow;
+    background-color: green;
 }
 input[allocationKey='17'] {
-    background-color: yellow;
+    background-color: navy;
 }
 input[allocationKey='18'] {
-    background-color: yellow;
+    background-color: purple;
 }
 input[allocationKey='19'] {
-    background-color: yellow;
+    background-color: white;
+}
+input[allocationKey] {
+  font-weight: bold;
 }

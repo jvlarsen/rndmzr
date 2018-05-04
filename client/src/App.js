@@ -21,10 +21,8 @@ class App extends Component {
       minute: 0,
       includeReferee: false,
       participantNames:[],
-      passwords: [],
       gameId: null,
       dataSet:{},
-      latestEvents:{},
       labels:['Start'],
       dataSets:[],
       graphColors:[
@@ -34,7 +32,7 @@ class App extends Component {
           {color: 'rgba(100,0,0,0.4)', borderColor: 'rgba(100,0,0,1)'},
           {color: 'rgba(0,100,0,0.4)', borderColor: 'rgba(0,100,0,1)'},
           {color: 'rgba(0,0,100,0.4)', borderColor: 'rgba(0,0,100,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
+          {color: 'rgba(100,255,100,0.4)', borderColor: 'rgba(100,255,100,1)'},
           {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
           {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
           {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},]
@@ -141,28 +139,15 @@ class App extends Component {
   updateWhatToDrink(randomizerResult) {
     var currDataSets = this.state.dataSets;
 
-    console.log(randomizerResult);
-
     for (var i = 0; i < randomizerResult.length; i++) {
       var endIndex = currDataSets[i].dataset.data.length-1;
       var latestTotal = currDataSets[i].dataset.data[endIndex];
       var newTotal = latestTotal + randomizerResult[i].value.NumericMeasure;
       currDataSets[i].dataset.data.push(newTotal);
       var currStatus = ElementsHelper.getStatus(randomizerResult[i].status);
-      console.log(randomizerResult[i].value);
       currStatus.value = randomizerResult[i].value.StringMeasure;
     }
-
-    /*randomizerResult.map(result => {
-      var currStatus = ElementsHelper.getStatus(result.status);
-      if (currStatus !== undefined && currStatus !== null) {
-        currStatus.value = result.value;
-      }
-      return 1;
-    });
-    */
   }
-
 
   onEventChange(e) {
     this.setState({selectedEvent:e.target});

@@ -5,55 +5,26 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   var measure = getMeasures()[measureType];
   var result = [];
   var givenMeasure = 0;
-  console.log(selectedPlayer);
   var allocationKey = selectedPlayer.getAttribute("allocationKey");
   var isOwn = measureType.substring(0,3) === "Own";
   var randomNumber = Math.floor(Math.random() * 100);
 
-  console.log(isOwn);
-  console.log(allocationKey);
   for (var i = 0; i < numberOfParticipants; i++) {
-    debugger;
     if (isOwn && i == allocationKey) {
-      console.log(1);
       result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
     }
     if (isOwn && i != allocationKey) {
-      console.log(2);
       result.push({status:i, value: getNoneMeasure()});
     }
     if (!isOwn && i == allocationKey) {
-      console.log(3);
       result.push({status:i, value: getNoneMeasure()});
     }
     if (!isOwn && i != allocationKey) {
-      console.log(4);
       result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
     }
     randomNumber = Math.floor(Math.random() * 100);
   }
 
-
-  console.log(result);
-  /*
-  if (measureType.substring(0,3) === "Own") {
-    console.log('Own drink');
-    result.push({status:0, value: getMeasureFromRandom(randomNumber, measure)});
-    return result;
-  }
-  */
-  /*
-  for (var i = 0; i < numberOfParticipants; i++) {
-    if (selectedPlayer.getAttribute("allocationKey") === i) {
-      result.push({status:0, value: getMeasureFromRandom(randomNumber, measure)});
-    }
-
-    randomNumber = Math.floor(Math.random() * 100);
-    givenMeasure = getMeasureFromRandom(randomNumber, measure);
-    console.log(givenMeasure);
-    result.push({status:i, value:{NumericMeasure: givenMeasure['NumericMeasure'], StringMeasure:givenMeasure['StringMeasure']}});
-  }
-  */
   return result;
 }
 
