@@ -79,7 +79,7 @@ class App extends Component {
     var d = new Date();
     var newLabel = '' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 
-    var selectedPlayer = 'referee';
+    var selectedPlayer = document.getElementById('refereeName');
     if (!this.state.refereeSelected) {
       selectedPlayer = this.state.selectedPlayer;
     }

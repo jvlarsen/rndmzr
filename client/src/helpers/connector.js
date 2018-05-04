@@ -1,7 +1,6 @@
 
-//Hele Player og hele Event elementet sendes med her.
+//2018-05-04: Problem: Own sætter slet ingenting på nogen. Other sætter på alle.
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
-  //Brug selectedPlayer.getAttribute("allocationKey") til at finde ud af hvem ejeren er.
   var measureType = selectedEvent.getAttribute("measure");
   var measure = getMeasures()[measureType];
   var result = [];
@@ -12,18 +11,23 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   var randomNumber = Math.floor(Math.random() * 100);
 
   console.log(isOwn);
+  console.log(allocationKey);
   for (var i = 0; i < numberOfParticipants; i++) {
     debugger;
-    if (isOwn && i === allocationKey) {
+    if (isOwn && i == allocationKey) {
+      console.log(1);
       result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
     }
-    if (isOwn && i !== allocationKey) {
+    if (isOwn && i != allocationKey) {
+      console.log(2);
       result.push({status:i, value: getNoneMeasure()});
     }
-    if (!isOwn && i === allocationKey) {
+    if (!isOwn && i == allocationKey) {
+      console.log(3);
       result.push({status:i, value: getNoneMeasure()});
     }
-    if (!isOwn && i !== allocationKey) {
+    if (!isOwn && i != allocationKey) {
+      console.log(4);
       result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
     }
     randomNumber = Math.floor(Math.random() * 100);

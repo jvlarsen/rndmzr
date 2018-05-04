@@ -13,8 +13,12 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
     var playerIndex = Math.floor(Math.random() * playersToAllocate.length);
     var participantIndex = indexStart%numberOfParticipants;
     var playerToAllocate = playersToAllocate[playerIndex];
+    var playerRadioToAllocate = playerToAllocate + 'Radio';
 
     document.getElementById(playerToAllocate).setAttribute('allocationKey', participantIndex);
+    console.log(document.getElementById(playerRadioToAllocate));
+    document.getElementById(playerRadioToAllocate).setAttribute('allocationKey', participantIndex);
+
     document.getElementById('status'+participantIndex).setAttribute('allocationKey', participantIndex);
     indexStart++;
     var deleteIndex = playersToAllocate.indexOf(playerToAllocate);
