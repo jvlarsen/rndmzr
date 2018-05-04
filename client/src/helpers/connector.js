@@ -75,9 +75,15 @@ const getMeasures = () => {
   return measures;
 }
 
+const getDrinkSizes = () => {
+  var drinkSizes = {'Small':1, 'Medium':3, 'Large':6, 'Walter':11};
+  return drinkSizes;
+}
+
 export default {
   randomize,
   getParticipants,
   getEvents,
   getMeasures,
+  getDrinkSizes,
 }
