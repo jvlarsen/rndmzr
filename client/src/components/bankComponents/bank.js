@@ -7,14 +7,14 @@ import Withdrawal from './bankWithdrawal';
 export default class Bank extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {'Small':0, 'Medium':0, 'Large':0, 'Walter':0};
+    this.state = {'counters':{'Small':0, 'Medium':0, 'Large':0, 'Walter':0}};
   }
 
   render() {
     return (
       <div className="bankGroup">
         <Deposit index={this.props.index} onAddBank={this.onAddBank.bind(this)}/>
-        <Withdrawal index={this.props.index}/>
+        <Withdrawal index={this.props.index} counters={this.state.counters}/>
       </div>
     );
   }
