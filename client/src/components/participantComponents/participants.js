@@ -70,7 +70,7 @@ class ParticipantsRadio extends React.Component {
     var currBankValue =  parseInt(currBank.value, 10) || 0;
     var newBank = statusValue + currBankValue;
     currBank.value = newBank;
-    //this.clearElementValue(status);
+    this.clearElementValue(status);
   }
 
   clearElementValue(element) {
@@ -92,6 +92,6 @@ class ParticipantsRadio extends React.Component {
     var walterCount = ElementHelper.getWalterCount(index);
     console.log(currBank); //Tag currBank.value for at se hvad der står.
     console.log(walterCount);
-
+    this.clearElementValue(currBank);
   }
 }
