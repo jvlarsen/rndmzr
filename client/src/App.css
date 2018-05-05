@@ -66,30 +66,31 @@ h1 {
 }
 
 input[allocationKey='0'] {
-    background-color: red;
+    background-color: rgba(255,0,0,0.4);
 }
 
 input[allocationKey='1'] {
-    background-color: coral;
+    background-color: rgba(0,255,0,0.4);
 }
 
 input[allocationKey='2'] {
-    background-color: yellow;
+    background-color: rgba(0,0,255,0.4);
 }
 input[allocationKey='3'] {
-    background-color: olive;
+    background-color: rgba(100,0,0,0.4);
 }
 input[allocationKey='4'] {
-    background-color: lime;
+    background-color: green;
 }
 input[allocationKey='5'] {
-    background-color: cyan;
+    background-color: orange;
 }
 input[allocationKey='6'] {
-    background-color: teal;
+    background-color: navy;
+    color: white;
 }
 input[allocationKey='7'] {
-    background-color: lavender;
+    background-color: red;
 }
 input[allocationKey='8'] {
     background-color: magenta;
@@ -104,7 +105,7 @@ input[allocationKey='11'] {
     background-color: mint;
 }
 input[allocationKey='12'] {
-    background-color: maroon;
+    background-color: grey;
 }
 input[allocationKey='13'] {
     background-color: pink;
