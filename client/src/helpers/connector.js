@@ -4,7 +4,6 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   var measureType = selectedEvent.getAttribute("measure");
   var measure = getMeasures()[measureType];
   var result = [];
-  var givenMeasure = 0;
   var allocationKey = selectedPlayer.getAttribute("allocationKey");
   var isOwn = measureType.substring(0,3) === "Own";
   var randomNumber = Math.floor(Math.random() * 100);

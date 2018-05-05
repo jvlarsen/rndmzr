@@ -22,7 +22,6 @@ class ParticipantsRadio extends React.Component {
   }
 
   render() {
-    console.log('participant render');
     var participantRadios = [];
     var selectedOption = this.state.selectedOption;
     var onOptionChange = this.onOptionChange.bind(this);

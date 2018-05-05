@@ -1,14 +1,11 @@
 import Connector from './connector';
 
 const allocatePlayers = (numberOfParticipants, includeReferee) => {
-  console.log(numberOfParticipants + ' deltagere i denne omgang.');
 
-  //så det ikke er de den samme deltager, der starter med at få tildelt spillere
   var indexStart = Math.floor(Math.random() * numberOfParticipants) +1;
 
   var playersToAllocate = getPlayersArrayForAllocation(includeReferee);
   while (playersToAllocate.length > 0)
-  //for (var i = 0; i < playersToAllocate.length; i++)
   {
     var playerIndex = Math.floor(Math.random() * playersToAllocate.length);
     var participantIndex = indexStart%numberOfParticipants;

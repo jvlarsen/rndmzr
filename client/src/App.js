@@ -7,6 +7,7 @@ import ParticipantBox from './components/participantComponents/participantBox';
 import Engine from './helpers/randomizer';
 import ElementsHelper from './helpers/elementsHelper';
 import LineSample from './components/graph/linesample';
+import Bank from './components/bankComponents/bank';
 
 class App extends Component {
 
@@ -74,14 +75,15 @@ class App extends Component {
               <Randomize onClick={this.onClickRandomize.bind(this)}/>
             </div>
           </div>
+          <div>
+            <Bank index="v" stringmeasure="5" />
+          </div>
       </div>
     );
   }
 
   onClickRandomize(e) {
     var selectedEvent = (this.state.selectedEvent) ? this.state.selectedEvent.value : null;
-    var d = new Date();
-    var newLabel = '' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 
     var selectedPlayer = document.getElementById('refereeName');
     if (!this.state.refereeSelected) {
