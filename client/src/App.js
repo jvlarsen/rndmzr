@@ -8,46 +8,28 @@ import Engine from './helpers/randomizer';
 import ElementsHelper from './helpers/elementsHelper';
 import LineSample from './components/graph/linesample';
 import Bank from './components/bankComponents/bank';
+import Connector from './helpers/connector'
 
 class App extends Component {
 
   constructor(props){
     super(props);
     this.state = {
+      //Defaults when loading and reloading
       selectedEvent: null,
       selectedParticipant: null,
       selectedPlayer:null,
-      refereeSelected:false,
+      graphColors: Connector.getGraphColors(),
       refereeIncluded: false,
-      minute: 0,
-      includeReferee: false,
+      refereeSelected:false,
+
+      //Variables when loading and reloading
       participantNames:[],
       gameId: null,
       dataSet:{},
-      labels:['Start'],
+      labels:['Kick off'],
       dataSets:[],
-      graphColors:[
-          {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'},
-          {color: 'rgba(0,255,0,0.4)', borderColor: 'rgba(0,255,0,1)'},
-          {color: 'rgba(0,0,255,0.4)', borderColor: 'rgba(0,0,255,1)'},
-          {color: 'rgba(100,0,0,0.4)', borderColor: 'rgba(100,0,0,1)'},
-          {color: 'orange', borderColor: 'rgba(0,100,0,1)'},
-          {color: 'green', borderColor: 'rgba(0,0,100,1)'},
-          {color: 'navy', borderColor: 'rgba(255,100,100,1)'},
-          {color: 'red', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'},
-          {color: 'rgba(0,255,0,0.4)', borderColor: 'rgba(0,255,0,1)'},
-          {color: 'rgba(0,0,255,0.4)', borderColor: 'rgba(0,0,255,1)'},
-          {color: 'rgba(100,0,0,0.4)', borderColor: 'rgba(100,0,0,1)'},
-          {color: 'rgba(0,100,0,0.4)', borderColor: 'rgba(0,100,0,1)'},
-          {color: 'rgba(0,0,100,0.4)', borderColor: 'rgba(0,0,100,1)'},
-          {color: 'rgba(100,255,100,0.4)', borderColor: 'rgba(100,255,100,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
-          {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'}]
+
     }
   }
 
@@ -103,13 +85,7 @@ class App extends Component {
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(this.state.participantNames.length, refereeCheckbox.checked);
     this.setState({gameId:123456});
-    //ElementsHelper.lockGame();
-    /*Lav noget med en property på hhv. Participants og Players, der mapper mellem
-    de to.
-    Eksempelvis <Participant allocationKey=1 ... />
-    <Player allocationKey=1 ... />
-    Så kan der kobles mellem de to, og det giver en foreign key til databasen.
-    */
+    ElementsHelper.lockGame();
   }
 
   addParticipantToGraph = (participantName) => {

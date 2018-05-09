@@ -8,12 +8,12 @@ export default class BankWithdrawal extends React.Component {
 
   render() {
     return (
-      <div>
-        <WithdrawalButton id={this.props.index} className="drink small" value="Small " counter={this.state.counters.Small} />
-        <WithdrawalButton id={this.props.index} className="drink medium" value="Medium " counter={this.state.counters.Medium} />
-        <WithdrawalButton id={this.props.index} className="drink walter" value="Large " counter={this.state.counters.Large} />
-        <WithdrawalButton id={this.props.index} className="drink walter" value="Walter " counter={this.state.counters.Walter}  />
-      </div>
+      <span>
+        <WithdrawalButton id={'withdrawSmall'+this.props.index} className="drink small" value="Small " counter={this.state.counters.Small} />
+        <WithdrawalButton id={'withdrawMedium'+this.props.index} className="drink medium" value="Medium " counter={this.state.counters.Medium} />
+        <WithdrawalButton id={'withdrawLarge'+this.props.index} className="drink walter" value="Large " counter={this.state.counters.Large} />
+        <WithdrawalButton id={'withdrawWalter'+this.props.index} className="drink walter" value="Walter " counter={this.state.counters.Walter}  />
+      </span>
     );
   }
 }

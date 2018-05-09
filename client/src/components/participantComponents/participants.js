@@ -1,5 +1,6 @@
 import React from 'react';
 import ElementHelper from '../../helpers/elementsHelper';
+import Bank from '../bankComponents/bank';
 
 export default class Participants extends React.Component {
   constructor(props) {
@@ -35,10 +36,9 @@ class ParticipantsRadio extends React.Component {
             {participantName}
             <input type='text' key={'status'+index} id={'status'+index} numericvalue='0' ref={'status'+index} readOnly />
             <input type="button" key={'drink'+index} id={'drink'+index} value='Skål' onClick={onDrink}/>
-            <input type='button' key={'addBank'+index} id={'addBank'+index} value='Sæt i banken' onClick={onAddBank}/>
-            <input type="text" key={'bank'+index} id={'bank'+index} readOnly />
-            <input type="text" id={'walterLabel' + index} readOnly className="labelInput"/>
-            <input type="button" key={'drinkBank' + index} id={'drinkBank' + index} value="Hæv i banken" onClick={onDrinkBank} />
+            <Bank index={index}/>
+
+
           </label>
         </div>);
         return participantRadios;

@@ -59,6 +59,11 @@ h1 {
   text-align: center;
 }
 
+.randomizer {
+  height: 50px;
+  background-color: red;
+}
+
 
 .participantLabel {
   width: 70px;

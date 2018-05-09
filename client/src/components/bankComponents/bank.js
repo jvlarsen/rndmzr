@@ -12,10 +12,10 @@ export default class Bank extends React.Component {
 
   render() {
     return (
-      <div className="bankGroup">
+      <span className="bankGroup">
         <Deposit index={this.props.index} onAddBank={this.onAddBank.bind(this)}/>
         <Withdrawal index={this.props.index} counters={this.state.counters}/>
-      </div>
+      </span>
     );
   }
 
