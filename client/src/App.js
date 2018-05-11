@@ -37,29 +37,26 @@ class App extends Component {
 
     return (
       <div className="App">
-      <label id='gameId'>Unique game ID: {this.state.gameId}</label>
-      <br/>
-      <div className="graph">
-        <LineSample labels={this.state.labels} dataSets={this.state.dataSets}/>
-      </div>
-          <div className="flex-grid">
-            <div className="colwide">
-              <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
-              <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
-            </div>
-            <div className="colmedium">
-              <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>
-            </div>
-            <div className="leftCol">
-              <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
-            </div>
-            <div >
-              <Randomize onClick={this.onClickRandomize.bind(this)}/>
-            </div>
+        <label id='gameId'>Unique game ID: {this.state.gameId}</label>
+        <br/>
+        <div className="graph row">
+          <LineSample labels={this.state.labels} dataSets={this.state.dataSets}/>
+        </div>
+        <div className="flex-grid">
+          <div className="colwide">
+            <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
+            <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
           </div>
-          <div>
-            <Bank index="v" stringmeasure="5" />
+          <div className="colmedium">
+            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>
           </div>
+          <div className="leftCol">
+            <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
+          </div>
+          <div >
+            <Randomize onClick={this.onClickRandomize.bind(this)}/>
+          </div>
+        </div>
       </div>
     );
   }

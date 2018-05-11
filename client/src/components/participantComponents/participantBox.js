@@ -11,8 +11,8 @@ export default class ParticipantBox extends React.Component {
     render(){
         return(
             <div>
-                <ParticipantAdder addParticipant={this.addParticipant.bind(this)} />
-                <Participants participantNames={this.state.participantNames}/>
+              <ParticipantAdder addParticipant={this.addParticipant.bind(this)} />
+              <Participants participantNames={this.state.participantNames}/>
             </div>
         );
     }
