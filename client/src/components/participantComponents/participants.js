@@ -26,9 +26,7 @@ class ParticipantsRadio extends React.Component {
     var participantRadios = [];
     var selectedOption = this.state.selectedOption;
     var onOptionChange = this.onOptionChange.bind(this);
-    var onAddBank = this.onAddBank.bind(this);
     var onDrink = this.onDrink.bind(this);
-    var onDrinkBank = this.onDrinkBank.bind(this);
     this.props.participants.map(function(participantName, index) {
         participantRadios.push(<div className='radio' key={index}>
           <label>

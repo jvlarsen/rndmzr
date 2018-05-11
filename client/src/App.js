@@ -45,7 +45,7 @@ class App extends Component {
           <div className="flex-grid">
             <div className="colwide">
               <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
-              <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' tooltip='Der kan ikke tilføjes deltagere eller ændres på dommerdeltagelse efterfølgende.' />
+              <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
             </div>
             <div className="colmedium">
               <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>

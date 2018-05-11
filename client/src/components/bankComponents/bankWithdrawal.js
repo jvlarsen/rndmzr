@@ -3,37 +3,27 @@ import React from 'react';
 export default class BankWithdrawal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {'counters':this.props.counters}
+    this.state = {'Small':this.props.counters.Small, 'Medium':this.props.counters.Medium, 'Large':this.props.counters.Large, 'Walter':this.props.counters.Walter}
   }
 
   render() {
     return (
       <span>
-        <WithdrawalButton id={'withdrawSmall'+this.props.index} className="drink small" value="Small " counter={this.state.counters.Small} />
-        <WithdrawalButton id={'withdrawMedium'+this.props.index} className="drink medium" value="Medium " counter={this.state.counters.Medium} />
-        <WithdrawalButton id={'withdrawLarge'+this.props.index} className="drink walter" value="Large " counter={this.state.counters.Large} />
-        <WithdrawalButton id={'withdrawWalter'+this.props.index} className="drink walter" value="Walter " counter={this.state.counters.Walter}  />
+        <input type="button" id={'withdrawSmall'+this.props.index} className="drink small" value={"Small " + this.props.counters.Small} onClick={this.props.onDrinkBank} measure="Small" counter={this.props.counters.Small} />
+
+        <input type="button" id={'withdrawMedium'+this.props.index} className="drink medium" value={"Medium " + this.props.counters.Medium} onClick={this.props.onDrinkBank} measure="Medium" counter={this.props.counters.Medium} />
+
+        <input type="button" id={'withdrawLarge'+this.props.index} className="drink walter" value={"Large " + this.props.counters.Large} onClick={this.props.onDrinkBank} measure="Large" counter={this.props.counters.Large} />
+
+        <input type="button" id={'withdrawWalter'+this.props.index} className="drink walter" value={"Walter " + this.props.counters.Walter} measure="Walter" counter={this.props.counters.Walter} onClick={this.props.onDrinkBank}/>
       </span>
-    );
-  }
-}
-
-class WithdrawalButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {'counter':this.props.counter};
-  }
-
-  render() {
-    return (
-      <input type="button" id={this.props.id} value={this.props.value + this.state.counter} onClick={this.drinkOne.bind(this)}/>
     );
   }
 
   drinkOne(e) {
-    //e.preventDefault();
-    var currCounter = this.state.counter;
+    var measure = e.target.measure;
+    var currCounter = this.state[measure];
     var newCounter = currCounter - 1;
-    this.setState({counter:newCounter >= 0 ? newCounter : 0});
+    this.setState({measure:newCounter >= 0 ? newCounter : 0});
   }
 }
