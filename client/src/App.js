@@ -6,9 +6,10 @@ import Randomize from './components/randomize';
 import ParticipantBox from './components/participantComponents/participantBox';
 import Engine from './helpers/randomizer';
 import ElementsHelper from './helpers/elementsHelper';
-import LineSample from './components/graph/linesample';
-import Bank from './components/bankComponents/bank';
+import LineGraph from './components/graph/lineGraph';
 import Connector from './helpers/connector'
+import AppFunc from './helpers/appFunctions';
+import Loader from './components/game/loader';
 
 class App extends Component {
 
@@ -29,8 +30,14 @@ class App extends Component {
       dataSet:{},
       labels:['Kick off'],
       dataSets:[],
+      loadedParticipants:[],
 
     }
+  }
+
+  componentWillMount() {
+    //var loadedParticipants = Connector.getParticipantsFromGameId(1);
+
   }
 
   render() {
@@ -39,8 +46,9 @@ class App extends Component {
       <div className="App">
         <label id='gameId'>Unique game ID: {this.state.gameId}</label>
         <br/>
-        <div className="graph row">
-          <LineSample labels={this.state.labels} dataSets={this.state.dataSets}/>
+        <Loader />
+        <div >
+          <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
         </div>
         <div className="flex-grid">
           <div className="colwide">
@@ -53,7 +61,7 @@ class App extends Component {
           <div className="leftCol">
             <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
           </div>
-          <div >
+          <div>
             <Randomize onClick={this.onClickRandomize.bind(this)}/>
           </div>
         </div>
@@ -62,18 +70,15 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
-    var selectedEvent = (this.state.selectedEvent) ? this.state.selectedEvent.value : null;
-
-    var selectedPlayer = document.getElementById('refereeName');
-    if (!this.state.refereeSelected) {
-      selectedPlayer = this.state.selectedPlayer;
-    }
+    var selectedEvent = AppFunc.getSelectedEvent(this.state);
+    var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
 
     if (!selectedEvent || !selectedPlayer) {return;}
 
     this.setState(prevState => ({
-      labels: [...prevState.labels, selectedEvent] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
+      labels: [...prevState.labels, selectedEvent]
     }))
+
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, this.state.participantNames.length);
     this.updateWhatToDrink(randomizerResult);
   }
@@ -130,6 +135,13 @@ class App extends Component {
       currStatus.value = randomizerResult[i].value.StringMeasure;
       currStatus.numericvalue = randomizerResult[i].value.NumericMeasure;
     }
+  }
+
+  loadGame(gameId) {
+    console.log('Loading game ID ' + gameId);
+    var participants = [];
+    Connector.loadGame(gameId).then(res => console.log(res));
+    console.log(participants);
   }
 
   onEventChange(e) {

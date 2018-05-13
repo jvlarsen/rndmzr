@@ -63,6 +63,16 @@ const getEvents = () => {
   return allEvents;
 }
 
+const loadGame = (gameIdInput) => {
+var data = {gameId:2};
+
+  var participants = fetch('api/games/gameId/participants?gameId='+gameIdInput)
+    .then(res => console.log(res.json));
+
+    console.log(participants);
+  return participants;
+}
+
 const getMeasures = () => {
   var measures = {'Other1':{'Small':50, 'Medium':80, 'Large':95, 'Walter':100},
                 'Other2':{'Small':30, 'Medium':60, 'Large':85, 'Walter':100},
@@ -111,4 +121,5 @@ export default {
   getMeasures,
   getDrinkSizes,
   getGraphColors,
+  loadGame,
 }

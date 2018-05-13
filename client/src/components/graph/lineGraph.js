@@ -6,7 +6,6 @@ export default class LineSample extends React.Component {
     var data = this.getData();
     return (
       <div>
-        <h2>Game Progress</h2>
         <Line data={data} />
       </div>
     );

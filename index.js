@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const generatePassword = require('password-generator');
-
 const app = express();
+
+const DataConnector = require('./backend/dataConnector');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -39,37 +40,13 @@ app.get('/api/events', (req, res) => {
                   {Id:14, Name:'Red card', RefereeName:'Injured', Type:'Own3'}]);
 });
 
-/*
---Goal
---Assist
---Shot on target
---Corner taken
---Medic
---Offside
---Foul committed
---Shot off target
---Penalty committed
---Yellow card
---Substituted
---Own Goal
---Penalty missed
---Red card
--------------------
---Goal cancelled
---Separates players
---Talk no card
---1st half 0-2
---1st half 3+ minutes
---Dictates placing of ball
---2H 0-2min ET
-2H 5+
---Consults other referees
---2nd half 3-4
---Falls
----Hit by ball
---Injured
---Uses spray
-*/
+app.get('/api/games/gameId/participants', (req, res) => {
+  var loadedParticipants = DataConnector.getParticipants(req.query['gameId']);
+  console.log(JSON.stringify(loadedParticipants));
+  res.json(loadedParticipants)
+});
+
+
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
@@ -80,4 +57,4 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`Randomizer backend running on ${port}`);
