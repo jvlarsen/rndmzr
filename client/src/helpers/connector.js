@@ -64,13 +64,15 @@ const getEvents = () => {
 }
 
 const loadGame = (gameIdInput) => {
-var data = {gameId:2};
 
-  var participants = fetch('api/games/gameId/participants?gameId='+gameIdInput)
-    .then(res => console.log(res.json));
-
-    console.log(participants);
-  return participants;
+  var loadedGame = fetch('api/games/gameId/participants?gameId='+gameIdInput)
+      .then(res => res.json());
+      /*{
+        return res.json();
+    }).then((data) => {
+      console.log(data)});
+*/
+  return loadedGame;
 }
 
 const getMeasures = () => {

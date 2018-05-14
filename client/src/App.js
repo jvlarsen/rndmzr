@@ -46,7 +46,7 @@ class App extends Component {
       <div className="App">
         <label id='gameId'>Unique game ID: {this.state.gameId}</label>
         <br/>
-        <Loader />
+        <Loader participantsWereLoaded={this.participantsWereLoaded.bind(this)}/>
         <div >
           <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
         </div>
@@ -142,6 +142,12 @@ class App extends Component {
     var participants = [];
     Connector.loadGame(gameId).then(res => console.log(res));
     console.log(participants);
+  }
+
+  participantsWereLoaded(loadedArray) {
+    for (var i = 0; i < loadedArray.length; i++) {
+      console.log('Loaded player ' + i + ': ' + loadedArray[i]);
+    }
   }
 
   onEventChange(e) {
