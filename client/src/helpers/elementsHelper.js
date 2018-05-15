@@ -19,9 +19,15 @@ const lockGame = () => {
   document.getElementById('refereeCheckbox').disabled = true;
 }
 
+const clearElementValue = (eleId) => {
+  console.log('clearing ' + eleId);
+  document.getElementById(eleId).value = null;
+}
+
 export default {
   getStatus,
   getBank,
   getWalterCount,
   lockGame,
+  clearElementValue,
 }

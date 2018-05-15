@@ -95,7 +95,6 @@ class App extends Component {
   }
 
   addParticipant(participantName) {
-    console.log('hejhej');
       if (participantName.length === 0 || this.state.participantNames.includes(participantName)) {
         return;
       }
@@ -155,19 +154,12 @@ class App extends Component {
     }
   }
 
-  loadGame(gameId) {
-    console.log('Loading game ID ' + gameId);
-    var participants = [];
-    Connector.loadGame(gameId).then(res => console.log(res));
-    console.log(participants);
-  }
-
   participantsWereLoaded(loadedArray) {
     for (var i = 0; i < loadedArray.length; i++) {
       this.addParticipant(loadedArray[i]);
       console.log('Loaded player ' + i + ': ' + loadedArray[i]);
     }
-    this.loadGame(2);
+    ElementsHelper.clearElementValue('gameIdInput');
   }
 
   onEventChange(e) {

@@ -26,6 +26,8 @@ export default class Bank extends React.Component {
     var allCounters = {...this.state.counters};
     allCounters[depositMeasure.value] = allCounters[depositMeasure.value]+1;
     this.setState({counters:allCounters});
+
+    depositMeasure.value = '';
   }
 
   onDrinkBank(e) {

@@ -15,12 +15,16 @@ export default class Loader extends React.Component {
   }
 
   handleSubmit(e) {
-    var bum;
     e.preventDefault();
-    console.log(this.state.gameId);
-    this.setState({formLabel:'hej'});
-    var bum = Connector.loadGame(this.state.gameId).then(res => this.props.participantsWereLoaded(res));
 
+    var loadedGame = Connector.loadGame(this.state.gameId);
+    loadedGame.then(res => this.props.participantsWereLoaded(res));
+    //loadedGame.dataSets.then(res => this.props.dataSetsWereLoaded(res));
+
+
+    //Connector.loadDataSets(this.state.gameId).then(res =>
+    //  this.props.dataSetsWereLoaded(res));
+    //this.buildGameDataDTO(loadedParticipantNames, loadedDataSets);
   }
 
   render() {
