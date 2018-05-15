@@ -11,18 +11,9 @@ export default class ParticipantBox extends React.Component {
     render(){
         return(
             <div>
-              <ParticipantAdder addParticipant={this.addParticipant.bind(this)} />
+              <ParticipantAdder addParticipant={this.props.addParticipant} />
               <Participants participantNames={this.props.participantNames}/>
             </div>
         );
-    }
-
-    addParticipant(newParticipant) {
-        if (newParticipant.length === 0 || this.state.participantNames.includes(newParticipant)) {
-          return;
-        }
-
-        this.state.participantNames.push(newParticipant);
-        this.setState({participantNames: this.state.participantNames});
     }
 }

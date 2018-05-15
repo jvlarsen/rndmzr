@@ -95,6 +95,7 @@ class App extends Component {
   }
 
   addParticipant(participantName) {
+    console.log('hejhej');
       if (participantName.length === 0 || this.state.participantNames.includes(participantName)) {
         return;
       }
