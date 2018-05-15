@@ -116,6 +116,10 @@ const getGraphColors = () => {
       {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'}];
 }
 
+const saveGame = () => {
+  console.log('Game saved.');
+}
+
 export default {
   randomize,
   getParticipants,
@@ -124,4 +128,5 @@ export default {
   getDrinkSizes,
   getGraphColors,
   loadGame,
+  saveGame,
 }

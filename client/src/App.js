@@ -83,6 +83,8 @@ class App extends Component {
 
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, this.state.participantNames.length);
     this.updateWhatToDrink(randomizerResult);
+
+    Connector.saveGame();
   }
 
   allocatePlayers = (e) => {
