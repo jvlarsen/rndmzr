@@ -42,8 +42,8 @@ app.get('/api/events', (req, res) => {
 
 app.get('/api/games/gameId/participants', (req, res) => {
   var loadedParticipants = DataConnector.getParticipants(req.query['gameId']);
-  console.log(JSON.stringify(loadedParticipants));
-  res.json(loadedParticipants)
+  console.log('Boom!' + JSON.stringify(loadedParticipants));
+  res.json(loadedParticipants);
 });
 
 

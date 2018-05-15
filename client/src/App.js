@@ -52,7 +52,9 @@ class App extends Component {
         </div>
         <div className="flex-grid">
           <div className="colwide">
-            <ParticipantBox id='participantBox' addParticipantToGraph={this.addParticipantToGraph.bind(this)}/>
+            <ParticipantBox id='participantBox'
+            addParticipant={this.addParticipant.bind(this)}
+            participantNames={this.state.participantNames} />
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
           </div>
           <div className="colmedium">
@@ -90,10 +92,23 @@ class App extends Component {
     ElementsHelper.lockGame();
   }
 
+  addParticipant(participantName) {
+      if (participantName.length === 0 || this.state.participantNames.includes(participantName)) {
+        return;
+      }
+
+      console.log('creating participant ' + participantName);
+
+      this.state.participantNames.push(participantName);
+      this.setState({participantNames: this.state.participantNames});
+      this.addParticipantToGraph(participantName);
+  }
+
   addParticipantToGraph = (participantName) => {
     var participants = this.state.participantNames;
-    participants.push(participantName);
-    this.setState({participantNames:participants});
+    console.log(participants);
+    //participants.push(participantName);
+    //this.setState({participantNames:participants});
     var color = this.state.graphColors[participants.length-1].color;
     var borderColor = this.state.graphColors[participants.length-1].borderColor;
     var newDataSetForParticipant = {
@@ -146,8 +161,10 @@ class App extends Component {
 
   participantsWereLoaded(loadedArray) {
     for (var i = 0; i < loadedArray.length; i++) {
+      this.addParticipant(loadedArray[i]);
       console.log('Loaded player ' + i + ': ' + loadedArray[i]);
     }
+    this.loadGame(2);
   }
 
   onEventChange(e) {
