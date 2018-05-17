@@ -22,18 +22,18 @@ module.exports = {
     if (gameId == '2') {
       return {
         labels:
-          ['Kick-off', 'Goal', 'Yellow card', 'Assist', 'Corner taken', 'Yellow card', 'Assist', 'Foul committed'],
+          ['Goal', 'Yellow card', 'Assist', 'Corner taken', 'Yellow card', 'Assist', 'Foul committed'],
         dataSets:{
-          0:[0, 1, 3, 7, 10, 16, 29, 30], 1:[0, 2, 2, 4, 5, 18, 18, 20]
+          0:[1, 3, 7, 10, 16, 29, 30], 1:[2, 2, 4, 5, 18, 18, 20]
         }
       };
     }
     if (gameId == '4') {
       return {
         labels:
-          ['Kick-off', 'Goal', 'Yellow card', 'Assist'],
+          ['Goal', 'Yellow card', 'Assist'],
         dataSets:{
-          0:[0, 1, 3, 7], 1:[0, 2, 2, 4]
+          0:[1, 3, 7], 1:[2, 2, 4], 2:[1, 3, 7], 3:[2, 2, 4], 4:[1, 3, 7], 5:[2, 2, 4], 6:[1, 3, 7]
         }
       };
     }

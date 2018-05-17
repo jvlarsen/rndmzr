@@ -46,7 +46,7 @@ class App extends Component {
       <div className="App">
         <label id='gameId'>Unique game ID: {this.state.gameId}</label>
         <br/>
-        <Loader participantsWereLoaded={this.participantsWereLoaded.bind(this)}/>
+        <Loader participantsWereLoaded={this.participantsWereLoaded.bind(this)} dataSetsWereLoaded={this.dataSetsWereLoaded.bind(this)}/>
         <div >
           <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
         </div>
@@ -77,9 +77,7 @@ class App extends Component {
 
     if (!selectedEvent || !selectedPlayer) {return;}
 
-    this.setState(prevState => ({
-      labels: [...prevState.labels, selectedEvent]
-    }))
+    this.addLabelToGraph(selectedEvent);
 
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, this.state.participantNames.length);
     this.updateWhatToDrink(randomizerResult);
@@ -140,7 +138,6 @@ class App extends Component {
   }
 
   updateWhatToDrink(randomizerResult) {
-    var currDataSets = this.state.dataSets;
 
     for (var i = 0; i < randomizerResult.length; i++) {
       this.addEventToGraph(i, randomizerResult[i].value.NumericMeasure);
@@ -151,9 +148,16 @@ class App extends Component {
     }
   }
 
+  addLabelToGraph(selectedEvent) {
+    this.setState(prevState => ({
+      labels: [...prevState.labels, selectedEvent]
+    }))
+  }
+
   addEventToGraph(allocationKey, numericMeasure) {
     var currDataSets = this.state.dataSets;
-
+    console.log('Allocation ' + allocationKey);
+    console.log('Numeric measure: ' + numericMeasure);
     var endIndex = currDataSets[allocationKey].dataset.data.length-1;
     var latestTotal = currDataSets[allocationKey].dataset.data[endIndex];
     var newTotal = latestTotal + numericMeasure;
@@ -166,6 +170,30 @@ class App extends Component {
       console.log('Loaded player ' + i + ': ' + loadedArray[i]);
     }
     ElementsHelper.clearElementValue('gameIdInput');
+  }
+
+  dataSetsWereLoaded(loadedDataSets) {
+
+    var labels = loadedDataSets.labels;
+    for (var i = 0; i < labels.length; i++) {
+      this.addLabelToGraph(labels[i]);
+    }
+
+    var dataSets = loadedDataSets.dataSets;
+    console.log(dataSets);
+    for (var dataArrayIndex in dataSets) {
+
+      console.log(dataSets[dataArrayIndex]);
+      this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
+    }
+  }
+
+  addEventArrayToGraph(allocationKey, eventArray) {
+    for (var i = 0; i < eventArray.length; i++) {
+      console.log(allocationKey);
+      console.log(eventArray);
+      this.addEventToGraph(allocationKey, eventArray[i]);
+    }
   }
 
   onEventChange(e) {

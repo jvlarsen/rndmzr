@@ -46,6 +46,11 @@ app.get('/api/games/gameId/participants', (req, res) => {
   res.json(loadedParticipants);
 });
 
+app.get('/api/games/gameId/dataSets', (req, res) => {
+  var loadedDataSets = DataConnector.getDataSets(req.query['gameId']);
+  console.log('Ka-ching! ' + JSON.stringify(loadedDataSets));
+  res.json(loadedDataSets);
+})
 
 
 // The "catchall" handler: for any request that doesn't

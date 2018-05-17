@@ -63,9 +63,9 @@ const getEvents = () => {
   return allEvents;
 }
 
-const loadGame = (gameIdInput) => {
+const loadParticipants = (gameId) => {
 
-  var loadedGame = fetch('api/games/gameId/participants?gameId='+gameIdInput)
+  var loadedGame = fetch('api/games/gameId/participants?gameId='+gameId)
       .then(res => res.json());
       /*{
         return res.json();
@@ -73,6 +73,13 @@ const loadGame = (gameIdInput) => {
       console.log(data)});
 */
   return loadedGame;
+}
+
+const loadDataSets = (gameId) => {
+  var loadedDataSets = fetch('api/games/gameId/dataSets?gameId=' + gameId)
+    .then(res => res.json());
+
+  return loadedDataSets;
 }
 
 const getMeasures = () => {
@@ -127,6 +134,7 @@ export default {
   getMeasures,
   getDrinkSizes,
   getGraphColors,
-  loadGame,
+  loadParticipants,
+  loadDataSets,
   saveGame,
 }
