@@ -143,15 +143,21 @@ class App extends Component {
     var currDataSets = this.state.dataSets;
 
     for (var i = 0; i < randomizerResult.length; i++) {
-      var endIndex = currDataSets[i].dataset.data.length-1;
-      var latestTotal = currDataSets[i].dataset.data[endIndex];
-      var newTotal = latestTotal + randomizerResult[i].value.NumericMeasure;
-      currDataSets[i].dataset.data.push(newTotal);
+      this.addEventToGraph(i, randomizerResult[i].value.NumericMeasure);
       var currStatus = ElementsHelper.getStatus(randomizerResult[i].status);
 
       currStatus.value = randomizerResult[i].value.StringMeasure;
       currStatus.numericvalue = randomizerResult[i].value.NumericMeasure;
     }
+  }
+
+  addEventToGraph(allocationKey, numericMeasure) {
+    var currDataSets = this.state.dataSets;
+
+    var endIndex = currDataSets[allocationKey].dataset.data.length-1;
+    var latestTotal = currDataSets[allocationKey].dataset.data[endIndex];
+    var newTotal = latestTotal + numericMeasure;
+    currDataSets[allocationKey].dataset.data.push(newTotal);
   }
 
   participantsWereLoaded(loadedArray) {
