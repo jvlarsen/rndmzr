@@ -46,7 +46,7 @@ class App extends Component {
       <div className="App">
         <label id='gameId'>Unique game ID: {this.state.gameId}</label>
         <br/>
-        <Loader participantsWereLoaded={this.participantsWereLoaded.bind(this)} dataSetsWereLoaded={this.dataSetsWereLoaded.bind(this)}/>
+        <Loader gameDataLoaded={this.gameDataLoaded.bind(this)} participantsWereLoaded={this.participantsWereLoaded.bind(this)} dataSetsWereLoaded={this.dataSetsWereLoaded.bind(this)}/>
         <div >
           <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
         </div>
@@ -186,6 +186,11 @@ class App extends Component {
       console.log(dataSets[dataArrayIndex]);
       this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
     }
+  }
+
+  gameDataLoaded(gameData) {
+    console.log('gameData');
+    console.log(gameData);
   }
 
   addEventArrayToGraph(allocationKey, eventArray) {
