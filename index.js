@@ -52,6 +52,15 @@ app.get('/api/games/gameId/dataSets', (req, res) => {
   res.json(loadedDataSets);
 })
 
+app.get('/api/games/gameId', (req, res) => {
+  var gameData = [];
+  var loadedDataSets = DataConnector.getDataSets(req.query['gameId']);
+  var loadedParticipants = DataConnector.getParticipants(req.query['gameId']);
+  gameData.push(loadedDataSets);
+  gameData.push(loadedParticipants);
+  res.json(gameData);
+})
+
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

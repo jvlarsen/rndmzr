@@ -46,7 +46,7 @@ class App extends Component {
       <div className="App">
         <label id='gameId'>Unique game ID: {this.state.gameId}</label>
         <br/>
-        <Loader gameDataLoaded={this.gameDataLoaded.bind(this)} participantsWereLoaded={this.participantsWereLoaded.bind(this)} dataSetsWereLoaded={this.dataSetsWereLoaded.bind(this)}/>
+        <Loader gameDataLoaded={this.gameDataLoaded.bind(this)}/>
         <div >
           <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
         </div>
@@ -97,8 +97,6 @@ class App extends Component {
         return;
       }
 
-      console.log('creating participant ' + participantName);
-
       this.state.participantNames.push(participantName);
       this.setState({participantNames: this.state.participantNames});
       this.addParticipantToGraph(participantName);
@@ -106,9 +104,6 @@ class App extends Component {
 
   addParticipantToGraph = (participantName) => {
     var participants = this.state.participantNames;
-    console.log(participants);
-    //participants.push(participantName);
-    //this.setState({participantNames:participants});
     var color = this.state.graphColors[participants.length-1].color;
     var borderColor = this.state.graphColors[participants.length-1].borderColor;
     var newDataSetForParticipant = {
@@ -156,8 +151,6 @@ class App extends Component {
 
   addEventToGraph(allocationKey, numericMeasure) {
     var currDataSets = this.state.dataSets;
-    console.log('Allocation ' + allocationKey);
-    console.log('Numeric measure: ' + numericMeasure);
     var endIndex = currDataSets[allocationKey].dataset.data.length-1;
     var latestTotal = currDataSets[allocationKey].dataset.data[endIndex];
     var newTotal = latestTotal + numericMeasure;
@@ -167,36 +160,29 @@ class App extends Component {
   participantsWereLoaded(loadedArray) {
     for (var i = 0; i < loadedArray.length; i++) {
       this.addParticipant(loadedArray[i]);
-      console.log('Loaded player ' + i + ': ' + loadedArray[i]);
     }
     ElementsHelper.clearElementValue('gameIdInput');
   }
 
   dataSetsWereLoaded(loadedDataSets) {
+    var dataSets = loadedDataSets.dataSets;
+    for (var dataArrayIndex in dataSets) {
+      this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
+    }
 
     var labels = loadedDataSets.labels;
     for (var i = 0; i < labels.length; i++) {
       this.addLabelToGraph(labels[i]);
     }
-
-    var dataSets = loadedDataSets.dataSets;
-    console.log(dataSets);
-    for (var dataArrayIndex in dataSets) {
-
-      console.log(dataSets[dataArrayIndex]);
-      this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
-    }
   }
 
   gameDataLoaded(gameData) {
-    console.log('gameData');
-    console.log(gameData);
+    this.participantsWereLoaded(gameData[1]);
+    this.dataSetsWereLoaded(gameData[0]);
   }
 
   addEventArrayToGraph(allocationKey, eventArray) {
     for (var i = 0; i < eventArray.length; i++) {
-      console.log(allocationKey);
-      console.log(eventArray);
       this.addEventToGraph(allocationKey, eventArray[i]);
     }
   }
