@@ -64,7 +64,7 @@ class App extends Component {
             <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
           </div>
           <div>
-            <Randomize onClick={this.onClickRandomize.bind(this)}/>
+            <Randomize onClick={this.onClickRandomize.bind(this)} />
           </div>
         </div>
       </div>

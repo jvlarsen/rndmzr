@@ -42,13 +42,11 @@ app.get('/api/events', (req, res) => {
 
 app.get('/api/games/gameId/participants', (req, res) => {
   var loadedParticipants = DataConnector.getParticipants(req.query['gameId']);
-  console.log('Boom!' + JSON.stringify(loadedParticipants));
   res.json(loadedParticipants);
 });
 
 app.get('/api/games/gameId/dataSets', (req, res) => {
   var loadedDataSets = DataConnector.getDataSets(req.query['gameId']);
-  console.log('Ka-ching! ' + JSON.stringify(loadedDataSets));
   res.json(loadedDataSets);
 })
 

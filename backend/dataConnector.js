@@ -5,20 +5,15 @@ module.exports = {
   },
 
   getParticipants(gameId) {
-    console.log('gameId loading in backend: ' + gameId);
-    if (gameId == '4') {
-      console.log('GameId was 4');
-      return ['Nosser', 'Aallex', 'Tennedz', 'Tarzan', 'Trusser', 'Faccio', 'Leffo'];
-    }
-
     if (gameId == '2') {
-      console.log('GameId was 2');
       return ['Nosser', 'Aallex'];
+    }
+    if (gameId == '4') {
+      return ['Nosser', 'Aallex', 'Tennedz', 'Tarzan', 'Trusser', 'Faccio', 'Leffo'];
     }
   },
 
   getDataSets(gameId) {
-    console.log('DataSets being fetched for gameId: ' + gameId);
     if (gameId == '2') {
       return {
         labels:
