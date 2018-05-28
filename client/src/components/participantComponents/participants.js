@@ -9,7 +9,7 @@ export default class Participants extends React.Component {
   }
     render() {
       return(
-        <div>
+        <div className='bank'>
           <ParticipantsRadio participants={this.props.participantNames} />
         </div>
       );
@@ -77,7 +77,6 @@ class ParticipantsRadio extends React.Component {
   }
 
   onDrink(e) {
-    console.log(1);
     var index = e.target.id.substring(5);
     var status = ElementHelper.getStatus(index);
     this.clearElementValue(status);

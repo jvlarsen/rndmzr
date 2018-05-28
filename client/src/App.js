@@ -36,6 +36,19 @@ class App extends Component {
   }
 
   componentWillMount() {
+    var localLabels = localStorage.getItem('labels');
+    if (localLabels) {
+      console.log(localLabels);
+      this.setState({labels: JSON.parse(localLabels)});
+      this.labelsWereLoaded(localLabels);
+    }
+
+    var localDataSets = localStorage.getItem('dataSets');
+    if (localDataSets) {
+      console.log(localDataSets);
+      this.setState({dataSets: JSON.parse(localDataSets)});
+      this.dataSetsWereLoaded(localDataSets);
+    }
     //var loadedParticipants = Connector.getParticipantsFromGameId(1);
 
   }
@@ -164,7 +177,7 @@ class App extends Component {
     ElementsHelper.clearElementValue('gameIdInput');
   }
 
-  dataSetsWereLoaded(loadedDataSets) {
+  gameWasLoaded(loadedDataSets) {
     var dataSets = loadedDataSets.dataSets;
     for (var dataArrayIndex in dataSets) {
       this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
@@ -176,9 +189,21 @@ class App extends Component {
     }
   }
 
+  dataSetsWereLoaded(dataSets) {
+    for (var dataArrayIndex in dataSets) {
+      this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
+    }
+  }
+
+  labelsWereLoaded(labels) {
+    for (var i = 0; i < labels.length; i++) {
+      this.addLabelToGraph(labels[i]);
+    }
+  }
+
   gameDataLoaded(gameData) {
     this.participantsWereLoaded(gameData[1]);
-    this.dataSetsWereLoaded(gameData[0]);
+    this.gameWasLoaded(gameData[0]);
   }
 
   addEventArrayToGraph(allocationKey, eventArray) {
