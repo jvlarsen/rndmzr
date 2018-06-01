@@ -56,13 +56,35 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    this.storeLabels();
+    this.storeParticipants();
+  }
+
+  storeLabels() {
     var currentLabels = [];
     currentLabels = this.state.labels;
     console.log(currentLabels);
     localStorage.setItem('labels', JSON.stringify(currentLabels));
+  }
 
-    var currParts = this.state.participantNames;
-    console.log(currParts);
+  storeParticipants() {
+    //Need to store allocationKeys if set. So I need a JSON object instead of an array.
+    //var currParts = this.state.participantNames;
+    var participantsGrid = document.getElementsByClassName('participant');
+    var name = "";
+    var allocationKey = -1;
+    var id = -1;
+    var participants = {}
+    for (var i = 0; i < participantsGrid.length; i++) {
+      if (participantsGrid[i].className == 'participant') {
+        id = participantsGrid[i].getAttribute('participantnumber');
+        name = participantsGrid[i].children[0].innerText;
+        allocationKey = participantsGrid[i].children[0].children[0].getAttribute('allocationkey');
+        participants[id] = {Name: name, AllocationKey: allocationKey};
+        console.log(participants);
+      }
+    }
+    localStorage.setItem('participants', participants);
   }
 
   render() {

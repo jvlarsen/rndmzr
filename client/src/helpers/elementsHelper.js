@@ -13,6 +13,10 @@ const getWalterCount = (index) => {
   return walterEle || null;
 }
 
+const getElementsByClassName = (id) => {
+  return document.getElementById(id) || [];
+}
+
 const lockGame = () => {
   document.getElementById('allocateButton').disabled = true;
   document.getElementById('participantNameInput').disabled = true;
@@ -30,4 +34,5 @@ export default {
   getWalterCount,
   lockGame,
   clearElementValue,
+  getElementsByClassName,
 }
