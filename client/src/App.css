@@ -54,6 +54,14 @@ h1 {
   text-align: right;
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 .labelInput {
   width:10px;
   text-align: center;
@@ -61,6 +69,9 @@ h1 {
 
 .randomizer {
   height: 50px;
+}
+
+.warning {
   background-color: red;
 }
 

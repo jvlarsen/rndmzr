@@ -26,12 +26,6 @@ export default class Loader extends React.Component {
     Promise.all([loadedDataSets, loadedParticipants]).then(function(values) {
       gameDataLoaded(values);
     })
-    //loadedGame.dataSets.then(res => this.props.dataSetsWereLoaded(res));
-
-
-    //Connector.loadDataSets(this.state.gameId).then(res =>
-    //  this.props.dataSetsWereLoaded(res));
-    //this.buildGameDataDTO(loadedParticipantNames, loadedDataSets);
   }
 
   render() {

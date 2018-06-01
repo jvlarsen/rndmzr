@@ -36,21 +36,33 @@ class App extends Component {
   }
 
   componentWillMount() {
-    var localLabels = localStorage.getItem('labels');
+    //localStorage.removeItem('dataSets');
+    //localStorage.removeItem('labels');
+
+    var localLabels = JSON.parse(localStorage.getItem('labels'));
     if (localLabels) {
       console.log(localLabels);
-      this.setState({labels: JSON.parse(localLabels)});
       this.labelsWereLoaded(localLabels);
     }
-
+/*
     var localDataSets = localStorage.getItem('dataSets');
     if (localDataSets) {
       console.log(localDataSets);
-      this.setState({dataSets: JSON.parse(localDataSets)});
+      this.setState({dataSets: localDataSets});
       this.dataSetsWereLoaded(localDataSets);
     }
     //var loadedParticipants = Connector.getParticipantsFromGameId(1);
+*/
+  }
 
+  componentDidUpdate() {
+    var currentLabels = [];
+    currentLabels = this.state.labels;
+    console.log(currentLabels);
+    localStorage.setItem('labels', JSON.stringify(currentLabels));
+
+    var currParts = this.state.participantNames;
+    console.log(currParts);
   }
 
   render() {
@@ -59,7 +71,14 @@ class App extends Component {
       <div className="App">
         <label id='gameId'>Unique game ID: {this.state.gameId}</label>
         <br/>
+        <span>
+        <div className="left">
         <Loader gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+        </div>
+        <div className="right warning">
+        <input type="button" onClick={this.resetGame.bind(this)} value="Click here to wipe existing game." />
+        </div>
+        </span>
         <div >
           <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
         </div>
@@ -157,6 +176,7 @@ class App extends Component {
   }
 
   addLabelToGraph(selectedEvent) {
+    if (selectedEvent == 'Kick off') { return; }
     this.setState(prevState => ({
       labels: [...prevState.labels, selectedEvent]
     }))
@@ -178,15 +198,9 @@ class App extends Component {
   }
 
   gameWasLoaded(loadedDataSets) {
-    var dataSets = loadedDataSets.dataSets;
-    for (var dataArrayIndex in dataSets) {
-      this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
-    }
+    this.dataSetsWereLoaded(loadedDataSets.dataSets);
 
-    var labels = loadedDataSets.labels;
-    for (var i = 0; i < labels.length; i++) {
-      this.addLabelToGraph(labels[i]);
-    }
+    this.labelsWereLoaded(loadedDataSets.labels);
   }
 
   dataSetsWereLoaded(dataSets) {
@@ -196,6 +210,7 @@ class App extends Component {
   }
 
   labelsWereLoaded(labels) {
+    console.log(labels.length);
     for (var i = 0; i < labels.length; i++) {
       this.addLabelToGraph(labels[i]);
     }
@@ -204,6 +219,12 @@ class App extends Component {
   gameDataLoaded(gameData) {
     this.participantsWereLoaded(gameData[1]);
     this.gameWasLoaded(gameData[0]);
+  }
+
+  resetGame() {
+    localStorage.setItem('participants', null);
+    localStorage.setItem('labels', null);
+    window.location.reload(false);
   }
 
   addEventArrayToGraph(allocationKey, eventArray) {

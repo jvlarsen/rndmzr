@@ -30,7 +30,6 @@ class ParticipantsRadio extends React.Component {
     this.props.participants.map(function(participantName, index) {
         participantRadios.push(<div className='radio' key={index}>
           <label>
-            <input type='radio' value={participantName} key={index} checked={selectedOption === participantName} onChange={onOptionChange} />
             {participantName}
             <input type='text' key={'status'+index} id={'status'+index} numericvalue='0' ref={'status'+index} readOnly />
             <input type="button" key={'drink'+index} id={'drink'+index} value='Skål' onClick={onDrink}/>
