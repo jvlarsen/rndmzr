@@ -1,9 +1,9 @@
-const pg = require('pg');
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/jemun';
+//const pg = require('pg');
+//const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/jemun';
 
-console.log(connectionString);
+//console.log(connectionString);
 
-const client = new pg.Client(connectionString);
+//const client = new pg.Client(connectionString);
 //client.connect();
 //const query = client.query(
   //'SELECT * FROM Games').then(res => console.log(res));
@@ -27,12 +27,11 @@ module.exports = {
       return ['Nosser', 'Aallex', 'Tennedz', 'Tarzan', 'Trusser', 'Faccio'];
     }
     if (gameId == '7') {
-      return ['Nosser', 'Aallex', 'D-Kwizzle', 'Fabchup', 'Trusser', 'Faccio', 'Leffo'];
+      return ['Nosser', 'Aallex', 'D-Kwizzle', 'Fabchup', 'Trusser', 'Tarzan', 'Leffo'];
     }
   },
 
   getDataSets(gameId) {
-    console.log(process.env.DATABASE_URL);
     if (gameId == '2') {
       return {
         labels:

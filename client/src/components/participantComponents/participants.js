@@ -23,7 +23,6 @@ class ParticipantsRadio extends React.Component {
   }
 
   render() {
-    console.log(this.props.participants);
     var participants = [];
     var onDrink = this.onDrink.bind(this);
     var participantProps = this.props.participants;
@@ -37,7 +36,6 @@ class ParticipantsRadio extends React.Component {
             <Bank index={i}/>
           </label>
         </div>);
-        //return participants;
     };
 
     return (
