@@ -1,3 +1,18 @@
+const pg = require('pg');
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/jemun';
+
+console.log(connectionString);
+
+const client = new pg.Client(connectionString);
+client.connect();
+const query = client.query(
+  'SELECT * FROM Games').then(res => console.log(res));
+
+
+
+
+//Dommeren løber i feltet
+//Hvis der står noget i status-feltet, når der trykkes Randomizer, skal de automatisk flyttes til banken.
 
 module.exports = {
   constructor(options) {
@@ -9,11 +24,15 @@ module.exports = {
       return ['Nosser', 'Aallex'];
     }
     if (gameId == '4') {
-      return ['Nosser', 'Aallex', 'Tennedz', 'Tarzan', 'Trusser', 'Faccio', 'Leffo'];
+      return ['Nosser', 'Aallex', 'Tennedz', 'Tarzan', 'Trusser', 'Faccio'];
+    }
+    if (gameId == '7') {
+      return ['Nosser', 'Aallex', 'D-Kwizzle', 'Fabchup', 'Trusser', 'Faccio', 'Leffo'];
     }
   },
 
   getDataSets(gameId) {
+    console.log(process.env.DATABASE_URL);
     if (gameId == '2') {
       return {
         labels:

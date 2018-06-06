@@ -25,7 +25,10 @@ const lockGame = () => {
 
 const clearElementValue = (eleId) => {
   console.log('clearing ' + eleId);
-  document.getElementById(eleId).value = null;
+  var element = document.getElementById(eleId);
+  if (element) {
+    element.value = null;
+  }
 }
 
 export default {

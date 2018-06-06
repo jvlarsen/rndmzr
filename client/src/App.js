@@ -25,7 +25,7 @@ class App extends Component {
       refereeSelected:false,
 
       //Variables when loading and reloading
-      participantNames:[],
+      participants:{},
       gameId: null,
       dataSet:{},
       labels:['Kick off'],
@@ -38,11 +38,14 @@ class App extends Component {
   componentWillMount() {
     //localStorage.removeItem('dataSets');
     //localStorage.removeItem('labels');
-
     var localLabels = JSON.parse(localStorage.getItem('labels'));
     if (localLabels) {
-      console.log(localLabels);
       this.labelsWereLoaded(localLabels);
+    }
+
+    var participants = JSON.parse(localStorage.getItem('participants'));
+    if (participants) {
+      this.participantsWereLoaded(participants);
     }
 /*
     var localDataSets = localStorage.getItem('dataSets');
@@ -63,28 +66,12 @@ class App extends Component {
   storeLabels() {
     var currentLabels = [];
     currentLabels = this.state.labels;
-    console.log(currentLabels);
     localStorage.setItem('labels', JSON.stringify(currentLabels));
   }
 
   storeParticipants() {
-    //Need to store allocationKeys if set. So I need a JSON object instead of an array.
-    //var currParts = this.state.participantNames;
-    var participantsGrid = document.getElementsByClassName('participant');
-    var name = "";
-    var allocationKey = -1;
-    var id = -1;
-    var participants = {}
-    for (var i = 0; i < participantsGrid.length; i++) {
-      if (participantsGrid[i].className == 'participant') {
-        id = participantsGrid[i].getAttribute('participantnumber');
-        name = participantsGrid[i].children[0].innerText;
-        allocationKey = participantsGrid[i].children[0].children[0].getAttribute('allocationkey');
-        participants[id] = {Name: name, AllocationKey: allocationKey};
-        console.log(participants);
-      }
-    }
-    localStorage.setItem('participants', participants);
+    var participants = this.state.participants;
+    localStorage.setItem('participants', JSON.stringify(participants));
   }
 
   render() {
@@ -108,7 +95,7 @@ class App extends Component {
           <div className="colwide">
             <ParticipantBox id='participantBox'
             addParticipant={this.addParticipant.bind(this)}
-            participantNames={this.state.participantNames} />
+            participants={this.state.participants} />
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
           </div>
           <div className="colmedium">
@@ -131,35 +118,39 @@ class App extends Component {
 
     if (!selectedEvent || !selectedPlayer) {return;}
 
-    this.addLabelToGraph(selectedEvent);
+    this.addLabelToGraph(selectedEvent + '(${selectedPlayer})');
 
-    var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, this.state.participantNames.length);
+    var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
     this.updateWhatToDrink(randomizerResult);
 
-    Connector.saveGame();
+    //Removed from Connector, since I'm currently using StoreLabels and StoreParticipants from App.js.
+    //Should definitely be refactored to a backend-facing handler.
+    //Connector.saveGame();
   }
 
   allocatePlayers = (e) => {
     var refereeCheckbox = document.getElementById('refereeCheckbox');
-    Engine.allocatePlayers(this.state.participantNames.length, refereeCheckbox.checked);
+    Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
     this.setState({gameId:123456});
     ElementsHelper.lockGame();
   }
 
-  addParticipant(participantName) {
-      if (participantName.length === 0 || this.state.participantNames.includes(participantName)) {
+  addParticipant(participant) {
+      if (participant.Name.length === 0 || Object.keys(this.state.participants).includes(participant.Name)) {
         return;
       }
 
-      this.state.participantNames.push(participantName);
-      this.setState({participantNames: this.state.participantNames});
-      this.addParticipantToGraph(participantName);
+      var currentParticipants = this.state.participants;
+      var currCount = Object.keys(currentParticipants).length;
+      currentParticipants[currCount] = participant;
+      this.setState({participants: currentParticipants});
+      this.addParticipantToGraph(participant.Name);
   }
 
   addParticipantToGraph = (participantName) => {
-    var participants = this.state.participantNames;
-    var color = this.state.graphColors[participants.length-1].color;
-    var borderColor = this.state.graphColors[participants.length-1].borderColor;
+    var index = Object.keys(this.state.participants).length-1;
+    var color = this.state.graphColors[index].color;
+    var borderColor = this.state.graphColors[index].borderColor;
     var newDataSetForParticipant = {
       dataset:{
         label:participantName,
@@ -212,11 +203,11 @@ class App extends Component {
     currDataSets[allocationKey].dataset.data.push(newTotal);
   }
 
-  participantsWereLoaded(loadedArray) {
-    for (var i = 0; i < loadedArray.length; i++) {
-      this.addParticipant(loadedArray[i]);
+  participantsWereLoaded(participantsJson) {
+    //Omskriv alle loops til map-functions.
+    for (var i = 0; i < Object.keys(participantsJson).length; i++) {
+      this.addParticipant(participantsJson[i]);
     }
-    ElementsHelper.clearElementValue('gameIdInput');
   }
 
   gameWasLoaded(loadedDataSets) {
@@ -232,7 +223,6 @@ class App extends Component {
   }
 
   labelsWereLoaded(labels) {
-    console.log(labels.length);
     for (var i = 0; i < labels.length; i++) {
       this.addLabelToGraph(labels[i]);
     }

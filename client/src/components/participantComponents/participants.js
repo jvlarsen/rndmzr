@@ -10,7 +10,7 @@ export default class Participants extends React.Component {
     render() {
       return(
         <div className='bank' id="participantsGrid">
-          <ParticipantsRadio participants={this.props.participantNames} />
+          <ParticipantsRadio participants={this.props.participants} />
         </div>
       );
     }
@@ -23,25 +23,26 @@ class ParticipantsRadio extends React.Component {
   }
 
   render() {
-    var participantRadios = [];
-    var selectedOption = this.state.selectedOption;
-    var onOptionChange = this.onOptionChange.bind(this);
+    console.log(this.props.participants);
+    var participants = [];
     var onDrink = this.onDrink.bind(this);
-    this.props.participants.map(function(participantName, index) {
-        participantRadios.push(<div className='participant' participantNumber={index} key={index}>
+    var participantProps = this.props.participants;
+
+      for (var i = 0; i < Object.keys(participantProps).length; i++) {
+        participants.push(<div className='participant' participantnumber={i} key={i}>
           <label>
-            {participantName}
-            <input type='text' key={'status'+index} id={'status'+index} numericvalue='0' ref={'status'+index} readOnly />
-            <input type="button" key={'drink'+index} id={'drink'+index} value='Skål' onClick={onDrink}/>
-            <Bank index={index}/>
+            {participantProps[i].Name}
+            <input type='text' key={'status'+i} id={'status'+i} numericvalue='0' ref={'status'+i} allocationkey={participantProps[i].AllocationKey} readOnly />
+            <input type="button" key={'drink'+i} id={'drink'+i} value='Skål' onClick={onDrink}/>
+            <Bank index={i}/>
           </label>
         </div>);
-        return participantRadios;
-    });
+        //return participants;
+    };
 
     return (
       <form className='leftCol'>
-        {participantRadios}
+        {participants}
       </form>
     );
   }
@@ -77,7 +78,6 @@ class ParticipantsRadio extends React.Component {
   onDrinkBank(e) {
     var index = e.target.id.substring(9);
     var currBank = ElementHelper.getBank(index);
-    var walterCount = ElementHelper.getWalterCount(index);
     this.clearElementValue(currBank);
   }
 }

@@ -16,7 +16,10 @@ export default class ParticipantAdder extends React.Component {
     handleSubmit(event) {
       var newName = this.state.value;
       event.preventDefault();
-      this.props.addParticipant(newName);
+
+      var participant = {'Name': newName, 'AllocationKey': null};
+
+      this.props.addParticipant(participant);
       this.setState({value:''});
     }
 
