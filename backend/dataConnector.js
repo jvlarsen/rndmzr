@@ -4,9 +4,9 @@ const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/
 console.log(connectionString);
 
 const client = new pg.Client(connectionString);
-client.connect();
-const query = client.query(
-  'SELECT * FROM Games').then(res => console.log(res));
+//client.connect();
+//const query = client.query(
+  //'SELECT * FROM Games').then(res => console.log(res));
 
 
 
