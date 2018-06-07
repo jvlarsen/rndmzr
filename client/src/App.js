@@ -32,13 +32,11 @@ class App extends Component {
       labels:['Kick off'],
       dataSets:[],
       loadedParticipants:[],
-
+      gameStarted: false,
     }
   }
 
   componentWillMount() {
-    //localStorage.removeItem('dataSets');
-    //localStorage.removeItem('labels');
     var localLabels = JSON.parse(localStorage.getItem('labels'));
     if (localLabels) {
       this.labelsWereLoaded(localLabels);
@@ -85,6 +83,7 @@ class App extends Component {
   }
 
   storePlayers() {
+    console.log('kaldes ved allocation');
     var players = this.state.players;
     localStorage.setItem('players', JSON.stringify(players));
   }
@@ -147,9 +146,8 @@ class App extends Component {
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
     this.updatePlayerAllocationKeys();
-    this.setState({gameId:123456});
+    this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
-    this.storePlayers();
   }
 
   addParticipant(participant) {

@@ -29,12 +29,11 @@ class ParticipantsRadio extends React.Component {
 
       for (var i = 0; i < Object.keys(participantProps).length; i++) {
         participants.push(<div className='participant' participantnumber={i} key={i}>
-          <label>
-            {participantProps[i].Name}
+            <span>{participantProps[i].Name}
             <input type='text' key={'status'+i} id={'status'+i} numericvalue='0' ref={'status'+i} allocationkey={participantProps[i].AllocationKey} readOnly />
             <input type="button" key={'drink'+i} id={'drink'+i} value='Skål' onClick={onDrink}/>
-            <Bank index={i}/>
-          </label>
+            <Bank index={i} className="right"/>
+            </span>
         </div>);
     };
 
