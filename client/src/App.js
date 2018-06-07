@@ -26,6 +26,7 @@ class App extends Component {
 
       //Variables when loading and reloading
       participants:{},
+      players: {},
       gameId: null,
       dataSet:{},
       labels:['Kick off'],
@@ -47,6 +48,7 @@ class App extends Component {
     if (participants) {
       this.participantsWereLoaded(participants);
     }
+
 /*
     var localDataSets = localStorage.getItem('dataSets');
     if (localDataSets) {
@@ -58,9 +60,17 @@ class App extends Component {
 */
   }
 
+  componentDidMount() {
+    var players = JSON.parse(localStorage.getItem('players'));
+    if (players) {
+      this.playersWereLoaded(players);
+    }
+  }
+
   componentDidUpdate() {
     this.storeLabels();
     this.storeParticipants();
+    this.storePlayers();
   }
 
   storeLabels() {
@@ -72,6 +82,11 @@ class App extends Component {
   storeParticipants() {
     var participants = this.state.participants;
     localStorage.setItem('participants', JSON.stringify(participants));
+  }
+
+  storePlayers() {
+    var players = this.state.players;
+    localStorage.setItem('players', JSON.stringify(players));
   }
 
   render() {
@@ -99,7 +114,7 @@ class App extends Component {
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
           </div>
           <div className="colmedium">
-            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected}/>
+            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected} addPlayerName={this.addPlayerName.bind(this)}/>
           </div>
           <div className="leftCol">
             <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
@@ -131,8 +146,10 @@ class App extends Component {
   allocatePlayers = (e) => {
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
+    this.updatePlayerAllocationKeys();
     this.setState({gameId:123456});
     ElementsHelper.lockGame();
+    this.storePlayers();
   }
 
   addParticipant(participant) {
@@ -210,6 +227,12 @@ class App extends Component {
     }
   }
 
+  playersWereLoaded(playersJson) {
+    ElementsHelper.updateLoadedPlayers(playersJson);
+    console.log(playersJson);
+    this.setState({players:playersJson});
+  }
+
   gameWasLoaded(loadedDataSets) {
     this.dataSetsWereLoaded(loadedDataSets.dataSets);
 
@@ -236,6 +259,7 @@ class App extends Component {
   resetGame() {
     localStorage.setItem('participants', null);
     localStorage.setItem('labels', null);
+    localStorage.setItem('players', null);
     window.location.reload(false);
   }
 
@@ -243,6 +267,33 @@ class App extends Component {
     for (var i = 0; i < eventArray.length; i++) {
       this.addEventToGraph(allocationKey, eventArray[i]);
     }
+  }
+
+  addPlayerName(e) {
+    console.log(this.state.players);
+    if (e.target.value.length === 0) {
+      return;
+    }
+    var nameInput = e.target.value;
+    if (Object.keys(this.state.players).includes(e.target.id)) {
+      return;
+    }
+    var players = this.state.players;
+    players[e.target.id] = {'Name': nameInput, AllocationKey:null};
+    this.setState({players: players});
+    this.storePlayers();
+  }
+
+  updatePlayerAllocationKeys() {
+    var currPlayers = this.state.players;
+    for (var player in currPlayers) {
+      var playerField = document.getElementById(player);
+      console.log(playerField.getAttribute('allocationkey'));
+      currPlayers[player].AllocationKey = playerField.getAttribute('allocationkey');
+      console.log(currPlayers[player]);
+    }
+    console.log(currPlayers);
+    this.setState({players: currPlayers});
   }
 
   onEventChange(e) {

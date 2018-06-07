@@ -30,6 +30,14 @@ const clearElementValue = (eleId) => {
   }
 }
 
+const updateLoadedPlayers = (playersJson) => {
+  for (var player in playersJson) {
+    var playerField = document.getElementById(player);
+    playerField.value = playersJson[player].Name;
+    playerField.setAttribute('allocationkey', playersJson[player].AllocationKey);
+  }
+}
+
 export default {
   getStatus,
   getBank,
@@ -37,4 +45,5 @@ export default {
   lockGame,
   clearElementValue,
   getElementsByClassName,
+  updateLoadedPlayers,
 }
