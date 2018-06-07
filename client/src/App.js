@@ -18,7 +18,6 @@ class App extends Component {
     this.state = {
       //Defaults when loading and reloading
       selectedEvent: null,
-      selectedParticipant: null,
       selectedPlayer:null,
       graphColors: Connector.getGraphColors(),
       refereeIncluded: false,
@@ -66,26 +65,9 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    this.storeLabels();
-    this.storeParticipants();
-    this.storePlayers();
-  }
-
-  storeLabels() {
-    var currentLabels = [];
-    currentLabels = this.state.labels;
-    localStorage.setItem('labels', JSON.stringify(currentLabels));
-  }
-
-  storeParticipants() {
-    var participants = this.state.participants;
-    localStorage.setItem('participants', JSON.stringify(participants));
-  }
-
-  storePlayers() {
-    console.log('kaldes ved allocation');
-    var players = this.state.players;
-    localStorage.setItem('players', JSON.stringify(players));
+    Connector.saveToLocal(this.state.labels, 'labels');
+    Connector.saveToLocal(this.state.participants, 'participants');
+    Connector.saveToLocal(this.state.players, 'players');
   }
 
   render() {
@@ -99,7 +81,7 @@ class App extends Component {
         <Loader gameDataLoaded={this.gameDataLoaded.bind(this)}/>
         </div>
         <div className="right warning">
-        <input type="button" onClick={this.resetGame.bind(this)} value="Click here to wipe existing game." />
+        <input type="button" onClick={AppFunc.resetGame.bind(this)} value="Click here to wipe existing game." />
         </div>
         </span>
         <div >
@@ -227,7 +209,6 @@ class App extends Component {
 
   playersWereLoaded(playersJson) {
     ElementsHelper.updateLoadedPlayers(playersJson);
-    console.log(playersJson);
     this.setState({players:playersJson});
   }
 
@@ -254,13 +235,6 @@ class App extends Component {
     this.gameWasLoaded(gameData[0]);
   }
 
-  resetGame() {
-    localStorage.setItem('participants', null);
-    localStorage.setItem('labels', null);
-    localStorage.setItem('players', null);
-    window.location.reload(false);
-  }
-
   addEventArrayToGraph(allocationKey, eventArray) {
     for (var i = 0; i < eventArray.length; i++) {
       this.addEventToGraph(allocationKey, eventArray[i]);
@@ -268,7 +242,6 @@ class App extends Component {
   }
 
   addPlayerName(e) {
-    console.log(this.state.players);
     if (e.target.value.length === 0) {
       return;
     }
@@ -279,27 +252,19 @@ class App extends Component {
     var players = this.state.players;
     players[e.target.id] = {'Name': nameInput, AllocationKey:null};
     this.setState({players: players});
-    this.storePlayers();
   }
 
   updatePlayerAllocationKeys() {
     var currPlayers = this.state.players;
     for (var player in currPlayers) {
       var playerField = document.getElementById(player);
-      console.log(playerField.getAttribute('allocationkey'));
       currPlayers[player].AllocationKey = playerField.getAttribute('allocationkey');
-      console.log(currPlayers[player]);
     }
-    console.log(currPlayers);
     this.setState({players: currPlayers});
   }
 
   onEventChange(e) {
     this.setState({selectedEvent:e.target});
-  }
-
-  onParticipantChange(e) {
-    this.setState({selectedParticipant:e.target.value});
   }
 
   onPlayerChange(e) {

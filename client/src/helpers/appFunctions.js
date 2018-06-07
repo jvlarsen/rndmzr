@@ -24,8 +24,16 @@ const getSelectedPlayer = (state) => {
   return state.refereeSelected ? document.getElementById('refereeName') : state.selectedPlayer;
 }
 
+const resetGame = () => {
+  localStorage.setItem('participants', null);
+  localStorage.setItem('labels', null);
+  localStorage.setItem('players', null);
+  window.location.reload(false);
+}
+
 export default {
   onClickRandomize,
   getSelectedEvent,
   getSelectedPlayer,
+  resetGame,
 }

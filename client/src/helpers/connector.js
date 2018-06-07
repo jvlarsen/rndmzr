@@ -123,6 +123,10 @@ const getGraphColors = () => {
       {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'}];
 }
 
+const saveToLocal = (data, key) => {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
 export default {
   randomize,
   getParticipants,
@@ -132,4 +136,5 @@ export default {
   getGraphColors,
   loadParticipants,
   loadDataSets,
+  saveToLocal,
 }

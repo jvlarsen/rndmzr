@@ -24,7 +24,7 @@ app.get('/api/passwords', (req, res) => {
 });
 
 app.get('/api/events', (req, res) => {
-  res.json([      {Id:1, Name:'Goal!!!', RefereeName:'Ball in but not approved', Type:'Other3'},
+  res.json([      {Id:1, Name:'Goal!!!', RefereeName:'Passes the ball', Type:'Other3'},
                   {Id:2, Name:'Assist', RefereeName:'Separates players', Type:'Other2'},
                   {Id:3, Name:'Shot on target', RefereeName:'1H 3+ min ET', Type:'Other1'},
                   {Id:4, Name:'Corner taken', RefereeName:'Talk, no card', Type:'Other1'},
