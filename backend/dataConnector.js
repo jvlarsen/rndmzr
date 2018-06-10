@@ -24,7 +24,7 @@ module.exports = {
       return ['Nosser', 'Aallex'];
     }
     if (gameId == '4') {
-      return ['Nosser', 'Aallex', 'Tennedz', 'Tarzan', 'Trusser', 'Faccio'];
+      return {0: {'Name':'Nosser', 'AllocationKey':null}, 1: {'Name':'Aallex', 'AllocationKey':null}, 2: {'Name':'Tarzan', 'AllocationKey':null}, 3: {'Name':'Faccio', 'AllocationKey':null}, 4: {'Name':'Tennedz', 'AllocationKey':null}, 5: {'Name':'Trusser', 'AllocationKey':null}, 6: {'Name':'Leffo', 'AllocationKey':null}};
     }
     if (gameId == '7') {
       return ['Nosser', 'Aallex', 'D-Kwizzle', 'Fabchup', 'Trusser', 'Tarzan', 'Leffo'];

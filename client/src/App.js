@@ -65,7 +65,6 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log('kaldes når spillet startes?');
     Connector.saveToLocal(this.state.labels, 'labels');
     Connector.saveToLocal(this.state.participants, 'participants');
     Connector.saveToLocal(this.state.players, 'players');
@@ -213,10 +212,9 @@ class App extends Component {
     this.setState({players:playersJson});
   }
 
-  gameWasLoaded(loadedDataSets) {
-    this.dataSetsWereLoaded(loadedDataSets.dataSets);
-
-    this.labelsWereLoaded(loadedDataSets.labels);
+  gameWasLoaded(loadedGameData) {
+    this.dataSetsWereLoaded(loadedGameData.dataSets);
+    this.labelsWereLoaded(loadedGameData.labels);
   }
 
   dataSetsWereLoaded(dataSets) {
