@@ -65,6 +65,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    console.log('kaldes når spillet startes?');
     Connector.saveToLocal(this.state.labels, 'labels');
     Connector.saveToLocal(this.state.participants, 'participants');
     Connector.saveToLocal(this.state.players, 'players');
@@ -245,13 +246,16 @@ class App extends Component {
     if (e.target.value.length === 0) {
       return;
     }
+    var players = this.state.players;
     var nameInput = e.target.value;
     if (Object.keys(this.state.players).includes(e.target.id)) {
-      return;
+      players[e.target.id].Name = nameInput;
     }
-    var players = this.state.players;
-    players[e.target.id] = {'Name': nameInput, AllocationKey:null};
+    else {
+      players[e.target.id] = {'Name': nameInput, AllocationKey:null};
+    }
     this.setState({players: players});
+    console.log(this.state.players);
   }
 
   updatePlayerAllocationKeys() {
