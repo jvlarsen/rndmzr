@@ -79,6 +79,7 @@ class App extends Component {
   saveGame() {
     Connector.saveToLocal(this.state.labels, 'labels');
     Connector.saveToLocal(this.state.participants, 'participants');
+    console.log(this.state.participants);
     Connector.saveToLocal(this.state.players, 'players');
     Connector.saveToLocal(this.state.refereeIncluded, 'refereeIncluded');
     Connector.saveToLocal(true, 'gameStarted');
@@ -142,6 +143,7 @@ class App extends Component {
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
     this.updatePlayerAllocationKeys();
+    this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
   }
@@ -277,6 +279,14 @@ class App extends Component {
       currPlayers[player].AllocationKey = playerField.getAttribute('allocationkey');
     }
     this.setState({players: currPlayers});
+  }
+
+  updateParticipantAllocationKeys() {
+    var currParticipants = this.state.participants;
+    for (var i = 0; i < Object.keys(currParticipants).length; i++) {
+      currParticipants[i].AllocationKey = i;
+    }
+    console.log(currParticipants);
   }
 
   onEventChange(e) {
