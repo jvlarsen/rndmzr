@@ -81,7 +81,8 @@ class App extends Component {
   saveGame() {
     Connector.saveToLocal(this.state.labels, 'labels');
     Connector.saveToLocal(this.state.participants, 'participants');
-    console.log(this.state.participants);
+    var refEle = ElementsHelper.getReferee();
+    Connector.saveToLocal(refEle, 'referee');
     Connector.saveToLocal(this.state.players, 'players');
     Connector.saveToLocal(this.state.refereeIncluded, 'refereeIncluded');
     Connector.saveToLocal(true, 'gameStarted');

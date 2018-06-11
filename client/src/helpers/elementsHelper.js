@@ -17,6 +17,13 @@ const getElementsByClassName = (id) => {
   return document.getElementById(id) || [];
 }
 
+const getReferee = () => {
+  var refEle = document.getElementById('refereeName');
+  var refName = refEle.value || '';
+  var allocationKey = refEle.getAttribute('allocationkey');
+  return {'Name':refName, 'AllocationKey':allocationKey};
+}
+
 const lockGame = () => {
   document.getElementById('allocateButton').disabled = true;
   document.getElementById('participantNameInput').disabled = true;
@@ -45,5 +52,6 @@ export default {
   lockGame,
   clearElementValue,
   getElementsByClassName,
+  getReferee,
   updateLoadedPlayers,
 }
