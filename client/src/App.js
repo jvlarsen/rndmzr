@@ -53,6 +53,8 @@ class App extends Component {
     if (players) {
       this.playersWereLoaded(players);
     }
+
+    document.getElementById('refereeCheckbox').checked = this.state.refereeIncluded;
   }
 
   componentDidUpdate() {
@@ -110,7 +112,7 @@ class App extends Component {
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
           </div>
           <div className="colmedium">
-            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeSelect.bind(this)} refereeSelected={this.state.refereeSelected} addPlayerName={this.addPlayerName.bind(this)}/>
+            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
           </div>
           <div className="leftCol">
             <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
@@ -217,7 +219,6 @@ class App extends Component {
   }
 
   participantsWereLoaded(participantsJson) {
-    console.log(participantsJson);
     //Omskriv alle loops til map-functions.
     for (var i = 0; i < Object.keys(participantsJson).length; i++) {
       this.addParticipant(participantsJson[i]);
@@ -286,7 +287,6 @@ class App extends Component {
     for (var i = 0; i < Object.keys(currParticipants).length; i++) {
       currParticipants[i].AllocationKey = i;
     }
-    console.log(currParticipants);
   }
 
   onEventChange(e) {
@@ -297,13 +297,11 @@ class App extends Component {
     this.setState({selectedPlayer:e.target, refereeSelected:false});
   }
 
-  onRefereeSelect(e) {
-    console.log('ref checked');
+  onRefereeRadioSelect(e) {
     this.setState({selectedPlayer:e.target, refereeSelected:true});
   }
 
-  onRefereeToggle(e) {
-    console.log('ref toggled');
+  onRefereeCheckboxToggle(e) {
     const newState = !this.state.refereeIncluded;
     this.setState({refereeIncluded:newState})
   }
