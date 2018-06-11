@@ -127,6 +127,10 @@ const saveToLocal = (data, key) => {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
+const loadFromLocal = (key) => {
+  return JSON.parse(localStorage.getItem(key));
+}
+
 export default {
   randomize,
   getParticipants,
@@ -137,4 +141,5 @@ export default {
   loadParticipants,
   loadDataSets,
   saveToLocal,
+  loadFromLocal,
 }

@@ -36,16 +36,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    var localLabels = JSON.parse(localStorage.getItem('labels'));
-    if (localLabels) {
-      this.labelsWereLoaded(localLabels);
-    }
-
-    var participants = JSON.parse(localStorage.getItem('participants'));
-    if (participants) {
-      this.participantsWereLoaded(participants);
-    }
-
+    this.loadGame();
 /*
     var localDataSets = localStorage.getItem('dataSets');
     if (localDataSets) {
@@ -65,9 +56,32 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    this.saveGame();
+  }
+
+  loadGame() {
+    var localLabels = Connector.loadFromLocal('labels');
+    if (localLabels) {
+      this.labelsWereLoaded(localLabels);
+    }
+
+    var participants = Connector.loadFromLocal('participants');
+    if (participants) {
+      this.participantsWereLoaded(participants);
+    }
+
+    var refereeIncluded = Connector.loadFromLocal('refereeIncluded');
+    if (refereeIncluded && refereeIncluded == true) {
+      this.setState({refereeIncluded:true});
+    }
+  }
+
+  saveGame() {
     Connector.saveToLocal(this.state.labels, 'labels');
     Connector.saveToLocal(this.state.participants, 'participants');
     Connector.saveToLocal(this.state.players, 'players');
+    Connector.saveToLocal(this.state.refereeIncluded, 'refereeIncluded');
+    Connector.saveToLocal(true, 'gameStarted');
   }
 
   render() {
@@ -201,6 +215,7 @@ class App extends Component {
   }
 
   participantsWereLoaded(participantsJson) {
+    console.log(participantsJson);
     //Omskriv alle loops til map-functions.
     for (var i = 0; i < Object.keys(participantsJson).length; i++) {
       this.addParticipant(participantsJson[i]);
@@ -253,7 +268,6 @@ class App extends Component {
       players[e.target.id] = {'Name': nameInput, AllocationKey:null};
     }
     this.setState({players: players});
-    console.log(this.state.players);
   }
 
   updatePlayerAllocationKeys() {
@@ -274,10 +288,12 @@ class App extends Component {
   }
 
   onRefereeSelect(e) {
+    console.log('ref checked');
     this.setState({selectedPlayer:e.target, refereeSelected:true});
   }
 
   onRefereeToggle(e) {
+    console.log('ref toggled');
     const newState = !this.state.refereeIncluded;
     this.setState({refereeIncluded:newState})
   }

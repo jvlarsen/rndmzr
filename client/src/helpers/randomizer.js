@@ -17,6 +17,7 @@ const allocatePlayers = (numberOfParticipants, includeReferee) => {
     document.getElementById(playerRadioToAllocate).setAttribute('allocationKey', participantIndex);
 
     document.getElementById('status'+participantIndex).setAttribute('allocationKey', participantIndex);
+
     indexStart++;
     var deleteIndex = playersToAllocate.indexOf(playerToAllocate);
     playersToAllocate.splice(deleteIndex, 1);
