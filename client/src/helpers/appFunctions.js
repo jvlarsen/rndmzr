@@ -28,6 +28,8 @@ const resetGame = () => {
   localStorage.setItem('participants', null);
   localStorage.setItem('labels', null);
   localStorage.setItem('players', null);
+  localStorage.setItem('referee', null);
+  localStorage.setItem('refereeIncluded', null);
   window.location.reload(false);
 }
 

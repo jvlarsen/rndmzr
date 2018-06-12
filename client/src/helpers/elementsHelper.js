@@ -45,6 +45,12 @@ const updateLoadedPlayers = (playersJson) => {
   }
 }
 
+const setReferee = (referee) => {
+  var refEle = document.getElementById('refereeName');
+  refEle.value = referee.Name;
+  refEle.setAttribute('allocationkey', referee.AllocationKey);
+}
+
 export default {
   getStatus,
   getBank,
@@ -54,4 +60,5 @@ export default {
   getElementsByClassName,
   getReferee,
   updateLoadedPlayers,
+  setReferee,
 }

@@ -53,8 +53,13 @@ class App extends Component {
     if (players) {
       this.playersWereLoaded(players);
     }
-
     document.getElementById('refereeCheckbox').checked = this.state.refereeIncluded;
+    if (this.state.refereeIncluded) {
+      var referee = Connector.loadFromLocal('referee');
+      if (referee) {
+        ElementsHelper.setReferee(referee);
+      }
+    }
   }
 
   componentDidUpdate() {
@@ -76,6 +81,7 @@ class App extends Component {
     if (refereeIncluded && refereeIncluded == true) {
       this.setState({refereeIncluded:true});
     }
+
   }
 
   saveGame() {
