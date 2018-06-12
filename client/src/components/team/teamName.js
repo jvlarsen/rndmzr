@@ -4,7 +4,7 @@ export default class Team extends React.Component {
     render() {
         return(
             <div>
-                <input type="text" key="teamNameHome" placeholder={this.props.placeholder} />
+                <input type="text" className="teamname" key="teamNameHome" placeholder={this.props.placeholder} />
             </div>
         );
     }

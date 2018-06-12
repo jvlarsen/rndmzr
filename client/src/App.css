@@ -86,6 +86,16 @@ h1 {
   border-width: 2px;
 }
 
+.teamname {
+  height: 25px;
+  font-size: 20px;
+}
+
+.playername {
+  height: 25px;
+  font-size: 15px;
+}
+
 input[allocationKey='0'] {
     background-color: rgba(255,0,0,0.4);
 }
