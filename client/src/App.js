@@ -85,12 +85,22 @@ class App extends Component {
   }
 
   saveGame() {
+    var dataSetsToSave = [];
+    var dataSets = this.state.dataSets;
+    for (var i = 0; i < Object.keys(dataSets).length; i++) {
+      console.log(dataSets[i].dataset.data);
+      dataSetsToSave.push(dataSets[i].dataset.data);
+    }
+    console.log(dataSetsToSave);
+    Connector.saveToLocal(dataSetsToSave, 'dataSets');
+
     Connector.saveToLocal(this.state.labels, 'labels');
     Connector.saveToLocal(this.state.participants, 'participants');
     var refEle = ElementsHelper.getReferee();
     Connector.saveToLocal(refEle, 'referee');
     Connector.saveToLocal(this.state.players, 'players');
     Connector.saveToLocal(this.state.refereeIncluded, 'refereeIncluded');
+
     Connector.saveToLocal(true, 'gameStarted');
   }
 
