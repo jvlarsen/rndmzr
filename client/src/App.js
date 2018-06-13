@@ -49,6 +49,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log('componendDidMount');
     var players = JSON.parse(localStorage.getItem('players'));
     if (players) {
       this.playersWereLoaded(players);
@@ -60,13 +61,26 @@ class App extends Component {
         ElementsHelper.setReferee(referee);
       }
     }
+
+    var dataSetsLocal = Connector.loadFromLocal('dataSets');
+    if (dataSetsLocal) {
+      var currDataSets = this.state.dataSets;
+      for (var i = 0; i < Object.keys(currDataSets).length; i++) {
+        currDataSets[i].dataset.data = dataSetsLocal[i];
+      }
+      console.log('loaded into currDataSets:');
+      console.log(currDataSets);
+      this.setState({dataSets: currDataSets});
+    }
   }
 
   componentDidUpdate() {
+    console.log('componendDidUpdate');
     this.saveGame();
   }
 
   loadGame() {
+    console.log('loadGame');
     var localLabels = Connector.loadFromLocal('labels');
     if (localLabels) {
       this.labelsWereLoaded(localLabels);
@@ -85,8 +99,10 @@ class App extends Component {
   }
 
   saveGame() {
+    console.log('saveGame');
     var dataSetsToSave = [];
     var dataSets = this.state.dataSets;
+    console.log(dataSets);
     for (var i = 0; i < Object.keys(dataSets).length; i++) {
       console.log(dataSets[i].dataset.data);
       dataSetsToSave.push(dataSets[i].dataset.data);
