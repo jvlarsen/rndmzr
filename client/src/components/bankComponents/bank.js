@@ -20,6 +20,7 @@ export default class Bank extends React.Component {
   }
 
   onAddBank(e) {
+    //Den her skal kaldes når Bank skal loades.
     var depositButton = e.target;
     var index = depositButton.getAttribute('allocationkey');
     var depositMeasure = document.getElementById('status' + index);
@@ -37,7 +38,5 @@ export default class Bank extends React.Component {
     var allCounters = {...this.state.counters};
     allCounters[measure] = newCounter;
     this.setState({counters:allCounters});
-
-    //this.setState({measure:newCounter >= 0 ? newCounter : 0});
   }
 }

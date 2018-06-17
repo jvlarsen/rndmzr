@@ -15,15 +15,8 @@ export default class BankWithdrawal extends React.Component {
 
         <input type="button" id={'withdrawLarge'+this.props.index} className="drink large" value={"Large " + this.props.counters.Large} onClick={this.props.onDrinkBank} measure="Large" counter={this.props.counters.Large} />
 
-        <input type="button" id={'withdrawWalter'+this.props.index} className="drink walter" value={"Walter " + this.props.counters.Walter} measure="Walter" counter={this.props.counters.Walter} onClick={this.props.onDrinkBank}/>
+        <input type="button" id={'withdrawWalter'+this.props.index} className="drink walter" value={"Walter " + this.props.counters.Walter} onClick={this.props.onDrinkBank} measure="Walter" counter={this.props.counters.Walter} />
       </span>
     );
-  }
-
-  drinkOne(e) {
-    var measure = e.target.measure;
-    var currCounter = this.state[measure];
-    var newCounter = currCounter - 1;
-    this.setState({measure:newCounter >= 0 ? newCounter : 0});
   }
 }

@@ -24,20 +24,20 @@ app.get('/api/passwords', (req, res) => {
 });
 
 app.get('/api/events', (req, res) => {
-  res.json([      {Id:1, Name:'Goal!!!', RefereeName:'Passes the ball', Type:'Other3'},
-                  {Id:2, Name:'Assist', RefereeName:'Separates players', Type:'Other2'},
-                  {Id:3, Name:'Shot on target', RefereeName:'1H 3+ min ET', Type:'Other1'},
-                  {Id:4, Name:'Corner taken', RefereeName:'Talk, no card', Type:'Other1'},
-                  {Id:5, Name:'Medic!', RefereeName:'1H 2- min ET', Type:'Own1'},
-                  {Id:6, Name:'Offside', RefereeName:'2H 5+', Type:'Own1'},
-                  {Id:7, Name:'Foul committed', RefereeName:'Dictates placing of ball', Type:'Own1'},
-                  {Id:8, Name:'Shot off target', RefereeName:'2H 0-2min ET', Type:'Own1'},
-                  {Id:9, Name:'Penalty committed', RefereeName:'2H 3-4min ET', Type:'Own2'},
-                  {Id:10, Name:'Yellow card', RefereeName:'Uses spray', Type:'Own2'},
-                  {Id:11, Name:'Substituted', RefereeName:'Hit by ball', Type:'Own2'},
-                  {Id:12, Name:'Own goal', RefereeName:'Consults other referees', Type:'Own3'},
-                  {Id:13, Name:'Penalty missed', RefereeName:'Falls', Type:'Own3'},
-                  {Id:14, Name:'Red card', RefereeName:'Injured', Type:'Own3'}]);
+  res.json([      {Id:1, Name:'Mål!!!', RefereeName:'Spiller bolden', Type:'Other3'},
+                  {Id:2, Name:'Assist', RefereeName:'Adskiller spillere', Type:'Other2'},
+                  {Id:3, Name:'Skud på mål', RefereeName:'1H 3+ min', Type:'Other1'},
+                  {Id:4, Name:'Tager hjørne', RefereeName:'Publikum spotter kamera', Type:'Other1'},
+                  {Id:5, Name:'Medic!', RefereeName:'1H 0-2 min', Type:'Own1'},
+                  {Id:6, Name:'Offside', RefereeName:'2H 4+ min', Type:'Own1'},
+                  {Id:7, Name:'Frispark begået', RefereeName:'Dommerkast', Type:'Own1'},
+                  {Id:8, Name:'Skud udenfor mål', RefereeName:'2H 0-3 min', Type:'Own1'},
+                  {Id:9, Name:'Straffe begået', RefereeName:'Taber genstand', Type:'Own2'},
+                  {Id:10, Name:'Gult kort', RefereeName:'Spray (1/situation)', Type:'Own2'},
+                  {Id:11, Name:'Udskiftet', RefereeName:'Ramt af bolden', Type:'Own2'},
+                  {Id:12, Name:'Selvmål', RefereeName:'VAR/GLT', Type:'Own3'},
+                  {Id:13, Name:'Brændt straffe', RefereeName:'Falder', Type:'Own3'},
+                  {Id:14, Name:'Rødt kort', RefereeName:'Udskiftes', Type:'Own3'}]);
 });
 
 app.get('/api/games/gameId/participants', (req, res) => {

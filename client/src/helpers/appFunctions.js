@@ -1,19 +1,26 @@
-const onClickRandomize = (e) => {
-  /*var selectedEvent = (this.state.selectedEvent) ? this.state.selectedEvent.value : null;
-
-  var selectedPlayer = document.getElementById('refereeName');
-  if (!this.state.refereeSelected) {
-    selectedPlayer = this.state.selectedPlayer;
-  }
-
-  if (!selectedEvent || !selectedPlayer) {return;}
-
-  this.setState(prevState => ({
-    labels: [...prevState.labels, selectedEvent] //newLabel kan udskiftes med selectedEvent for at se hændelsen i bunden.
-  }))
-  var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, this.state.participantNames.length);
-  this.updateWhatToDrink(randomizerResult);
-  */
+const createDataSet = (name, color, borderColor) => {
+  return {
+    dataset:{
+      label:name,
+      data:[0],
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: color,
+      borderColor: borderColor,
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: color,
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: color,
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10}
+    }
 }
 
 const getSelectedEvent = (state) => {
@@ -34,7 +41,7 @@ const resetGame = () => {
 }
 
 export default {
-  onClickRandomize,
+  createDataSet,
   getSelectedEvent,
   getSelectedPlayer,
   resetGame,

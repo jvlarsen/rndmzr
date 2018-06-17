@@ -48,18 +48,6 @@ class ParticipantsRadio extends React.Component {
     this.setState({selectedOption:e.target.value});
   }
 
-  onAddBank(e) {
-
-    var index = e.target.id.substring(7);
-    var status = ElementHelper.getStatus(index);
-    var currBank = ElementHelper.getBank(index);
-    var statusValue = parseInt(status.numericvalue, 10) || 0;
-    var currBankValue =  parseInt(currBank.value, 10) || 0;
-    var newBank = statusValue + currBankValue;
-    currBank.value = newBank;
-    this.clearElementValue(status);
-  }
-
   clearElementValue(element) {
     element.value = null;
     element.numericvalue = null;
@@ -70,11 +58,5 @@ class ParticipantsRadio extends React.Component {
     var status = ElementHelper.getStatus(index);
     this.clearElementValue(status);
     status.value = '';
-  }
-
-  onDrinkBank(e) {
-    var index = e.target.id.substring(9);
-    var currBank = ElementHelper.getBank(index);
-    this.clearElementValue(currBank);
   }
 }

@@ -124,37 +124,43 @@ class App extends Component {
 
     return (
       <div className="App">
-        <label id='gameId'>Unique game ID: {this.state.gameId}</label>
-        <br/>
-        <span>
-        <div className="left">
-        <Loader gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+        <div className="flex-grid">
+          <label id='gameId'>Unique game ID: {this.state.gameId}</label>
+          <br/>
+          <span>
+            <div className="left">
+              <Loader gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+            </div>
+            <div className="right warning">
+              <input type="button" onClick={AppFunc.resetGame.bind(this)} value="Click here to wipe existing game." />
+            </div>
+          </span>
         </div>
-        <div className="right warning">
-        <input type="button" onClick={AppFunc.resetGame.bind(this)} value="Click here to wipe existing game." />
+        <div className="flex-grid">
+          <div className="colwide">
+            <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
+          </div>
+          <div className="colmedium">
+            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
+          </div>
+
         </div>
-        </span>
-        <div >
-          <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
-        </div>
+
         <div className="flex-grid">
           <div className="colwide">
             <ParticipantBox id='participantBox'
             addParticipant={this.addParticipant.bind(this)}
             participants={this.state.participants} />
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
-          </div>
-          <div className="colmedium">
-            <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
-          </div>
-          <div className="leftCol">
-            <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
-          </div>
-          <div>
-            <Randomize onClick={this.onClickRandomize.bind(this)} />
+            </div>
+            <div className="leftCol">
+              <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
+            </div>
+            <div>
+              <Randomize onClick={this.onClickRandomize.bind(this)} />
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 
@@ -199,28 +205,7 @@ class App extends Component {
     var index = Object.keys(this.state.participants).length-1;
     var color = this.state.graphColors[index].color;
     var borderColor = this.state.graphColors[index].borderColor;
-    var newDataSetForParticipant = {
-      dataset:{
-        label:participantName,
-        data:[0],
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: color,
-        borderColor: borderColor,
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: color,
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: color,
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10}
-      }
+    var newDataSetForParticipant = AppFunc.createDataSet(participantName, color, borderColor); 
 
       this.setState(prevState => ({dataSets:[...prevState.dataSets, newDataSetForParticipant]}));
   }
