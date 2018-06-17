@@ -37,19 +37,9 @@ class App extends Component {
 
   componentWillMount() {
     this.loadGame();
-/*
-    var localDataSets = localStorage.getItem('dataSets');
-    if (localDataSets) {
-      console.log(localDataSets);
-      this.setState({dataSets: localDataSets});
-      this.dataSetsWereLoaded(localDataSets);
-    }
-    //var loadedParticipants = Connector.getParticipantsFromGameId(1);
-*/
   }
 
   componentDidMount() {
-    console.log('componendDidMount');
     var players = JSON.parse(localStorage.getItem('players'));
     if (players) {
       this.playersWereLoaded(players);
@@ -68,19 +58,20 @@ class App extends Component {
       for (var i = 0; i < Object.keys(currDataSets).length; i++) {
         currDataSets[i].dataset.data = dataSetsLocal[i];
       }
-      console.log('loaded into currDataSets:');
-      console.log(currDataSets);
       this.setState({dataSets: currDataSets});
+    }
+
+    var gameStarted = this.state.gameStarted;
+    if (gameStarted == true) {
+      ElementsHelper.lockGame();
     }
   }
 
   componentDidUpdate() {
-    console.log('componendDidUpdate');
     this.saveGame();
   }
 
   loadGame() {
-    console.log('loadGame');
     var localLabels = Connector.loadFromLocal('labels');
     if (localLabels) {
       this.labelsWereLoaded(localLabels);
@@ -96,18 +87,19 @@ class App extends Component {
       this.setState({refereeIncluded:true});
     }
 
+    var gameStarted = Connector.loadFromLocal('gameStarted');
+    if (gameStarted && gameStarted == true) {
+      this.setState({gameStarted:true});
+    }
+
   }
 
   saveGame() {
-    console.log('saveGame');
     var dataSetsToSave = [];
     var dataSets = this.state.dataSets;
-    console.log(dataSets);
     for (var i = 0; i < Object.keys(dataSets).length; i++) {
-      console.log(dataSets[i].dataset.data);
       dataSetsToSave.push(dataSets[i].dataset.data);
     }
-    console.log(dataSetsToSave);
     Connector.saveToLocal(dataSetsToSave, 'dataSets');
 
     Connector.saveToLocal(this.state.labels, 'labels');
@@ -205,13 +197,12 @@ class App extends Component {
     var index = Object.keys(this.state.participants).length-1;
     var color = this.state.graphColors[index].color;
     var borderColor = this.state.graphColors[index].borderColor;
-    var newDataSetForParticipant = AppFunc.createDataSet(participantName, color, borderColor); 
+    var newDataSetForParticipant = AppFunc.createDataSet(participantName, color, borderColor);
 
       this.setState(prevState => ({dataSets:[...prevState.dataSets, newDataSetForParticipant]}));
   }
 
   updateWhatToDrink(randomizerResult) {
-
     for (var i = 0; i < randomizerResult.length; i++) {
       this.addEventToGraph(i, randomizerResult[i].value.NumericMeasure);
       var currStatus = ElementsHelper.getStatus(randomizerResult[i].status);
