@@ -77,9 +77,19 @@ h1 {
     height:45%;
 }
 
-.participantLabel {
-  width: 70px;
-  text-overflow: ellipsis;
+.participant {
+  display: flex;
+  align-items: center;
+}
+
+.participant > * {
+  padding: 4px;
+  margin: 4px;
+}
+
+.participant-name {
+  display: inline-block;
+  min-width: 80px;
 }
 
 .bank {
