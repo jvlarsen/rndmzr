@@ -1,6 +1,7 @@
 import React from 'react';
 import Deposit from './bankDeposit';
 import Withdrawal from './bankWithdrawal';
+import Connector from './../../helpers/connector';
 
 
 //Deposit skal have en onAddBank() sendt som props.
@@ -8,6 +9,10 @@ export default class Bank extends React.Component {
   constructor(props) {
     super(props);
     this.state = {counters:{'Small':0, 'Medium':0, 'Large':0, 'Walter':0}};
+  }
+
+  componentDidUpdate() {
+    Connector.saveToLocal(this.state.counters, 'counters' + this.props.index);
   }
 
   render() {
