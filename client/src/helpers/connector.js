@@ -131,6 +131,15 @@ const loadFromLocal = (key) => {
   return JSON.parse(localStorage.getItem(key));
 }
 
+const saveCounter = (counter, index) => {
+  console.log('called saveCounter-' + index);
+  var allCounters = loadFromLocal('allCounters') || {};
+  console.log(allCounters);
+  allCounters[index] = counter;
+  console.log(allCounters);
+  saveToLocal(allCounters, 'allCounters');
+}
+
 export default {
   randomize,
   getParticipants,
@@ -142,4 +151,5 @@ export default {
   loadDataSets,
   saveToLocal,
   loadFromLocal,
+  saveCounter,
 }

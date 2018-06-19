@@ -110,8 +110,6 @@ class App extends Component {
     Connector.saveToLocal(refEle, 'referee');
     Connector.saveToLocal(this.state.players, 'players');
     Connector.saveToLocal(this.state.refereeIncluded, 'refereeIncluded');
-
-    Connector.saveToLocal(true, 'gameStarted');
   }
 
   render() {
@@ -181,6 +179,7 @@ class App extends Component {
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
+    Connector.saveToLocal(true, 'gameStarted');
   }
 
   addParticipant(participant) {

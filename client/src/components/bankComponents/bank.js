@@ -8,18 +8,31 @@ import Connector from './../../helpers/connector';
 export default class Bank extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {counters:{'Small':0, 'Medium':0, 'Large':0, 'Walter':0}};
+    this.state = {counter:{'Small':0, 'Medium':0, 'Large':0, 'Walter':0}};
   }
 
   componentDidUpdate() {
-    Connector.saveToLocal(this.state.counters, 'counters' + this.props.index);
+    Connector.saveCounter(this.state.counter, this.props.index);
+  }
+
+  componentWillMount() {
+    var allCounters = Connector.loadFromLocal('allCounters') || {};
+    if (allCounters[this.props.index]) {
+      console.log('found it');
+      console.log(allCounters[this.props.index]);
+      this.setState({counter:allCounters[this.props.index]});
+    }
+    else {
+      console.log('not found');
+      console.log(this.props.index);
+    }
   }
 
   render() {
     return (
       <span className="bankGroup">
         <Deposit index={this.props.index} allocationkey={this.props.index} onAddBank={this.onAddBank.bind(this)}/>
-        <Withdrawal index={this.props.index} counters={this.state.counters} onDrinkBank={this.onDrinkBank.bind(this)}/>
+        <Withdrawal index={this.props.index} counters={this.state.counter} onDrinkBank={this.onDrinkBank.bind(this)}/>
       </span>
     );
   }
@@ -29,19 +42,19 @@ export default class Bank extends React.Component {
     var depositButton = e.target;
     var index = depositButton.getAttribute('allocationkey');
     var depositMeasure = document.getElementById('status' + index);
-    var allCounters = {...this.state.counters};
+    var allCounters = {...this.state.counter};
     allCounters[depositMeasure.value] = allCounters[depositMeasure.value]+1;
-    this.setState({counters:allCounters});
+    this.setState({counter:allCounters});
 
     depositMeasure.value = '';
   }
 
   onDrinkBank(e) {
     var measure = e.target.getAttribute('measure');
-    var currCounter = this.state.counters[measure];
+    var currCounter = this.state.counter[measure];
     var newCounter = currCounter >= 1 ? currCounter - 1 : 0;
-    var allCounters = {...this.state.counters};
+    var allCounters = {...this.state.counter};
     allCounters[measure] = newCounter;
-    this.setState({counters:allCounters});
+    this.setState({counter:allCounters});
   }
 }

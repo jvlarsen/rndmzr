@@ -38,6 +38,7 @@ const resetGame = () => {
   localStorage.setItem('referee', null);
   localStorage.setItem('refereeIncluded', null);
   localStorage.setItem('gameStarted', null);
+  localStorage.setItem('allCounters', null);
   window.location.reload(false);
 }
 
