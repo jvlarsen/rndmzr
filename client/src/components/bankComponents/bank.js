@@ -18,13 +18,7 @@ export default class Bank extends React.Component {
   componentWillMount() {
     var allCounters = Connector.loadFromLocal('allCounters') || {};
     if (allCounters[this.props.index]) {
-      console.log('found it');
-      console.log(allCounters[this.props.index]);
       this.setState({counter:allCounters[this.props.index]});
-    }
-    else {
-      console.log('not found');
-      console.log(this.props.index);
     }
   }
 

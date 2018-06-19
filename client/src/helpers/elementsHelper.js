@@ -25,7 +25,6 @@ const getReferee = () => {
 }
 
 const lockGame = () => {
-  console.log('called lockGame');
   document.getElementById('allocateButton').disabled = true;
   document.getElementById('participantNameInput').disabled = true;
   document.getElementById('refereeCheckbox').disabled = true;
@@ -43,6 +42,8 @@ const updateLoadedPlayers = (playersJson) => {
     var playerField = document.getElementById(player);
     playerField.value = playersJson[player].Name;
     playerField.setAttribute('allocationkey', playersJson[player].AllocationKey);
+    var playerFieldRadio = document.getElementById(player+'Radio');
+    playerFieldRadio.setAttribute('allocationKey', playersJson[player].AllocationKey);
   }
 }
 

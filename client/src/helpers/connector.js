@@ -67,11 +67,7 @@ const loadParticipants = (gameId) => {
 
   var loadedGame = fetch('api/games/gameId/participants?gameId='+gameId)
       .then(res => res.json());
-      /*{
-        return res.json();
-    }).then((data) => {
-      console.log(data)});
-*/
+
   return loadedGame;
 }
 
@@ -132,11 +128,8 @@ const loadFromLocal = (key) => {
 }
 
 const saveCounter = (counter, index) => {
-  console.log('called saveCounter-' + index);
   var allCounters = loadFromLocal('allCounters') || {};
-  console.log(allCounters);
   allCounters[index] = counter;
-  console.log(allCounters);
   saveToLocal(allCounters, 'allCounters');
 }
 
