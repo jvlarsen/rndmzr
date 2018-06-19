@@ -62,6 +62,7 @@ class App extends Component {
     }
 
     var gameStarted = this.state.gameStarted;
+    console.log(gameStarted);
     if (gameStarted == true) {
       ElementsHelper.lockGame();
     }
@@ -88,7 +89,8 @@ class App extends Component {
     }
 
     var gameStarted = Connector.loadFromLocal('gameStarted');
-    if (gameStarted && gameStarted == true) {
+    console.log(gameStarted);
+    if (gameStarted && gameStarted === true) {
       this.setState({gameStarted:true});
     }
 
