@@ -4,19 +4,20 @@
 }
 
 .participant > * {
-  padding: 4px;
-  margin: 4px;
+  padding: 2px;
+  margin: 1px;
 }
 
 .participant-name {
   display: inline-block;
   min-width: 80px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .cheers {
   font-weight: 4px;
   font-size: 20px;
-  font-weight: bold;
   background-color: cyan;
 }
 

@@ -19,11 +19,12 @@
 }
 
 .drink {
-  padding: 8px;
+  padding: 3px;
 
 }
 
 .bigtext {
   font-weight: 4px;
-  font-size: 20px;
+  font-size: 18px;
+  padding: 3px;
 }

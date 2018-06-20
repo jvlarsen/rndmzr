@@ -157,6 +157,7 @@ class App extends Component {
   onClickRandomize(e) {
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
+
     if (!selectedEvent || !selectedPlayer) {return;}
 
     this.addLabelToGraph(selectedEvent);
