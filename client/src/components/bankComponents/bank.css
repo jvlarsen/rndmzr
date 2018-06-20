@@ -1,0 +1,29 @@
+.bank {
+  border-width: 2px;
+}
+
+.small {
+  background-color: #555FFF;
+}
+
+.medium {
+  background-color: #888AAA;
+}
+
+.large {
+  background-color: orange;
+}
+
+.walter {
+  background-color: #CCC111;
+}
+
+.drink {
+  padding: 8px;
+
+}
+
+.bigtext {
+  font-weight: 4px;
+  font-size: 20px;
+}

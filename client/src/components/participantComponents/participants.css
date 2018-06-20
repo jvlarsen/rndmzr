@@ -12,3 +12,16 @@
   display: inline-block;
   min-width: 80px;
 }
+
+.cheers {
+  font-weight: 4px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: cyan;
+}
+
+.status {
+  font-weight: 4px;
+  font-size: 20px;
+  font-weight: bold;
+}

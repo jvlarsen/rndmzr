@@ -1,6 +1,7 @@
 import React from 'react';
 import ElementHelper from '../../helpers/elementsHelper';
 import Bank from '../bankComponents/bank';
+import './participants.css';
 
 export default class Participants extends React.Component {
   constructor(props) {
@@ -31,8 +32,8 @@ class ParticipantsRadio extends React.Component {
         participants.push(
           <div className='participant' participantnumber={i} key={i}>
             <span className='participant-name'>{participantProps[i].Name}</span>
-            <input type='text' key={'status'+i} id={'status'+i} numericvalue='0' ref={'status'+i} allocationkey={i} readOnly />
-            <input type="button" key={'drink'+i} id={'drink'+i} value='Skål' onClick={onDrink}/>
+            <input type='text' className='status' key={'status'+i} id={'status'+i} numericvalue='0' ref={'status'+i} allocationkey={i} readOnly />
+            <input type="button" className='cheers' key={'drink'+i} id={'drink'+i} value='Skål' onClick={onDrink}/>
             <Bank index={i} className="right"/>
         </div>);
     };

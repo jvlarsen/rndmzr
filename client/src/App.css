@@ -77,25 +77,6 @@ h1 {
     height:45%;
 }
 
-.participant {
-  display: flex;
-  align-items: center;
-}
-
-.participant > * {
-  padding: 4px;
-  margin: 4px;
-}
-
-.participant-name {
-  display: inline-block;
-  min-width: 80px;
-}
-
-.bank {
-  border-width: 2px;
-}
-
 .teamname {
   height: 25px;
   font-size: 20px;
