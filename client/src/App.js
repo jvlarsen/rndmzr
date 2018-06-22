@@ -10,6 +10,7 @@ import LineGraph from './components/graph/lineGraph';
 import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
+import Undo from './components/game/undo';
 
 class App extends Component {
 
@@ -140,9 +141,10 @@ class App extends Component {
             <div className="leftCol">
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
             </div>
-            <div>
+
               <Randomize onClick={this.onClickRandomize.bind(this)} />
-            </div>
+            
+            <Undo />
           </div>
         </div>
     );
