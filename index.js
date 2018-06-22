@@ -17,7 +17,6 @@ app.get('/api/passwords', (req, res) => {
     generatePassword(12, false)
   )
 
-  // Return them as json
   res.json(passwords);
 
   console.log(`Sent ${count} passwords`);
@@ -32,9 +31,9 @@ app.get('/api/events', (req, res) => {
                   {Id:6, Name:'Offside', RefereeName:'2H 4+ min', Type:'Own1'},
                   {Id:7, Name:'Frispark begået', RefereeName:'Dommerkast', Type:'Own1'},
                   {Id:8, Name:'Skud udenfor mål', RefereeName:'2H 0-3 min', Type:'Own1'},
-                  {Id:9, Name:'Straffe begået', RefereeName:'Taber genstand', Type:'Own2'},
+                  {Id:9, Name:'Straffe begået', RefereeName:'Forholder sig til tiden', Type:'Own2'},
                   {Id:10, Name:'Gult kort', RefereeName:'Spray (1/situation)', Type:'Own2'},
-                  {Id:11, Name:'Udskiftet', RefereeName:'Ramt af bolden', Type:'Own2'},
+                  {Id:11, Name:'Udskiftet', RefereeName:'Ramt af bold/spiller', Type:'Own2'},
                   {Id:12, Name:'Selvmål', RefereeName:'VAR/GLT', Type:'Own3'},
                   {Id:13, Name:'Brændt straffe', RefereeName:'Falder', Type:'Own3'},
                   {Id:14, Name:'Rødt kort', RefereeName:'Udskiftes', Type:'Own3'}]);
