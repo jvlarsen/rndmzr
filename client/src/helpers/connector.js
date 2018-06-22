@@ -31,13 +31,13 @@ const getMeasureFromRandom = (randomNumber, measure) => {
   var givenMeasure = null;
 
     if (randomNumber <= measure['Small']) {
-      givenMeasure = {NumericMeasure: 1, StringMeasure:'Small'};
+      givenMeasure = {NumericMeasure: 1, StringMeasure:'Lille'};
     }
     if (randomNumber > measure['Small'] && randomNumber <= measure['Medium']) {
-      givenMeasure = {NumericMeasure: 3, StringMeasure:'Medium'};
+      givenMeasure = {NumericMeasure: 3, StringMeasure:'Memmel'};
     }
     if (randomNumber > measure['Medium'] && randomNumber <= measure['Large']) {
-      givenMeasure = {NumericMeasure: 6, StringMeasure:'Large'};
+      givenMeasure = {NumericMeasure: 6, StringMeasure:'Stor'};
     }
     if (randomNumber > measure['Large']) {
       givenMeasure = {NumericMeasure: 11, StringMeasure:'Walter'};

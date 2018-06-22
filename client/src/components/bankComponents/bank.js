@@ -8,7 +8,7 @@ import Connector from './../../helpers/connector';
 export default class Bank extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {counter:{'Small':0, 'Medium':0, 'Large':0, 'Walter':0}};
+    this.state = {counter:{'Lille':0, 'Memmel':0, 'Stor':0, 'Walter':0}};
   }
 
   componentDidUpdate() {
@@ -32,7 +32,6 @@ export default class Bank extends React.Component {
   }
 
   onAddBank(e) {
-    //Den her skal kaldes når Bank skal loades.
     var depositButton = e.target;
     var index = depositButton.getAttribute('allocationkey');
     var depositMeasure = document.getElementById('status' + index);
