@@ -53,6 +53,24 @@ const setReferee = (referee) => {
   refEle.setAttribute('allocationkey', referee.AllocationKey);
 }
 
+const updatePlayerStats = (playerStats, player) => {
+  var playerOwn = null;
+  var playerOther = null;
+  if (player == 'referee') {
+    playerOwn = document.getElementById('refereeStatOwn');
+    playerOther = document.getElementById('refereeStatOther');
+  }
+  else {
+    playerOwn = document.getElementById('playerStat' + player + 'Own');
+    playerOther = document.getElementById('playerStat' + player + 'Other');
+  }
+
+  var newStatOwn = Number(playerOwn.innerText) + playerStats['Own'];
+  var newStatOther = Number(playerOther.innerText) + playerStats['Other'];
+  playerOwn.innerText = newStatOwn;
+  playerOther.innerText = newStatOther;
+}
+
 export default {
   getStatus,
   getBank,
@@ -63,4 +81,5 @@ export default {
   getReferee,
   updateLoadedPlayers,
   setReferee,
+  updatePlayerStats,
 }

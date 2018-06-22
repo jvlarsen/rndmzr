@@ -1,3 +1,4 @@
+import ElementsHelper from './elementsHelper';
 
 //2018-05-04: Problem: Own sætter slet ingenting på nogen. Other sætter på alle.
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
@@ -7,10 +8,13 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   var allocationKey = selectedPlayer.getAttribute("allocationkey");
   var isOwn = measureType.substring(0,3) === "Own";
   var randomNumber = Math.floor(Math.random() * 100);
+  var playerStats = {'Own':0, 'Other':0};
 
   for (var i = 0; i < numberOfParticipants; i++) {
     if (isOwn && i == allocationKey) {
-      result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
+      var randomValue = getMeasureFromRandom(randomNumber, measure);
+      result.push({status:i, value: randomValue});
+      playerStats['Own'] += randomValue.NumericMeasure;
     }
     if (isOwn && i != allocationKey) {
       result.push({status:i, value: getNoneMeasure()});
@@ -19,11 +23,14 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
       result.push({status:i, value: getNoneMeasure()});
     }
     if (!isOwn && i != allocationKey) {
-      result.push({status:i, value: getMeasureFromRandom(randomNumber, measure)});
+      var randomValue = getMeasureFromRandom(randomNumber, measure);
+      result.push({status:i, value: randomValue});
+      playerStats['Other'] += randomValue.NumericMeasure;
     }
     randomNumber = Math.floor(Math.random() * 100);
   }
 
+  ElementsHelper.updatePlayerStats(playerStats, selectedPlayer.value);
   return result;
 }
 

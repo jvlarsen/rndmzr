@@ -1,3 +1,11 @@
 .playerinput {
   font-size: 20px;
 }
+
+.own {
+  background-color: orange;
+}
+
+.other {
+  background-color: green;
+}
