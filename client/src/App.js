@@ -9,7 +9,7 @@ import ElementsHelper from './helpers/elementsHelper';
 import LineGraph from './components/graph/lineGraph';
 import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
-import Loader from './components/game/loader';
+import GameMenu from './components/game/gameMenu';
 
 class App extends Component {
 
@@ -115,16 +115,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="flex-grid">
-          <label id='gameId'>Unique game ID: {this.state.gameId}</label>
-          <br/>
-          <span>
-            <div className="left">
-              <Loader gameDataLoaded={this.gameDataLoaded.bind(this)}/>
-            </div>
-            <div className="right warning">
-              <input type="button" onClick={AppFunc.resetGame.bind(this)} value="Click here to wipe existing game." />
-            </div>
-          </span>
+        <span>
+          <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+        </span>
+
         </div>
         <div className="flex-grid">
           <div className="colwide">

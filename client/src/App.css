@@ -48,11 +48,11 @@ h1 {
 }
 
 .left {
-  float: left;
+  flex: auto;
 }
 
 .right {
-  float: right;
+  flex: auto;
 }
 
 .labelInput {

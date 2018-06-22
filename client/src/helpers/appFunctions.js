@@ -1,3 +1,5 @@
+import Connector from './connector';
+
 const createDataSet = (name, color, borderColor) => {
   return {
     dataset:{
@@ -42,9 +44,23 @@ const resetGame = () => {
   window.location.reload(false);
 }
 
+const undoLatest = () => {
+  var dataSets = Connector.loadFromLocal('dataSets');
+  var labels = Connector.loadFromLocal('labels');
+
+  for (var i = 0; i < Object.keys(dataSets).length; i++) {
+    dataSets[i].pop();
+  }
+  labels.pop();
+  Connector.saveToLocal(dataSets, 'dataSets');
+  Connector.saveToLocal(labels, 'labels');
+  window.location.reload();
+}
+
 export default {
   createDataSet,
   getSelectedEvent,
   getSelectedPlayer,
   resetGame,
+  undoLatest,
 }
