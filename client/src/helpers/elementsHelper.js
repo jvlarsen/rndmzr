@@ -56,7 +56,7 @@ const setReferee = (referee) => {
 const updatePlayerStats = (playerStats, player) => {
   var playerOwn = null;
   var playerOther = null;
-  if (player == 'referee') {
+  if (player == 'Marufo') {
     playerOwn = document.getElementById('refereeStatOwn');
     playerOther = document.getElementById('refereeStatOther');
   }
