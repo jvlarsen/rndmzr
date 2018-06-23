@@ -30,7 +30,7 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
     randomNumber = Math.floor(Math.random() * 100);
   }
 
-  ElementsHelper.updatePlayerStats(playerStats, selectedPlayer.value);
+  ElementsHelper.updatePlayerStats(playerStats, selectedPlayer);
   return result;
 }
 
