@@ -3,9 +3,11 @@
 }
 
 .own {
-  background-color: orange;
+  background-color: red;
+  color: white;
 }
 
 .other {
   background-color: green;
+  color: white;
 }
