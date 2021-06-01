@@ -94,18 +94,20 @@ h1 {
 }
 
 input[allocationKey='0'] {
-    background-color: rgba(255,0,0,0.4);
+    background-color: rgba(255,0,0,1);
 }
 
 input[allocationKey='1'] {
-    background-color: rgba(0,255,0,0.4);
+    background-color: rgba(0,255,0,1);
 }
 
 input[allocationKey='2'] {
-    background-color: rgba(0,0,255,0.4);
+    background-color: rgba(0,0,255,1);
+    color: white;
 }
 input[allocationKey='3'] {
-    background-color: rgba(100,0,0,0.4);
+    background-color: rgba(100,0,0,1);
+    color: white;
 }
 input[allocationKey='4'] {
     background-color: green;
