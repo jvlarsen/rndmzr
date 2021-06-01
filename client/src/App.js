@@ -115,7 +115,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="flex-grid">
+        <div className="flex-grid wipediv">
         <span>
           <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
         </span>
@@ -123,7 +123,7 @@ class App extends Component {
         </div>
         <div className="flex-grid">
           <div className="colwide">
-            <LineGraph labels={this.state.labels} dataSets={this.state.dataSets}/>
+            <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
           </div>
           <div className="colmedium">
             <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>

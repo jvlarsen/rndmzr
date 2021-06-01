@@ -1,4 +1,8 @@
 .graph {
-	background-image: url('../../euro2020.jpg');
+	/*background-image: url('../../euro2020.jpg');*/
 	background-position: top;
+}
+
+.innerGraph {
+	background-color: red;
 }

@@ -1,9 +1,12 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
+import { defaults } from 'react-chartjs-2'; 
 import './graph.css';
 
 export default class LineSample extends React.Component {
   render() {
+    console.log(defaults.line);
+    defaults.line.fontColor = "#FFF";
     var data = this.getData();
     return (
       <div className="graph">

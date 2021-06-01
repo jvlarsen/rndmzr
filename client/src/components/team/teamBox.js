@@ -2,6 +2,7 @@ import React from 'react';
 import PlayerNames from './playerNames';
 import Team from './teamName';
 import Referee from './referee';
+import './team.css';
 
 export default class TeamBox extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class TeamBox extends React.Component {
 
     render() {
         return(
-          <div>
+          <div className="teamboxdiv">
             <div className="flex-grid">
                 <div className="col leftCol">
                     <Team placeholder='Home' />
