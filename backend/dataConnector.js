@@ -24,7 +24,7 @@ module.exports = {
       return ['Nosser', 'Aallex'];
     }
     if (gameId == '4') {
-      return {0: {'Name':'Nosser', 'AllocationKey':null}, 1: {'Name':'Aallex', 'AllocationKey':null}, 2: {'Name':'Tarzan', 'AllocationKey':null}, 3: {'Name':'Faccio', 'AllocationKey':null}, 4: {'Name':'Tennedz', 'AllocationKey':null}, 5: {'Name':'Trusser', 'AllocationKey':null}, 6: {'Name':'Leffo', 'AllocationKey':null}};
+      return {0: {'Name':'Nosser', 'AllocationKey':0}, 1: {'Name':'Aallex', 'AllocationKey':1}, 2: {'Name':'Tarzan', 'AllocationKey':2}, 3: {'Name':'Faccio', 'AllocationKey':3}, 4: {'Name':'Tennedz', 'AllocationKey':4}, 5: {'Name':'Trusser', 'AllocationKey':5}, 6: {'Name':'Leffo', 'AllocationKey':6}};
     }
     if (gameId == '7') {
       return ['Nosser', 'Aallex', 'D-Kwizzle', 'Fabchup', 'Trusser', 'Tarzan', 'Leffo'];
@@ -44,9 +44,15 @@ module.exports = {
     if (gameId == '4') {
       return {
         labels:
-          ['Goal', 'Yellow card', 'Assist'],
+          ['Goal', 'Yellow card', 'Assist', 'Medic'],
         dataSets:{
-          0:[1, 3, 7], 1:[2, 2, 4], 2:[3, 3, 7], 3:[4, 2, 4], 4:[5, 3, 7], 5:[6, 2, 4], 6:[7, 3, 7]
+          0:[0, 2, 7, 3], 
+          1:[2, 0, 4, 5], 
+          2:[3, 3, 7, 2], 
+          3:[4, 0, 4, 1], 
+          4:[5, 0, 0, 0], 
+          5:[6, 0, 4, 5], 
+          6:[7, 0, 7, 2]
         }
       };
     }

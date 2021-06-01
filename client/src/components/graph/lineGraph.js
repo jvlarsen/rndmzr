@@ -7,7 +7,7 @@ export default class LineSample extends React.Component {
     var data = this.getData();
     return (
       <div className="graph">
-        <Line data={data} className="graphInternal" />
+        <Line data={data} />
       </div>
     );
 }

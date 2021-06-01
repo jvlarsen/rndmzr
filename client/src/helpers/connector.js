@@ -1,6 +1,5 @@
 import ElementsHelper from './elementsHelper';
 
-//2018-05-04: Problem: Own sætter slet ingenting på nogen. Other sætter på alle.
 const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   var measureType = selectedEvent.getAttribute("measure");
   var measure = getMeasures()[measureType];
@@ -103,7 +102,7 @@ const getDrinkSizes = () => {
 
 const getGraphColors = () => {
   return [
-      {color: 'rgba(255,255,0,1)', borderColor: 'rgba(255,0,0,1)'},
+      {color: 'rgba(255,0,0,1)', borderColor: 'rgba(255,0,0,1)'},
       {color: 'rgba(0,255,0,1)', borderColor: 'rgba(0,255,0,1)'},
       {color: 'rgba(0,0,255,1)', borderColor: 'rgba(0,0,255,1)'},
       {color: 'rgba(100,0,0,1)', borderColor: 'rgba(100,0,0,1)'},
