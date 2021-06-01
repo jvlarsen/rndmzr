@@ -1,12 +1,13 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
+import './graph.css';
 
 export default class LineSample extends React.Component {
   render() {
     var data = this.getData();
     return (
-      <div>
-        <Line data={data} />
+      <div className="graph">
+        <Line data={data} className="graphInternal" />
       </div>
     );
 }

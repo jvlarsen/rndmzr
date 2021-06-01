@@ -190,7 +190,6 @@ class App extends Component {
   addParticipantToGraph = (participantName) => {
     var index = Object.keys(this.state.participants).length-1;
     var color = this.state.graphColors[index].color;
-    console.log(color);
     var borderColor = this.state.graphColors[index].borderColor;
     var newDataSetForParticipant = AppFunc.createDataSet(participantName, color, borderColor);
 
