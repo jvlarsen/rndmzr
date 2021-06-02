@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: "Arial", sans-serif;
+  padding-bottom: 0px;
 }
 
 h1 {
@@ -71,6 +72,7 @@ h1 {
 
 .warning {
   background-color: red;
+  display: inherit;
 }
 
 .row {
@@ -163,9 +165,19 @@ input[allocationKey] {
 }
 
 .wipediv {
-    float: right;
+    float: center;
 }
 
 .participantslist {
     width: 1200px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.events {
+    width: 250px;
+    text-align: left;
+    font-size: 20px;
 }

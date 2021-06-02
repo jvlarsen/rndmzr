@@ -116,7 +116,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        
+        <div className="wipediv">
+          
+            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+         
+        </div>
         <div className="flex-grid">
           <div className="colwide">
             <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
@@ -129,27 +133,18 @@ class App extends Component {
 
         <div className="flex-grid">
           <div className="participantslist" id="participantsListId">
-            <ParticipantBox id='participantBox'
-            addParticipant={this.addParticipant.bind(this)}
-            participants={this.state.participants} />
+            <ParticipantBox id='participantBox' addParticipant={this.addParticipant.bind(this)} participants={this.state.participants} />
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
-            </div>
-            <div className="leftCol">
-              <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
-            </div>
-
-            <div>
+          </div>
+          <div className="events">
+            <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
+          </div>
+          <div className="inline">
             <Randomize onClick={this.onClickRandomize.bind(this)} />
-
-            <div><Undo /></div>
-            <div className="wipediv">
-          
-            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
-         
-        </div>
-            </div>
+            <Undo />
           </div>
         </div>
+      </div>
     );
   }
 
