@@ -117,10 +117,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="flex-grid wipediv">
-        <span>
-          <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
-        </span>
-
+          
+            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+         
         </div>
         <div className="flex-grid">
           <div className="colwide">
@@ -143,9 +142,12 @@ class App extends Component {
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
             </div>
 
-              <Randomize onClick={this.onClickRandomize.bind(this)} />
+            <div>
+            <Randomize onClick={this.onClickRandomize.bind(this)} />
 
-            <Undo />
+            <div><Undo /></div>
+            
+            </div>
           </div>
         </div>
     );
