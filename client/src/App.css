@@ -31,7 +31,7 @@ h1 {
 }
 
 .colwide {
-  flex: 5;
+  flex: 4;
 }
 
 .colmedium {
@@ -164,4 +164,8 @@ input[allocationKey] {
 
 .wipediv {
     float: right;
+}
+
+.participantslist {
+    width: 1200px;
 }

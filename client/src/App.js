@@ -116,11 +116,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="flex-grid wipediv">
-          
-            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
-         
-        </div>
+        
         <div className="flex-grid">
           <div className="colwide">
             <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
@@ -132,7 +128,7 @@ class App extends Component {
         </div>
 
         <div className="flex-grid">
-          <div className="colwide">
+          <div className="participantslist" id="participantsListId">
             <ParticipantBox id='participantBox'
             addParticipant={this.addParticipant.bind(this)}
             participants={this.state.participants} />
@@ -146,7 +142,11 @@ class App extends Component {
             <Randomize onClick={this.onClickRandomize.bind(this)} />
 
             <div><Undo /></div>
-            
+            <div className="wipediv">
+          
+            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+         
+        </div>
             </div>
           </div>
         </div>

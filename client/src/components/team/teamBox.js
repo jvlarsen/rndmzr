@@ -16,17 +16,17 @@ export default class TeamBox extends React.Component {
         return(
           <div className="teamboxdiv">
             <div className="flex-grid">
-                <div className="col leftCol">
+                <div className="narrow">
                     <Team placeholder='Home' />
                     <PlayerNames selectedPlayer={this.props.selectedPlayer} onChange={this.props.onChange} addPlayerName={this.props.addPlayerName} team='Home'/>
                 </div>
-                <div className="col leftCol">
+                <div className="narrow">
                     <Team placeholder='Away' />
                     <PlayerNames selectedPlayer={this.props.selectedPlayer} onChange={this.props.onChange} addPlayerName={this.props.addPlayerName} team='Away'/>
                 </div>
             </div>
             <br />
-            <div className='col centerCol'>
+            <div className="narrow referee">
               <input type='checkbox' id='refereeCheckbox' onClick={this.props.toggleReferee}/>Include referee?<Referee onRefereeSelect={this.props.onRefereeSelect} refereeSelected={this.props.refereeSelected} onBlur={this.props.addPlayerName}/>
             </div>
             </div>
