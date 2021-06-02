@@ -11,6 +11,7 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
+import audio from './sounds/bomb drop.wav';
 
 class App extends Component {
 
@@ -150,7 +151,17 @@ class App extends Component {
     );
   }
 
+  playAudio() {
+    new Audio(audio).play();
+  }
+
+
+
   onClickRandomize(e) {
+      
+
+      this.playAudio();
+
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
 
