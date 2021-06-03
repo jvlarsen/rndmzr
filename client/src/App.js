@@ -150,7 +150,7 @@ class App extends Component {
 
   playAudio(selectedEvent) {
     var allSounds = Sounds.loadSounds();
-    selectedEvent = 'mål';
+
     let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
     new Audio(currentSound.sound).play();
   }
@@ -162,7 +162,6 @@ class App extends Component {
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
 
-    debugger;
     this.playAudio(selectedEvent);
 
     if (!selectedEvent || !selectedPlayer) {return;}
