@@ -11,7 +11,7 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
-import audio from './sounds/bomb drop.wav';
+import Sounds from './helpers/soundsHelper';
 
 class App extends Component {
 
@@ -148,19 +148,22 @@ class App extends Component {
     );
   }
 
-  playAudio() {
-    new Audio(audio).play();
+  playAudio(selectedEvent) {
+    var allSounds = Sounds.loadSounds();
+    selectedEvent = 'mål';
+    let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
+    new Audio(currentSound.sound).play();
   }
 
 
 
   onClickRandomize(e) {
-      
-
-      this.playAudio();
 
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
+
+    debugger;
+    this.playAudio(selectedEvent);
 
     if (!selectedEvent || !selectedPlayer) {return;}
 
@@ -174,12 +177,16 @@ class App extends Component {
   }
 
   allocatePlayers = (e) => {
+    this.playAudio('fanfare.wav');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
     this.updatePlayerAllocationKeys();
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
+
+
+
     Connector.saveToLocal(true, 'gameStarted');
   }
 

@@ -53,7 +53,29 @@ module.exports = {
           4:[5, 0, 0, 0], 
           5:[6, 0, 4, 5], 
           6:[7, 0, 7, 2]
-        }
+        },
+        players:
+          {
+            "playerHome0":{"Name":"sc","AllocationKey":"0"},
+            "playerHome1":{"Name":"kjhg","AllocationKey":"1"},
+            "playerHome2":{"Name":"yt","AllocationKey":"2"},
+            "playerHome3":{"Name":",mnlo","AllocationKey":"3"},
+            "playerHome4":{"Name":"tyvv","AllocationKey":"4"},
+            "playerHome5":{"Name":"08","AllocationKey":"0"},
+            "playerHome6":{"Name":",mnkj","AllocationKey":"2"},
+            "playerHome7":{"Name":"5487","AllocationKey":"0"},
+            "playerHome8":{"Name":"369","AllocationKey":"0"},
+            "playerHome9":{"Name":"964","AllocationKey":"2"},
+            "playerAway0":{"Name":"876g","AllocationKey":"6"},
+            "playerAway1":{"Name":"876n","AllocationKey":"3"},
+            "playerAway2":{"Name":"09o","AllocationKey":"1"},
+            "playerAway3":{"Name":"vrtf4","AllocationKey":"1"},
+            "playerAway4":{"Name":"bjh09","AllocationKey":"0"},
+            "playerAway5":{"Name":".,mnyg ","AllocationKey":"2"},
+            "playerAway6":{"Name":" ljoh9","AllocationKey":"1"},
+            "playerAway7":{"Name":"hlh","AllocationKey":"1"},
+            "playerAway8":{"Name":"'klkj","AllocationKey":"0"},
+            "playerAway9":{"Name":"h97y","AllocationKey":"3"}}
       };
     }
   }
