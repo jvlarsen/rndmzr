@@ -12,10 +12,6 @@
   color: white;
 }
 
-.teamboxdiv {
-  margin-top: 20px;
-}
-
 .narrow {
   margin-right: 10px;
 }
@@ -27,4 +23,14 @@
 .referee {
   width: 500px;
 }
+
+.teamname {
+  width: 180px;
+  font-weight: bold;
+}
+
+.playername {
+  width: ;
+}
+
 

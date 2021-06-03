@@ -25,6 +25,7 @@ h1 {
 
 .flex-grid {
   display: flex;
+  justify-content: space-around;
 }
 
 .col {
@@ -37,6 +38,10 @@ h1 {
 
 .colmedium {
   flex: 3;
+}
+
+.colsmall {
+    flex: 2;
 }
 
 .leftCol {
@@ -169,7 +174,8 @@ input[allocationKey] {
 }
 
 .participantslist {
-    width: 1200px;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .inline {
@@ -180,4 +186,14 @@ input[allocationKey] {
     width: 250px;
     text-align: left;
     font-size: 20px;
+    display: grid;
+}
+
+.topgrid {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.teamsandevents {
+    justify-content: space-evenly !important; 
 }
