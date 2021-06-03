@@ -116,34 +116,31 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="wipediv">
-          
+
+        <div className="wipediv">         
             <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
-         
         </div>
         <div className="flex-grid">
-          <div className="colwide">
-            <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
-          </div>
-          <div className="colmedium">
+          <div className="flex-grid" id="teamsDiv">
             <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
           </div>
-
+          <div className="events" id="eventsDiv">
+            <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
+            <Randomize onClick={this.onClickRandomize.bind(this)} />
+          </div>
+          <div className="colwide" id="graphDiv">
+            <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
+          </div>
         </div>
-
         <div className="flex-grid">
           <div className="participantslist" id="participantsListId">
             <ParticipantBox id='participantBox' addParticipant={this.addParticipant.bind(this)} participants={this.state.participants} />
             <input type='button' id='allocateButton' onClick={this.allocatePlayers} value='Start spillet' />
           </div>
-          <div className="events">
-            <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
-          </div>
           <div className="inline">
-            <Randomize onClick={this.onClickRandomize.bind(this)} />
             <Undo />
           </div>
-        </div>
+        </div>   
       </div>
     );
   }
