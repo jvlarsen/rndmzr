@@ -5,7 +5,6 @@ import './graph.css';
 
 export default class LineSample extends React.Component {
   render() {
-    console.log(defaults.line);
     defaults.line.fontColor = "#FFF";
     var data = this.getData();
     return (

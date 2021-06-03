@@ -1,7 +1,6 @@
 
 const get = (participant, participantsGraph) => {
   var participantGraph = getParticipantGraph(participant, participantsGraph);
-  console.log(participant);
   return {
     data: participantGraph.data,
     label: participant,

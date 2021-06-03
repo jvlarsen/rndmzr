@@ -164,7 +164,6 @@ class App extends Component {
 
     if (!selectedEvent || !selectedPlayer) {return;}
 
-console.log(selectedEvent);
     this.addLabelToGraph(selectedEvent);
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
     this.updateWhatToDrink(randomizerResult);
@@ -261,6 +260,7 @@ console.log(selectedEvent);
 
   gameDataLoaded(gameData) {
     this.participantsWereLoaded(gameData[1]);
+    this.playersWereLoaded(gameData[0].players);
     this.gameWasLoaded(gameData[0]);
   }
 

@@ -47,7 +47,6 @@ const resetGame = () => {
 const undoLatest = () => {
   var dataSets = Connector.loadFromLocal('dataSets');
   var labels = Connector.loadFromLocal('labels');
-
   for (var i = 0; i < Object.keys(dataSets).length; i++) {
     dataSets[i].pop();
   }
