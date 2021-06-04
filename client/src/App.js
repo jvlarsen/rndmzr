@@ -176,7 +176,7 @@ class App extends Component {
   }
 
   allocatePlayers = (e) => {
-    this.playAudio('fanfare.wav');
+    this.playAudio('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
     this.updatePlayerAllocationKeys();

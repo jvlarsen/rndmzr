@@ -23,7 +23,7 @@ app.get('/api/passwords', (req, res) => {
 
 app.get('/api/events', (req, res) => {
   res.json([      {Id:1, Name:'Mål!!!', RefereeName:'Spiller bolden', Type:'Other3'},
-                  {Id:2, Name:'Assist', RefereeName:'Sætter sig igennem', Type:'Other2'},
+                  {Id:2, Name:'Assist', RefereeName:'Kalder spiller hen', Type:'Other2'},
                   {Id:3, Name:'Skud på mål', RefereeName:'Spray (1/situation)', Type:'Other1'},
                   {Id:4, Name:'Tager hjørne', RefereeName:'Publikum spotter kamera', Type:'Other1'},
                   {Id:5, Name:'Medic!', RefereeName:'1H 0-2 min', Type:'Own1'},
