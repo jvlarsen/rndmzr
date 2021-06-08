@@ -168,11 +168,19 @@ class App extends Component {
 
     this.addLabelToGraph(selectedEvent);
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
-    this.updateWhatToDrink(randomizerResult);
+    var result = JSON.parse(randomizerResult.results);
+    this.updateWhatToDrink(result);
 
-    //Removed from Connector, since I'm currently using StoreLabels and StoreParticipants from App.js.
-    //Should definitely be refactored to a backend-facing handler.
-    //Connector.saveGame();
+    var storedPlayers = JSON.parse(localStorage.players);
+    var playerIndex = 'player' + selectedPlayer.value;
+    
+    var playerStats = JSON.parse(randomizerResult.playerStats);
+    storedPlayers[playerIndex].Own = playerStats.Own;
+    storedPlayers[playerIndex].Other = playerStats.Other;
+
+    Connector.saveToLocal(JSON.stringify(storedPlayers), 'players');
+
+    this.setState({players:storedPlayers});
   }
 
   allocatePlayers = (e) => {
@@ -286,7 +294,7 @@ class App extends Component {
       players[e.target.id].Name = nameInput;
     }
     else {
-      players[e.target.id] = {'Name': nameInput, AllocationKey:null};
+      players[e.target.id] = {Name: nameInput, AllocationKey:null, Own:0, Other:0};
     }
     this.setState({players: players});
   }

@@ -29,8 +29,10 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
     randomNumber = Math.floor(Math.random() * 100);
   }
 
-  ElementsHelper.updatePlayerStats(playerStats, selectedPlayer);
-  return result;
+  var playerStats = ElementsHelper.updatePlayerStats(playerStats, selectedPlayer);
+  
+  var resultJson = {results: JSON.stringify(result), playerStats: JSON.stringify(playerStats)};
+  return resultJson;
 }
 
 const getMeasureFromRandom = (randomNumber, measure) => {

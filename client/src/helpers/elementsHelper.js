@@ -1,3 +1,5 @@
+import Connector from './connector';
+
 const getStatus = (index) => {
   var statusElement = document.getElementById('status'+index);
   return statusElement || null;
@@ -70,6 +72,8 @@ const updatePlayerStats = (playerStats, player) => {
   var newStatOther = Number(playerOther.innerText) + playerStats['Other'];
   playerOwn.innerText = newStatOwn;
   playerOther.innerText = newStatOther;
+
+  return {Own: newStatOwn, Other: newStatOther};
 }
 
 export default {
