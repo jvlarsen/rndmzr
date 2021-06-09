@@ -30,7 +30,7 @@ const getSelectedEvent = (state) => {
 }
 
 const getSelectedPlayer = (state) => {
-  return state.refereeSelected ? document.getElementById('refereeName') : state.selectedPlayer;
+  return state.refereeSelected ? document.getElementById('referee') : state.selectedPlayer;
 }
 
 const resetGame = () => {

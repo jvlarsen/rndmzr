@@ -27,7 +27,7 @@ export default class TeamBox extends React.Component {
             </div>
             <br />
             <div className="narrow referee">
-              <input type='checkbox' id='refereeCheckbox' onClick={this.props.toggleReferee}/>Include referee?<Referee onRefereeSelect={this.props.onRefereeSelect} refereeSelected={this.props.refereeSelected} onBlur={this.props.addPlayerName}/>
+              <input type='checkbox' id='refereeCheckbox' onClick={this.props.toggleReferee}/>Include referee?<Referee onRefereeSelect={this.props.onRefereeSelect} refereeSelected={this.props.refereeSelected} addRefereeName={this.props.addPlayerName}/>
             </div>
           </div>
         );

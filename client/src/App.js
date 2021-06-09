@@ -152,13 +152,12 @@ class App extends Component {
     var allSounds = Sounds.loadSounds();
 
     let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
-    /*new Audio(currentSound.sound).play(); */
+    new Audio(currentSound.sound).play(); 
   }
 
 
 
   onClickRandomize(e) {
-
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
 
@@ -170,6 +169,17 @@ class App extends Component {
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
     this.updateWhatToDrink(JSON.parse(randomizerResult.result));
 
+    var currentPlayers = this.state.players;
+
+    if (selectedPlayer.id == 'referee') {
+      currentPlayers['referee'].Own = randomizerResult.stats.Stats.Own;
+      currentPlayers['referee'].Other = randomizerResult.stats.Stats.Other;
+    }
+    else {
+      currentPlayers['player'+selectedPlayer.value].Own = randomizerResult.stats.Stats.Own;
+      currentPlayers['player'+selectedPlayer.value].Other = randomizerResult.stats.Stats.Other;
+    }
+    this.setState({players:currentPlayers});
     //Removed from Connector, since I'm currently using StoreLabels and StoreParticipants from App.js.
     //Should definitely be refactored to a backend-facing handler.
     //Connector.saveGame();

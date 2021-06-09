@@ -18,7 +18,7 @@ const getElementsByClassName = (id) => {
 }
 
 const getReferee = () => {
-  var refEle = document.getElementById('refereeName');
+  var refEle = document.getElementById('referee');
   var refName = refEle.value || '';
   var allocationKey = refEle.getAttribute('allocationkey');
   return {'Name':refName, 'AllocationKey':allocationKey};
@@ -51,7 +51,7 @@ const updateLoadedPlayers = (playersJson) => {
 }
 
 const setReferee = (referee) => {
-  var refEle = document.getElementById('refereeName');
+  var refEle = document.getElementById('referee');
   refEle.value = referee.Name;
   refEle.setAttribute('allocationkey', referee.AllocationKey);
 }
@@ -60,9 +60,9 @@ const updatePlayerStats = (playerStats, player) => {
   var playerOwn = null;
   var playerOther = null;
 
-  if (player.id == 'refereeName') {
-    playerOwn = document.getElementById('refereeStatOwn');
-    playerOther = document.getElementById('refereeStatOther');
+  if (player.id == 'referee') {
+    playerOwn = document.getElementById('refereeOwn');
+    playerOther = document.getElementById('refereeOther');
   }
   else {
     playerOwn = document.getElementById('player' + player.defaultValue + 'Own');
