@@ -162,10 +162,10 @@ class App extends Component {
 
     var maxOther = this.findWorms('other');
     var maxOwn = this.findWorms('own');
+    var maxParticipant = this.findWinner();
 
     document.getElementById(maxOther.player).classList.add('highlight');
     document.getElementById(maxOwn.player).classList.add('highlight');
-
   }
 
   findWorms(ownOther) {
@@ -177,11 +177,27 @@ class App extends Component {
       if (Number.parseInt(allValues[i].innerText) > maxValue) {
         maxValue = Number.parseInt(allValues[i].innerText);
         maxPlayer = allValues[i].id;
-        console.log('Max' + ownOther + ' is now ' + maxValue + ' and it comes from ' + maxPlayer);
       }
     }
 
     return {player:maxPlayer, value:maxValue};
+  }
+
+  findWinner() {
+    var maxValue = 0;
+    var winnerPlayer = '';
+
+    var allDataSets = this.state.dataSets;
+    for (var i = allDataSets.length - 1; i >= 0; i--) {
+      var last = allDataSets[i].dataset.data['length']-1;
+      var value = allDataSets[i].dataset.data[last];
+      if (value > maxValue) {
+        winnerPlayer = allDataSets[i].dataset.label;
+        maxValue = value;
+      }
+    }
+
+    return winnerPlayer;
   }
 
   playAudio(selectedEvent) {
