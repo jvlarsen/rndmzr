@@ -69,6 +69,11 @@ h1 {
   height: 100px;
 }
 
+.highlight {
+    font-weight: bold;
+    background-color: orange !important;
+}
+
 .undo {
   margin-top: 200px;
   height: 50px;
@@ -78,6 +83,11 @@ h1 {
 .warning {
   background-color: red;
   display: inherit;
+  font-size: 35px;
+  font-weight: bold;
+  font-style: italic;
+  border-color: white;
+  border-width: 7px;
 }
 
 .row {
@@ -87,6 +97,11 @@ h1 {
 .row div {
     width:50%;
     height:45%;
+}
+
+.bottom {
+    margin-top: 10px;
+    padding: 5px;
 }
 
 .teamname {
@@ -179,7 +194,8 @@ input[allocationKey] {
 }
 
 .inline {
-    display: inline-block;
+    display: inline-grid;
+    margin: 15px;
 }
 
 .events {

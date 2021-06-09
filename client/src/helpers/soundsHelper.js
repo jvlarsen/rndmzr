@@ -1,8 +1,5 @@
-import bomb from '../sounds/bomb drop.wav';
-
 const loadSounds = () => {
 	var allsounds = {};
-	var raw = sounds;
 
 	allsounds = {'sounds' : [
 		{ "id":"Mål!!!", "sound": sounds['goalshout.wav']},

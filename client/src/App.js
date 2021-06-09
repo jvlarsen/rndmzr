@@ -140,7 +140,7 @@ class App extends Component {
           </div>
           <div className="inline">
             <Undo className="rightCol"/>
-            <input type='button' id='gameEnded' value="Kampen er slut" onClick={this.toggleGameEnded.bind(this)}/>
+            <input type='button' className='bottom' id='gameEnded' value="Kampen er slut" onClick={this.toggleGameEnded.bind(this)}/>
           </div>
         </div>
       </div>
@@ -148,7 +148,6 @@ class App extends Component {
   }
 
   toggleGameEnded() {
-    console.log('toggle');
 
     var toggle = document.getElementById('event15').hidden;
 
@@ -160,6 +159,29 @@ class App extends Component {
       document.getElementById('event15').setAttribute('hidden', toggle);
       document.getElementById('event16').setAttribute('hidden', toggle);
     }
+
+    var maxOther = this.findWorms('other');
+    var maxOwn = this.findWorms('own');
+
+    document.getElementById(maxOther.player).classList.add('highlight');
+    document.getElementById(maxOwn.player).classList.add('highlight');
+
+  }
+
+  findWorms(ownOther) {
+
+    var allValues = document.getElementsByClassName(ownOther);
+    var maxValue = 0;
+    var maxPlayer = '';
+    for (var i = allValues.length - 1; i >= 0; i--) {
+      if (Number.parseInt(allValues[i].innerText) > maxValue) {
+        maxValue = Number.parseInt(allValues[i].innerText);
+        maxPlayer = allValues[i].id;
+        console.log('Max' + ownOther + ' is now ' + maxValue + ' and it comes from ' + maxPlayer);
+      }
+    }
+
+    return {player:maxPlayer, value:maxValue};
   }
 
   playAudio(selectedEvent) {
