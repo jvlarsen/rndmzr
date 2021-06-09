@@ -137,8 +137,6 @@ class App extends Component {
         <div className="flex-grid participantslist">
           <div className="participantslist" id="participantsListId">
             <ParticipantBox id='participantBox' addParticipant={this.addParticipant.bind(this)} allocatePlayers={this.allocatePlayers.bind(this)} participants={this.state.participants} />
-            
-
           </div>
           <div className="inline">
             <Undo className="rightCol"/>
@@ -154,8 +152,6 @@ class App extends Component {
     let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
     new Audio(currentSound.sound).play(); 
   }
-
-
 
   onClickRandomize(e) {
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
@@ -180,9 +176,6 @@ class App extends Component {
       currentPlayers['player'+selectedPlayer.value].Other = randomizerResult.stats.Stats.Other;
     }
     this.setState({players:currentPlayers});
-    //Removed from Connector, since I'm currently using StoreLabels and StoreParticipants from App.js.
-    //Should definitely be refactored to a backend-facing handler.
-    //Connector.saveGame();
   }
 
   allocatePlayers = (e) => {
@@ -193,8 +186,6 @@ class App extends Component {
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
-
-
 
     Connector.saveToLocal(true, 'gameStarted');
   }
@@ -217,7 +208,7 @@ class App extends Component {
     var borderColor = this.state.graphColors[index].borderColor;
     var newDataSetForParticipant = AppFunc.createDataSet(participantName, color, borderColor);
 
-      this.setState(prevState => ({dataSets:[...prevState.dataSets, newDataSetForParticipant]}));
+    this.setState(prevState => ({dataSets:[...prevState.dataSets, newDataSetForParticipant]}));
   }
 
   updateWhatToDrink(randomizerResult) {

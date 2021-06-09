@@ -34,6 +34,8 @@ const loadSounds = () => {
 		{ "id":"Falder", "sound": sounds['refhitbyball.wav']},
 		{ "id":"Udskiftes", "sound": sounds['you have failed me for the last time.wav']},
 		{ "id":"Start", "sound": sounds['fanfare.wav']},
+		{ "id":"Worst Worm Egen (rød)", "sound": sounds['open and drink.wav']},
+		{ "id":"Best Worm Andre (grøn)", "sound": sounds['need a drink.wav']},
 	]};
 
 	return allsounds;

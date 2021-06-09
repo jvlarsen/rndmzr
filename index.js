@@ -35,7 +35,9 @@ app.get('/api/events', (req, res) => {
                   {Id:11, Name:'Udskiftet', RefereeName:'2H 4+ min', Type:'Own1'},
                   {Id:12, Name:'Selvmål', RefereeName:'Ramt af bold/spiller', Type:'Own3'},
                   {Id:13, Name:'Brændt straffe', RefereeName:'Falder', Type:'Own3'},
-                  {Id:14, Name:'Rødt kort', RefereeName:'Udskiftes', Type:'Own3'}]);
+                  {Id:14, Name:'Rødt kort', RefereeName:'Udskiftes', Type:'Own3'},
+                  {Id:15, Name:'Worst Worm Egen (rød)', RefereeName:'Worst Worm Egen (rød)', Type:'Other3'},
+                  {Id:16, Name:'Best Worm Andre (grøn)', RefereeName:'Best Worm Andre (grøn)', Type:'Own3'},]);
 });
 
 app.get('/api/games/gameId/participants', (req, res) => {
