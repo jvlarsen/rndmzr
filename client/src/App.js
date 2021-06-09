@@ -140,10 +140,26 @@ class App extends Component {
           </div>
           <div className="inline">
             <Undo className="rightCol"/>
+            <input type='button' id='gameEnded' value="Kampen er slut" onClick={this.toggleGameEnded.bind(this)}/>
           </div>
         </div>
       </div>
     );
+  }
+
+  toggleGameEnded() {
+    console.log('toggle');
+
+    var toggle = document.getElementById('event15').hidden;
+
+    if (toggle) {
+      document.getElementById('event15').removeAttribute('hidden');
+      document.getElementById('event16').removeAttribute('hidden');
+    }
+    else {
+      document.getElementById('event15').setAttribute('hidden', toggle);
+      document.getElementById('event16').setAttribute('hidden', toggle);
+    }
   }
 
   playAudio(selectedEvent) {
