@@ -1,3 +1,5 @@
+import Connector from './connector';
+
 const getStatus = (index) => {
   var statusElement = document.getElementById('status'+index);
   return statusElement || null;
