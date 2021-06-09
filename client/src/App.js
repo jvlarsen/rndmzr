@@ -163,7 +163,7 @@ class App extends Component {
 
     this.addLabelToGraph(selectedEvent);
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
-<<<<<<< HEAD
+
     this.updateWhatToDrink(JSON.parse(randomizerResult.result));
 
     var currentPlayers = this.state.players;
@@ -177,21 +177,6 @@ class App extends Component {
       currentPlayers['player'+selectedPlayer.value].Other = randomizerResult.stats.Stats.Other;
     }
     this.setState({players:currentPlayers});
-=======
-    var result = JSON.parse(randomizerResult.results);
-    this.updateWhatToDrink(result);
-
-    var storedPlayers = JSON.parse(localStorage.players);
-    var playerIndex = 'player' + selectedPlayer.value;
-    
-    var playerStats = JSON.parse(randomizerResult.playerStats);
-    storedPlayers[playerIndex].Own = playerStats.Own;
-    storedPlayers[playerIndex].Other = playerStats.Other;
-
-    Connector.saveToLocal(JSON.stringify(storedPlayers), 'players');
-
-    this.setState({players:storedPlayers});
->>>>>>> 569984b9de2a1b80289abfc1db3726614b2ce515
   }
 
   allocatePlayers = (e) => {
