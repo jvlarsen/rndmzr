@@ -44,6 +44,9 @@ const updateLoadedPlayers = (playersJson) => {
     playerField.setAttribute('allocationkey', playersJson[player].AllocationKey);
     var playerFieldRadio = document.getElementById(player+'Radio');
     playerFieldRadio.setAttribute('allocationKey', playersJson[player].AllocationKey);
+
+    document.getElementById(player+'Own').innerText = playersJson[player].Own;
+    document.getElementById(player+'Other').innerText = playersJson[player].Other;
   }
 }
 
@@ -70,6 +73,8 @@ const updatePlayerStats = (playerStats, player) => {
   var newStatOther = Number(playerOther.innerText) + playerStats['Other'];
   playerOwn.innerText = newStatOwn;
   playerOther.innerText = newStatOther;
+
+  return {Stats: {Own: newStatOwn, Other: newStatOther}};
 }
 
 export default {

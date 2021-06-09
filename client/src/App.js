@@ -152,7 +152,7 @@ class App extends Component {
     var allSounds = Sounds.loadSounds();
 
     let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
-    new Audio(currentSound.sound).play();
+    /*new Audio(currentSound.sound).play(); */
   }
 
 
@@ -168,7 +168,7 @@ class App extends Component {
 
     this.addLabelToGraph(selectedEvent);
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
-    this.updateWhatToDrink(randomizerResult);
+    this.updateWhatToDrink(JSON.parse(randomizerResult.result));
 
     //Removed from Connector, since I'm currently using StoreLabels and StoreParticipants from App.js.
     //Should definitely be refactored to a backend-facing handler.
@@ -286,7 +286,7 @@ class App extends Component {
       players[e.target.id].Name = nameInput;
     }
     else {
-      players[e.target.id] = {'Name': nameInput, AllocationKey:null};
+      players[e.target.id] = {'Name': nameInput, AllocationKey:null, Own:0, Other:0};
     }
     this.setState({players: players});
   }
