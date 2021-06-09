@@ -62,8 +62,8 @@ const updatePlayerStats = (playerStats, player) => {
     playerOther = document.getElementById('refereeStatOther');
   }
   else {
-    playerOwn = document.getElementById('playerStat' + player.defaultValue + 'Own');
-    playerOther = document.getElementById('playerStat' + player.defaultValue + 'Other');
+    playerOwn = document.getElementById('player' + player.defaultValue + 'Own');
+    playerOther = document.getElementById('player' + player.defaultValue + 'Other');
   }
 
   var newStatOwn = Number(playerOwn.innerText) + playerStats['Own'];
