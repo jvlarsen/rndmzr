@@ -9,4 +9,26 @@ body {
   background-position: bottom; 
 }
 
+.Own1 {
+  background-color: yellow;
+}
 
+.Own2 {
+  background-color: orange;
+}
+
+.Own3 {
+  background-color: red;
+}
+
+.Other1 {
+  background-color: lightgreen;
+}
+
+.Other2 {
+  background-color: lawngreen;
+}
+
+.Other3 {
+  background-color: green;
+}

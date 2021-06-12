@@ -1,5 +1,6 @@
 import React from 'react';
 import Connector from './helpers/connector';
+import './index.css';
 
 export default class Events extends React.Component {
   constructor(props) {
@@ -26,8 +27,8 @@ export default class Events extends React.Component {
       var value = this.props.refereeSelected ? event.RefereeName : event.Name;
 
       eventRadios.push(<div className="radio" id={'event'+event.Id} key={event.Id} >
-              <label>
-                <input className='bigradio' type="radio" value={value} measure={event.Type} key={event.Id} checked={selectedOption === event.Name || selectedOption === event.RefereeName} onChange={onOptionChange}/>
+              <label className={event.Type}>
+                <input type="radio" value={value} measure={event.Type} key={event.Id} checked={selectedOption === event.Name || selectedOption === event.RefereeName} onChange={onOptionChange}/>
                 {value}
               </label>
             </div>);

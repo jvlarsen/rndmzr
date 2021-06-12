@@ -148,24 +148,15 @@ class App extends Component {
   }
 
   toggleGameEnded() {
-//Måske flyttes ud i ElementsHelper.
-    var toggle = document.getElementById('event15').hidden;
-
-    if (toggle) {
       document.getElementById('event15').removeAttribute('hidden');
       document.getElementById('event16').removeAttribute('hidden');
-    }
-    else {
-      document.getElementById('event15').setAttribute('hidden', toggle);
-      document.getElementById('event16').setAttribute('hidden', toggle);
-    }
 
-    var maxOther = AppFunc.findWorms('other');
-    var maxOwn = AppFunc.findWorms('own');
-    var maxParticipant = AppFunc.findWinner(this.state.dataSets);
+      var maxOther = AppFunc.findWorms('other');
+      var maxOwn = AppFunc.findWorms('own');
+      var maxParticipant = AppFunc.findWinner(this.state.dataSets);
 
-    document.getElementById(maxOther.player).classList.add('highlight');
-    document.getElementById(maxOwn.player).classList.add('highlight');
+      document.getElementById(maxOther.player).classList.add('highlight');
+      document.getElementById(maxOwn.player).classList.add('highlight');
   }
 
   playAudio(selectedEvent) {
