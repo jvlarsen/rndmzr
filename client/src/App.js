@@ -211,7 +211,8 @@ class App extends Component {
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
-
+    document.getElementById('event15').setAttribute('hidden', true);
+    document.getElementById('event16').setAttribute('hidden', true);
     Connector.saveToLocal(true, 'gameStarted');
   }
 
