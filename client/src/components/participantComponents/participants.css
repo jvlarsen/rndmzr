@@ -14,16 +14,24 @@
   width: 300px;
   font-size: 18px;
   font-weight: bold;
+  background-color: lightgray;
+  border-width: 3xp;
+  border-style: groove;
 }
 
 .cheers {
   font-weight: 4px;
   font-size: 20px;
   background-color: cyan;
+  border-color: green;
+  border-width: 3px;
+  font-weight: bold;
 }
 
 .status {
   font-weight: 4px;
   font-size: 20px;
   font-weight: bold;
+  border-width: 3px;
+  border-style: inset;
 }

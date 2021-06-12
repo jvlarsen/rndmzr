@@ -33,7 +33,7 @@ class ParticipantsRadio extends React.Component {
           <div className='participant' participantnumber={i} key={i}>
             <span className='participant-name'>{participantProps[i].Name}</span>
             <input type='text' className='status' key={'status'+i} id={'status'+i} numericvalue='0' ref={'status'+i} allocationkey={i} readOnly />
-            <input type="button" className='cheers' key={'drink'+i} id={'drink'+i} value='Terminate!' onClick={onDrink}/>
+            <input type="button" className='cheers' key={'drink'+i} id={'drink'+i} value='TERMINATE!' onClick={onDrink}/>
             <Bank index={i} className="right"/>
         </div>);
     };
