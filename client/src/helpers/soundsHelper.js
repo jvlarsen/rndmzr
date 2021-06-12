@@ -9,7 +9,7 @@ const loadSounds = () => {
 		{ "id":"Medic!", "sound": sounds['hospital.wav']},
 		{ "id":"Offside", "sound": sounds['Over the line.wav']},
 		{ "id":"Frispark begået", "sound": sounds['what is your problem.wav']},
-		{ "id":"Skud udenfor mål", "sound": sounds['nervous - first time.wav']},
+		{ "id":"Skud udenfor mål", "sound": sounds['nervous.wav']},
 		{ "id":"Straffe begået", "sound": sounds['moron.wav']},
 		{ "id":"Gult kort", "sound": sounds['Letter.wav']},
 		{ "id":"Udskiftet", "sound": sounds['you have failed me for the last time.wav']},
@@ -38,10 +38,6 @@ const loadSounds = () => {
 	return allsounds;
 }
 
-const getSoundFromEvent = (event) => {
-
-}
-
 function importAll(s) {
 	let sounds = {};
 	s.keys().map((item, index) => { sounds[item.replace('./', '')] = s(item); });
@@ -51,6 +47,5 @@ function importAll(s) {
 const sounds = importAll(require.context('../sounds/', false, /\.(wav)$/));
 
 export default {
-	loadSounds,
-	getSoundFromEvent
+	loadSounds
 }
