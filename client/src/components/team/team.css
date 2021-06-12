@@ -30,7 +30,11 @@
 }
 
 .playername {
-  width: ;
+  padding-left: 10px;
+}
+
+.nameField {
+  width: 125px;
 }
 
 

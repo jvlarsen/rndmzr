@@ -148,7 +148,7 @@ class App extends Component {
   }
 
   toggleGameEnded() {
-
+//Måske flyttes ud i ElementsHelper.
     var toggle = document.getElementById('event15').hidden;
 
     if (toggle) {
@@ -160,44 +160,12 @@ class App extends Component {
       document.getElementById('event16').setAttribute('hidden', toggle);
     }
 
-    var maxOther = this.findWorms('other');
-    var maxOwn = this.findWorms('own');
-    var maxParticipant = this.findWinner();
+    var maxOther = AppFunc.findWorms('other');
+    var maxOwn = AppFunc.findWorms('own');
+    var maxParticipant = AppFunc.findWinner(this.state.dataSets);
 
     document.getElementById(maxOther.player).classList.add('highlight');
     document.getElementById(maxOwn.player).classList.add('highlight');
-  }
-
-  findWorms(ownOther) {
-
-    var allValues = document.getElementsByClassName(ownOther);
-    var maxValue = 0;
-    var maxPlayer = '';
-    for (var i = allValues.length - 1; i >= 0; i--) {
-      if (Number.parseInt(allValues[i].innerText) > maxValue) {
-        maxValue = Number.parseInt(allValues[i].innerText);
-        maxPlayer = allValues[i].id;
-      }
-    }
-
-    return {player:maxPlayer, value:maxValue};
-  }
-
-  findWinner() {
-    var maxValue = 0;
-    var winnerPlayer = '';
-
-    var allDataSets = this.state.dataSets;
-    for (var i = allDataSets.length - 1; i >= 0; i--) {
-      var last = allDataSets[i].dataset.data['length']-1;
-      var value = allDataSets[i].dataset.data[last];
-      if (value > maxValue) {
-        winnerPlayer = allDataSets[i].dataset.label;
-        maxValue = value;
-      }
-    }
-
-    return winnerPlayer;
   }
 
   playAudio(selectedEvent) {
@@ -208,6 +176,8 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
+    //tryk på alle BANK automatisk som det første.
+
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
 

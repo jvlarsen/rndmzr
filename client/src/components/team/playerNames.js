@@ -17,7 +17,7 @@ export default class PlayerNames extends React.Component {
             options.push(
             <div key={playerValue} className="playername">
                 <input className="bigradio" type="radio" id={'player'+playerValue+'Radio'} key={playerValue} value={playerValue} checked={selectedPlayer === playerValue} onChange={this.props.onChange}/>
-                <input type="text" id={'player'+playerValue} onBlur={this.props.addPlayerName}/>
+                <input className="nameField" type="text" id={'player'+playerValue} onBlur={this.props.addPlayerName}/>
                 <label className="own" id={'player'+playerValue+'Own'} /> - <label className="other" id={'player'+playerValue+'Other'} />
                 <br/>
             </div>)

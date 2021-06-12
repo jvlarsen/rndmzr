@@ -56,10 +56,42 @@ const undoLatest = () => {
   window.location.reload();
 }
 
+const findWorms = (ownOther) => {
+
+    var allValues = document.getElementsByClassName(ownOther);
+    var maxValue = 0;
+    var maxPlayer = '';
+    for (var i = allValues.length - 1; i >= 0; i--) {
+      if (Number.parseInt(allValues[i].innerText) > maxValue) {
+        maxValue = Number.parseInt(allValues[i].innerText);
+        maxPlayer = allValues[i].id;
+      }
+    }
+
+    return {player:maxPlayer, value:maxValue};
+  }
+
+const findWinner = (allDataSets) => {
+    var maxValue = 0;
+    var winnerPlayer = '';
+
+    for (var i = allDataSets.length - 1; i >= 0; i--) {
+      var last = allDataSets[i].dataset.data['length']-1;
+      var value = allDataSets[i].dataset.data[last];
+      if (value > maxValue) {
+        winnerPlayer = allDataSets[i].dataset.label;
+        maxValue = value;
+      }
+    }
+       return winnerPlayer;
+  }
+
 export default {
   createDataSet,
   getSelectedEvent,
   getSelectedPlayer,
   resetGame,
   undoLatest,
+  findWorms,
+  findWinner,
 }
