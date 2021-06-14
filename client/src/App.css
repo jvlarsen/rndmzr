@@ -4,6 +4,14 @@
   padding-bottom: 0px;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+}
+
 h1 {
   font-weight: normal;
   font-size: 42px;
@@ -120,7 +128,7 @@ input[allocationKey='0'], span[allocationKey='0'] {
 }
 
 input[allocationKey='1'], span[allocationKey='1']  {
-    background-color: rgb(32, 207, 23);
+    background-color: rgb(47, 245, 60);
 }
 
 input[allocationKey='2'], span[allocationKey='2']  {
@@ -132,14 +140,13 @@ input[allocationKey='3'], span[allocationKey='3']  {
     color: white;
 }
 input[allocationKey='4'], span[allocationKey='4']  {
-    background-color: green;
-    color: white;
+    background-color: rgba(246, 250, 17);
 }
 input[allocationKey='5'], span[allocationKey='5']  {
-    background-color: rgb(224, 163, 20);
+    background-color: rgb(247, 15, 240);
 }
 input[allocationKey='6'], span[allocationKey='6']  {
-    background-color: purple;
+    background-color: rgba(6, 64, 10);
     color: white;
 }
 input[allocationKey='7'], span[allocationKey='7']  {
