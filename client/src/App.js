@@ -157,6 +157,11 @@ class App extends Component {
 
       document.getElementById(maxOther.player).classList.add('highlight');
       document.getElementById(maxOwn.player).classList.add('highlight');
+
+      var playerOther = document.getElementById(maxOther.player.slice(0,-5)).value;
+      var playerOwn = document.getElementById(maxOwn.player.slice(0,-3)).value;
+
+      window.alert('Vinderen er ' + maxParticipant + '\nBest Worm ANDRE at uddele var ' + playerOther + '\nWorst Worm EGEN egen var ' + playerOwn);
   }
 
   playAudio(selectedEvent) {

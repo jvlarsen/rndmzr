@@ -9,6 +9,18 @@ body {
   background-position: bottom; 
 }
 
+.Other3 {
+  background-color: rgb(32, 207, 23);
+}
+
+.Other2 {
+  background-color: rgb(146, 207, 23);
+}
+
+.Other1 {
+  background-color: rgb(201, 207, 23);
+}
+
 .Own1 {
   background-color: rgb(224, 163, 20);
 }
@@ -21,14 +33,7 @@ body {
   background-color: rgb(224, 54, 20);
 }
 
-.Other1 {
-  background-color: rgb(201, 207, 23);
-}
 
-.Other2 {
-  background-color: rgb(146, 207, 23);
-}
 
-.Other3 {
-  background-color: rgb(32, 207, 23);
-}
+
+

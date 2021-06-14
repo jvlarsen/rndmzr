@@ -28,6 +28,7 @@ const lockGame = () => {
   document.getElementById('allocateButton').disabled = true;
   document.getElementById('participantNameInput').disabled = true;
   document.getElementById('refereeCheckbox').disabled = true;
+  document.getElementById('participantNameSubmit').disabled = true;
 }
 
 const clearElementValue = (eleId) => {

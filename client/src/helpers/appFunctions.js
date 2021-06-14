@@ -34,6 +34,10 @@ const getSelectedPlayer = (state) => {
 }
 
 const resetGame = () => {
+  var wipe = window.confirm('Er du sikker?');
+  if (!wipe) {
+    return;
+  }
   localStorage.setItem('participants', null);
   localStorage.setItem('labels', null);
   localStorage.setItem('players', null);

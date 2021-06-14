@@ -27,7 +27,7 @@ export default class ParticipantAdder extends React.Component {
       return (
         <form onSubmit={this.handleSubmit}>
             <input id='participantNameInput' type='text' value={this.state.value} onChange={this.handleChange} placeholder='Deltagernavn' />
-            <input type="submit" value="Opret ny deltager" />
+            <input type="submit" id='participantNameSubmit' value="Opret ny deltager" />
         </form>
       );
     }
