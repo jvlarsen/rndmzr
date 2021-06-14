@@ -148,8 +148,8 @@ class App extends Component {
   }
 
   toggleGameEnded() {
-      document.getElementById('event15').removeAttribute('hidden');
-      document.getElementById('event16').removeAttribute('hidden');
+      document.getElementById('eventLabel15').removeAttribute('hidden');
+      document.getElementById('eventLabel16').removeAttribute('hidden');
 
       var maxOther = AppFunc.findWorms('other');
       var maxOwn = AppFunc.findWorms('own');
@@ -197,13 +197,15 @@ class App extends Component {
   allocatePlayers = (e) => {
     this.playAudio('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
-    Engine.allocatePlayers(Object.keys(this.state.participants).length, refereeCheckbox.checked);
+    var numberOfParticipants = Object.keys(this.state.participants).length;
+    if (numberOfParticipants == 0) { return; }
+    Engine.allocatePlayers(numberOfParticipants, refereeCheckbox.checked);
     this.updatePlayerAllocationKeys();
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
     ElementsHelper.lockGame();
-    document.getElementById('event15').setAttribute('hidden', true);
-    document.getElementById('event16').setAttribute('hidden', true);
+    document.getElementById('eventLabel15').setAttribute('hidden', true);
+    document.getElementById('eventLabel16').setAttribute('hidden', true);
     Connector.saveToLocal(true, 'gameStarted');
   }
 

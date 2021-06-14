@@ -3,9 +3,9 @@ import Connector from './connector';
 const allocatePlayers = (numberOfParticipants, includeReferee) => {
 
   var indexStart = Math.floor(Math.random() * numberOfParticipants) +1;
-
+;
   var playersToAllocate = getPlayersArrayForAllocation(includeReferee);
-  while (playersToAllocate.length > 0)
+  while (playersToAllocate.length > 0 && numberOfParticipants > 0)
   {
     var playerIndex = Math.floor(Math.random() * playersToAllocate.length);
     var participantIndex = indexStart%numberOfParticipants;
