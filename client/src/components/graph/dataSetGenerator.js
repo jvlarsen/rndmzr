@@ -14,8 +14,6 @@ const get = (participant, participantsGraph) => {
 }
 
 const getParticipantGraph = (participant, participantsGraph) => {
-    console.log(participantsGraph);
-    console.log("hej");
     if (participantsGraph[participant]) {
       return participantsGraph[participant];
     }

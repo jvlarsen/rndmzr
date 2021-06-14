@@ -104,12 +104,12 @@ const getDrinkSizes = () => {
 const getGraphColors = () => {
   return [
       {color: 'rgba(255,0,0,1)', borderColor: 'rgba(255,0,0,1)'},
-      {color: 'rgba(0,255,0,1)', borderColor: 'rgba(0,255,0,1)'},
+      {color: 'rgb(32, 207, 23)', borderColor: 'rgba(0,255,0,1)'},
       {color: 'rgba(0,0,255,1)', borderColor: 'rgba(0,0,255,1)'},
       {color: 'rgba(100,0,0,1)', borderColor: 'rgba(100,0,0,1)'},
       {color: 'green', borderColor: 'green'},
-      {color: 'orange', borderColor: 'orange'},
-      {color: 'navy', borderColor: 'purple'},
+      {color: 'rgb(224, 163, 20)', borderColor: 'orange'},
+      {color: 'purple', borderColor: 'purple'},
       {color: 'red', borderColor: 'rgba(75,192,192,1)'},
       {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},
       {color: 'rgba(75,192,192,0.4)', borderColor: 'rgba(75,192,192,1)'},

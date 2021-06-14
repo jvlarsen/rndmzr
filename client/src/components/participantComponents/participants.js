@@ -31,7 +31,7 @@ class ParticipantsRadio extends React.Component {
       for (var i = 0; i < Object.keys(participantProps).length; i++) {
         participants.push(
           <div className='participant' participantnumber={i} key={i}>
-            <span className='participant-name'>{participantProps[i].Name}</span>
+            <span className='participant-name' allocationkey={i}>{participantProps[i].Name}</span>
             <input type='text' className='status' key={'status'+i} id={'status'+i} numericvalue='0' ref={'status'+i} allocationkey={i} readOnly />
             <input type="button" className='cheers' key={'drink'+i} id={'drink'+i} value='TERMINATE!' onClick={onDrink}/>
             <Bank index={i} className="right"/>
