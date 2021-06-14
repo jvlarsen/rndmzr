@@ -10,25 +10,25 @@ body {
 }
 
 .Own1 {
-  background-color: yellow;
+  background-color: rgb(224, 163, 20);
 }
 
 .Own2 {
-  background-color: orange;
+  background-color: rgb(224, 122, 20);
 }
 
 .Own3 {
-  background-color: red;
+  background-color: rgb(224, 54, 20);
 }
 
 .Other1 {
-  background-color: lightgreen;
+  background-color: rgb(201, 207, 23);
 }
 
 .Other2 {
-  background-color: lawngreen;
+  background-color: rgb(146, 207, 23);
 }
 
 .Other3 {
-  background-color: green;
+  background-color: rgb(32, 207, 23);
 }
