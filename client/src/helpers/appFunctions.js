@@ -90,6 +90,16 @@ const findWinner = (allDataSets) => {
        return winnerPlayer;
   }
 
+const checkStatusesAreClear = () => {
+  var allStatuses = document.getElementsByClassName('status');
+  for (var i = allStatuses.length - 1; i >= 0; i--) {
+    if (allStatuses[i].value != "") {
+      return false;
+    }
+  }
+  return true;
+}
+
 export default {
   createDataSet,
   getSelectedEvent,
@@ -98,4 +108,5 @@ export default {
   undoLatest,
   findWorms,
   findWinner,
+  checkStatusesAreClear,
 }

@@ -172,7 +172,11 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
-    //tryk på alle BANK automatisk som det første.
+
+    if (!AppFunc.checkStatusesAreClear()) {
+      window.alert("Terminate eller sæt i banken først!");
+      return;
+    }
 
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
