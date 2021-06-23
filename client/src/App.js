@@ -203,7 +203,9 @@ class App extends Component {
     this.setState({players:currentPlayers});
   }
 
+//allocate tager også random for hvem der får hhv. 3 og 4 spillere.
   allocatePlayers = (e) => {
+    debugger;
     this.playAudio('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     var numberOfParticipants = Object.keys(this.state.participants).length;

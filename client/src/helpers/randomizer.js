@@ -1,7 +1,7 @@
 import Connector from './connector';
 
 const allocatePlayers = (numberOfParticipants, includeReferee) => {
-
+debugger;
   var indexStart = Math.floor(Math.random() * numberOfParticipants) +1;
 ;
   var playersToAllocate = getPlayersArrayForAllocation(includeReferee);

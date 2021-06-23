@@ -86,11 +86,11 @@ const loadDataSets = (gameId) => {
 }
 
 const getMeasures = () => {
-  var measures = {'Other1':{'Small':50, 'Medium':80, 'Large':95, 'Walter':100},
-                'Other2':{'Small':30, 'Medium':60, 'Large':85, 'Walter':100},
-                'Other3':{'Small':15, 'Medium':40, 'Large':75, 'Walter':100},
+  var measures = {'Other1':{'Small':50, 'Medium':80, 'Large':90, 'Walter':100},
+                'Other2':{'Small':30, 'Medium':65, 'Large':80, 'Walter':100},
+                'Other3':{'Small':15, 'Medium':45, 'Large':70, 'Walter':100},
                 'Own1':{'Small':40, 'Medium':70, 'Large':90, 'Walter':100},
-                'Own2':{'Small':20, 'Medium':50, 'Large':80, 'Walter':100},
+                'Own2':{'Small':30, 'Medium':60, 'Large':80, 'Walter':100},
                 'Own3':{'Small':15, 'Medium':40, 'Large':70, 'Walter':100},};
 
   return measures;
