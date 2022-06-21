@@ -172,6 +172,7 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
+    console.log('Randomizer clicked');
 
     if (!AppFunc.checkStatusesAreClear()) {
       window.alert("Terminate eller sæt i banken først!");
