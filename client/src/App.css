@@ -74,7 +74,8 @@ h1 {
 }
 
 .randomizer {
-  height: 100px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .highlight {
@@ -91,10 +92,10 @@ h1 {
 .warning {
   background-color: red;
   display: inherit;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   font-style: italic;
-  border-color: white;
+  border-color: black;
   border-width: 7px;
 }
 

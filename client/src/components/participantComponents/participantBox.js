@@ -13,7 +13,7 @@ export default class ParticipantBox extends React.Component {
             <div>
               <div className="flex-grid">
                 <ParticipantAdder addParticipant={this.props.addParticipant} />
-                <input type='button' id='allocateButton' onClick={this.props.allocatePlayers} value='Start spillet' />
+                <input type='button' id='allocateButton' onClick={this.props.startTheGame} value='Start spillet' />
               </div>
               <Participants participants={this.props.participants} />
             </div>

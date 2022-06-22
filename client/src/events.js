@@ -37,7 +37,7 @@ export default class Events extends React.Component {
         );
 
     return (
-      <form>
+      <form id="eventsFormId" >
        {eventRadios}
       </form>
     );

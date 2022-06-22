@@ -2,10 +2,11 @@ body {
   margin: 0;
   padding: 0;
   height: 90%;
+  background-image: url("trophy2.jpeg");
 }
 
 .App {
-  background-image: url("trophy2.jpeg");
+  
   background-position: bottom; 
 }
 

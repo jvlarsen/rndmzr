@@ -12,6 +12,7 @@ import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
 import Sounds from './helpers/soundsHelper';
+import appFunctions from './helpers/appFunctions';
 
 class App extends Component {
 
@@ -125,18 +126,18 @@ class App extends Component {
             <div className="flex-grid teamsgrid" id="teamsDiv">
               <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
             </div>
-            <div className="events" id="eventsDiv">
+            <div className="events" id="eventsDiv" >
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
               <Randomize onClick={this.onClickRandomize.bind(this)} />
             </div>
           </div>
-          <div className="colwide graph" id="graphDiv">
+          <div className="colwide graph" id="graphDiv" >
             <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
           </div>
         </div>
         <div className="flex-grid participantslist">
           <div className="participantslist" id="participantsListId">
-            <ParticipantBox id='participantBox' addParticipant={this.addParticipant.bind(this)} allocatePlayers={this.allocatePlayers.bind(this)} participants={this.state.participants} />
+            <ParticipantBox id='participantBox' addParticipant={this.addParticipant.bind(this)} startTheGame={this.startTheGame.bind(this)} participants={this.state.participants} />
           </div>
           <div className="inline">
             <Undo className="rightCol"/>
@@ -172,8 +173,6 @@ class App extends Component {
   }
 
   onClickRandomize(e) {
-    console.log('Randomizer clicked');
-
     if (!AppFunc.checkStatusesAreClear()) {
       window.alert("Terminate eller sæt i banken først!");
       return;
@@ -205,8 +204,8 @@ class App extends Component {
   }
 
 //allocate tager også random for hvem der får hhv. 3 og 4 spillere.
-  allocatePlayers = (e) => {
-    debugger;
+startTheGame = (e) => {
+
     this.playAudio('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     var numberOfParticipants = Object.keys(this.state.participants).length;
