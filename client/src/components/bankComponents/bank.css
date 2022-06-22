@@ -22,6 +22,7 @@
   padding: 3px;
   margin-left: 2px;
   width: 25%;
+  border-radius: 10px;
 }
 
 .bigtext {
@@ -32,4 +33,5 @@
 
 .deposit {
   width: 120px;
+  border-radius: 10px;
 }

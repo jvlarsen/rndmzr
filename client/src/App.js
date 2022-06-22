@@ -130,7 +130,7 @@ class App extends Component {
               <Randomize onClick={this.onClickRandomize.bind(this)} />
             </div>
           </div>
-          <div className="colwide" id="graphDiv">
+          <div className="colwide graph" id="graphDiv">
             <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
           </div>
         </div>

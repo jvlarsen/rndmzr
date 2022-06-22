@@ -120,7 +120,7 @@ h1 {
 
 .playername {
   height: 25px;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 input[allocationKey='0'], span[allocationKey='0'] {
@@ -187,9 +187,12 @@ input[allocationKey], span[allocationKey] {
 
 .topgrid {
     display: flex;
-    justify-content: flex-end;
 }
 
 .teamsandevents {
-    justify-content: space-evenly !important; 
+    justify-content: space-evenly !important;
+}
+
+.graph {
+
 }
