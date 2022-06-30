@@ -2,6 +2,7 @@ import React from 'react';
 import ElementHelper from '../../helpers/elementsHelper';
 import Bank from '../bankComponents/bank';
 import './participants.css';
+import AppFunc from '../../helpers/appFunctions';
 
 export default class Participants extends React.Component {
   constructor(props) {
@@ -59,5 +60,6 @@ class ParticipantsRadio extends React.Component {
     var status = ElementHelper.getStatus(index);
     this.clearElementValue(status);
     status.value = '';
+    AppFunc.playSound('terminate');
   }
 }

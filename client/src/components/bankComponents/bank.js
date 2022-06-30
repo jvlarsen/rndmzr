@@ -41,7 +41,7 @@ export default class Bank extends React.Component {
 
     depositMeasure.value = '';
 
-    AppFunc.playAudio('Bank');
+    AppFunc.playSound('Bank');
   }
 
   onDrinkBank(e) {

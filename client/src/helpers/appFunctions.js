@@ -101,11 +101,8 @@ const checkStatusesAreClear = () => {
   return true;
 }
 
-const playAudio = (selectedEvent) => {
-  var allSounds = Sounds.loadSounds();
-
-  let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
-  new Audio(currentSound.sound).play(); 
+const playSound = (selectedEvent) => {
+  Sounds.playSound(selectedEvent);
 }
 
 export default {
@@ -117,5 +114,5 @@ export default {
   findWorms,
   findWinner,
   checkStatusesAreClear,
-  playAudio,
+  playSound,
 }

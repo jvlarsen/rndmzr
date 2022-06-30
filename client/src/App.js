@@ -167,7 +167,7 @@ class App extends Component {
       window.alert("Ro på, vælg en spiller og event først.");
       return;}
 
-    AppFunc.playAudio(selectedEvent);
+    AppFunc.playSound(selectedEvent);
 
    
 
@@ -192,7 +192,7 @@ class App extends Component {
 //allocate tager også random for hvem der får hhv. 3 og 4 spillere.
 startTheGame = (e) => {
 
-    AppFunc.playAudio('Start');
+    AppFunc.playSound('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     var numberOfParticipants = Object.keys(this.state.participants).length;
     if (numberOfParticipants == 0) { return; }

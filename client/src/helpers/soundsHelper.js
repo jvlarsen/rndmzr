@@ -34,9 +34,17 @@ const loadSounds = () => {
 		{ "id":"Worst Worm Egen (rød)", "sound": sounds['open and drink.wav']},
 		{ "id":"Best Worm Andre (grøn)", "sound": sounds['need a drink.wav']},
 		{ "id":"Bank", "sound": sounds['kaching.wav']},
+		{ "id":"terminate", "sound":sounds['cannon.wav']},
 	]};
 
 	return allsounds;
+}
+
+const playSound = (id) => {
+	var allSounds = loadSounds();
+
+	let currentSound = allSounds.sounds.find(sound => sound.id == id);
+	new Audio(currentSound.sound).play(); 
 }
 
 function importAll(s) {
@@ -48,5 +56,6 @@ function importAll(s) {
 const sounds = importAll(require.context('../sounds/', false, /\.(wav)$/));
 
 export default {
-	loadSounds
+	loadSounds,
+	playSound,
 }
