@@ -43,19 +43,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.checkAndLoadLocalData();
-  }
-
-  componentDidUpdate() {
-    this.saveGame();
-  }
-
-  checkAndLoadLocalData() {
     var players = JSON.parse(localStorage.getItem('players'));
     if (players) {
       this.playersWereLoaded(players);
     }
-
     document.getElementById('refereeCheckbox').checked = this.state.refereeIncluded;
     if (this.state.refereeIncluded) {
       var referee = Connector.loadFromLocal('referee');
@@ -63,13 +54,24 @@ class App extends Component {
         ElementsHelper.setReferee(referee);
       }
     }
-    var dataSetsLocal = Connector.loadFromLocal(this.state.dataSets, 'dataSets');
-    this.setState({dataSets: dataSetsLocal});
+
+    var dataSetsLocal = Connector.loadFromLocal('dataSets');
+    if (dataSetsLocal) {
+      var currDataSets = this.state.dataSets;
+      for (var i = 0; i < Object.keys(currDataSets).length; i++) {
+        currDataSets[i].dataset.data = dataSetsLocal[i];
+      }
+      this.setState({dataSets: currDataSets});
+    }
 
     var gameStarted = this.state.gameStarted;
     if (gameStarted == true) {
       ElementsHelper.lockGame();
     }
+  }
+
+  componentDidUpdate() {
+    this.saveGame();
   }
 
   loadGame() {
@@ -92,6 +94,7 @@ class App extends Component {
     if (gameStarted && gameStarted === true) {
       this.setState({gameStarted:true});
     }
+
   }
 
   saveGame() {
