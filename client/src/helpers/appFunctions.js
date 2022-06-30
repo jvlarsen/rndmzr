@@ -1,4 +1,5 @@
 import Connector from './connector';
+import Sounds from './soundsHelper';
 
 const createDataSet = (name, color, borderColor) => {
   return {
@@ -100,6 +101,13 @@ const checkStatusesAreClear = () => {
   return true;
 }
 
+const playAudio = (selectedEvent) => {
+  var allSounds = Sounds.loadSounds();
+
+  let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
+  new Audio(currentSound.sound).play(); 
+}
+
 export default {
   createDataSet,
   getSelectedEvent,
@@ -109,4 +117,5 @@ export default {
   findWorms,
   findWinner,
   checkStatusesAreClear,
+  playAudio,
 }

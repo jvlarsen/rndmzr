@@ -145,8 +145,15 @@ const saveToLocal = (data, key) => {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-const loadFromLocal = (key) => {
-  return JSON.parse(localStorage.getItem(key));
+const loadFromLocal = (existingDataSets, key) => {
+  var dataSetsLocal = JSON.parse(localStorage.getItem(key));
+
+  if (dataSetsLocal) {
+    for (var i = 0; i < Object.keys(existingDataSets).length; i++) {
+      existingDataSets[i].dataset.data = dataSetsLocal[i];
+    }
+  return existingDataSets;
+  }
 }
 
 const saveCounter = (counter, index) => {

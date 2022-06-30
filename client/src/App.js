@@ -63,15 +63,8 @@ class App extends Component {
         ElementsHelper.setReferee(referee);
       }
     }
-
-    var dataSetsLocal = Connector.loadFromLocal('dataSets');
-    if (dataSetsLocal) {
-      var currDataSets = this.state.dataSets;
-      for (var i = 0; i < Object.keys(currDataSets).length; i++) {
-        currDataSets[i].dataset.data = dataSetsLocal[i];
-      }
-      this.setState({dataSets: currDataSets});
-    }
+    var dataSetsLocal = Connector.loadFromLocal(this.state.dataSets, 'dataSets');
+    this.setState({dataSets: dataSetsLocal});
 
     var gameStarted = this.state.gameStarted;
     if (gameStarted == true) {
@@ -157,12 +150,7 @@ class App extends Component {
       window.alert('Vinderen er ' + maxParticipant + '\nBest Worm ANDRE at uddele var ' + playerOther + '\nWorst Worm EGEN egen var ' + playerOwn);
   }
 
-  playAudio(selectedEvent) {
-    var allSounds = Sounds.loadSounds();
-
-    let currentSound = allSounds.sounds.find(sound => sound.id == selectedEvent);
-    new Audio(currentSound.sound).play(); 
-  }
+ 
 
   onClickRandomize(e) {
     if (!AppFunc.checkStatusesAreClear()) {
@@ -176,7 +164,7 @@ class App extends Component {
       window.alert("Ro på, vælg en spiller og event først.");
       return;}
 
-    this.playAudio(selectedEvent);
+    AppFunc.playAudio(selectedEvent);
 
    
 
@@ -201,7 +189,7 @@ class App extends Component {
 //allocate tager også random for hvem der får hhv. 3 og 4 spillere.
 startTheGame = (e) => {
 
-    this.playAudio('Start');
+    AppFunc.playAudio('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     var numberOfParticipants = Object.keys(this.state.participants).length;
     if (numberOfParticipants == 0) { return; }

@@ -2,7 +2,7 @@ import React from 'react';
 import Deposit from './bankDeposit';
 import Withdrawal from './bankWithdrawal';
 import Connector from './../../helpers/connector';
-
+import AppFunc from './../../helpers/appFunctions';
 
 //Deposit skal have en onAddBank() sendt som props.
 export default class Bank extends React.Component {
@@ -40,6 +40,8 @@ export default class Bank extends React.Component {
     this.setState({counter:allCounters});
 
     depositMeasure.value = '';
+
+    AppFunc.playAudio('Bank');
   }
 
   onDrinkBank(e) {
