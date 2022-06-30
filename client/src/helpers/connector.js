@@ -126,6 +126,21 @@ const getGraphColors = () => {
       {color: 'rgba(255,0,0,0.4)', borderColor: 'rgba(255,0,0,1)'}];
 }
 
+const saveGame = (dataSets, labels, participants, players, refereeIncluded) => {
+var dataSetsToSave = [];
+    for (var i = 0; i < Object.keys(dataSets).length; i++) {
+      dataSetsToSave.push(dataSets[i].dataset.data);
+    }
+    saveToLocal(dataSetsToSave, 'dataSets');
+
+    saveToLocal(labels, 'labels');
+    saveToLocal(participants, 'participants');
+    var refEle = ElementsHelper.getReferee();
+    saveToLocal(refEle, 'referee');
+    saveToLocal(players, 'players');
+    saveToLocal(refereeIncluded, 'refereeIncluded');
+  }
+
 const saveToLocal = (data, key) => {
   localStorage.setItem(key, JSON.stringify(data));
 }
@@ -149,6 +164,7 @@ export default {
   getGraphColors,
   loadParticipants,
   loadDataSets,
+  saveGame,
   saveToLocal,
   loadFromLocal,
   saveCounter,

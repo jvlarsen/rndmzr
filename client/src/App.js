@@ -43,10 +43,19 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.checkAndLoadLocalData();
+  }
+
+  componentDidUpdate() {
+    this.saveGame();
+  }
+
+  checkAndLoadLocalData() {
     var players = JSON.parse(localStorage.getItem('players'));
     if (players) {
       this.playersWereLoaded(players);
     }
+
     document.getElementById('refereeCheckbox').checked = this.state.refereeIncluded;
     if (this.state.refereeIncluded) {
       var referee = Connector.loadFromLocal('referee');
@@ -70,10 +79,6 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    this.saveGame();
-  }
-
   loadGame() {
     var localLabels = Connector.loadFromLocal('labels');
     if (localLabels) {
@@ -94,23 +99,10 @@ class App extends Component {
     if (gameStarted && gameStarted === true) {
       this.setState({gameStarted:true});
     }
-
   }
 
   saveGame() {
-    var dataSetsToSave = [];
-    var dataSets = this.state.dataSets;
-    for (var i = 0; i < Object.keys(dataSets).length; i++) {
-      dataSetsToSave.push(dataSets[i].dataset.data);
-    }
-    Connector.saveToLocal(dataSetsToSave, 'dataSets');
-
-    Connector.saveToLocal(this.state.labels, 'labels');
-    Connector.saveToLocal(this.state.participants, 'participants');
-    var refEle = ElementsHelper.getReferee();
-    Connector.saveToLocal(refEle, 'referee');
-    Connector.saveToLocal(this.state.players, 'players');
-    Connector.saveToLocal(this.state.refereeIncluded, 'refereeIncluded');
+    Connector.saveGame(this.state.dataSets, this.state.labels, this.state.participants, this.state.players, this.state.refereeIncluded);
   }
 
   render() {
@@ -180,10 +172,13 @@ class App extends Component {
 
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
+    if (!selectedEvent || !selectedPlayer) {
+      window.alert("Ro på, vælg en spiller og event først.");
+      return;}
 
     this.playAudio(selectedEvent);
 
-    if (!selectedEvent || !selectedPlayer) {return;}
+   
 
     this.addLabelToGraph(selectedEvent);
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
