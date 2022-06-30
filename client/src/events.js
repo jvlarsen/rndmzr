@@ -27,7 +27,7 @@ export default class Events extends React.Component {
       var value = this.props.refereeSelected ? event.RefereeName : event.Name;
 
       eventRadios.push(<div className="radio" id={'event'+event.Id} key={event.Id} >
-              <label className={event.Type} id={'eventLabel'+event.Id} hidden={event.Name == "Worst Worm Egen (rød)" || event.Name == "Best Worm Andre (grøn)"}>
+              <label className={event.Type} id={'eventLabel'+event.Id} hidden={event.Name === "Worst Worm Egen (rød)" || event.Name === "Best Worm Andre (grøn)"}>
                 <input type="radio" value={value} measure={event.Type} key={event.Id} checked={selectedOption === event.Name || selectedOption === event.RefereeName} onChange={onOptionChange}/>
                 {value}
               </label>

@@ -43,7 +43,7 @@ const loadSounds = () => {
 const playSound = (id) => {
 	var allSounds = loadSounds();
 
-	let currentSound = allSounds.sounds.find(sound => sound.id == id);
+	let currentSound = allSounds.sounds.find(sound => sound.id === id);
 	new Audio(currentSound.sound).play(); 
 }
 

@@ -11,8 +11,6 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
-import Sounds from './helpers/soundsHelper';
-import appFunctions from './helpers/appFunctions';
 
 class App extends Component {
 
@@ -65,7 +63,7 @@ class App extends Component {
     }
 
     var gameStarted = this.state.gameStarted;
-    if (gameStarted == true) {
+    if (gameStarted === true) {
       ElementsHelper.lockGame();
     }
   }
@@ -86,7 +84,7 @@ class App extends Component {
     }
 
     var refereeIncluded = Connector.loadFromLocal('refereeIncluded');
-    if (refereeIncluded && refereeIncluded == true) {
+    if (refereeIncluded && refereeIncluded === true) {
       this.setState({refereeIncluded:true});
     }
 
@@ -169,8 +167,6 @@ class App extends Component {
 
     AppFunc.playSound(selectedEvent);
 
-   
-
     this.addLabelToGraph(selectedEvent);
     var randomizerResult = Engine.randomize(selectedPlayer, this.state.selectedEvent, Object.keys(this.state.participants).length);
 
@@ -178,7 +174,7 @@ class App extends Component {
 
     var currentPlayers = this.state.players;
 
-    if (selectedPlayer.id == 'referee') {
+    if (selectedPlayer.id === 'referee') {
       currentPlayers['referee'].Own = randomizerResult.stats.Stats.Own;
       currentPlayers['referee'].Other = randomizerResult.stats.Stats.Other;
     }
@@ -195,7 +191,7 @@ startTheGame = (e) => {
     AppFunc.playSound('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     var numberOfParticipants = Object.keys(this.state.participants).length;
-    if (numberOfParticipants == 0) { return; }
+    if (numberOfParticipants === 0) { return; }
     Engine.allocatePlayers(numberOfParticipants, refereeCheckbox.checked);
     this.updatePlayerAllocationKeys();
     this.updateParticipantAllocationKeys();
@@ -238,7 +234,7 @@ startTheGame = (e) => {
   }
 
   addLabelToGraph(selectedEvent) {
-    if (selectedEvent == 'Kick off') { return; }
+    if (selectedEvent === 'Kick off') { return; }
     this.setState(prevState => ({
       labels: [...prevState.labels, selectedEvent]
     }))

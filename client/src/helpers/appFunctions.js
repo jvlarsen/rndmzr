@@ -94,7 +94,7 @@ const findWinner = (allDataSets) => {
 const checkStatusesAreClear = () => {
   var allStatuses = document.getElementsByClassName('status');
   for (var i = allStatuses.length - 1; i >= 0; i--) {
-    if (allStatuses[i].value != "") {
+    if (allStatuses[i].value !== "") {
       return false;
     }
   }

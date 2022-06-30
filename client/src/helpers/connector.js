@@ -8,21 +8,22 @@ const randomize = (selectedPlayer, selectedEvent, numberOfParticipants) => {
   var isOwn = measureType.substring(0,3) === "Own";
   var randomNumber = Math.floor(Math.random() * 100);
   var playerStats = {'Own':0, 'Other':0};
-
+  var randomValue = 0;
+  
   for (var i = 0; i < numberOfParticipants; i++) {
-    if (isOwn && i == allocationKey) {
-      var randomValue = getMeasureFromRandom(randomNumber, measure);
+    if (isOwn && i === +allocationKey) {
+      randomValue = getMeasureFromRandom(randomNumber, measure);
       result.push({status:i, value: randomValue});
       playerStats['Own'] += randomValue.NumericMeasure;
     }
-    if (isOwn && i != allocationKey) {
+    if (isOwn && i !== +allocationKey) {
       result.push({status:i, value: getNoneMeasure()});
     }
-    if (!isOwn && i == allocationKey) {
+    if (!isOwn && i === +allocationKey) {
       result.push({status:i, value: getNoneMeasure()});
     }
-    if (!isOwn && i != allocationKey) {
-      var randomValue = getMeasureFromRandom(randomNumber, measure);
+    if (!isOwn && i !== +allocationKey) {
+      randomValue = getMeasureFromRandom(randomNumber, measure);
       result.push({status:i, value: randomValue});
       playerStats['Other'] += randomValue.NumericMeasure;
     }
