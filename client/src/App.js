@@ -158,9 +158,8 @@ class App extends Component {
       var playerOwn = document.getElementById(maxOwn.player.slice(0,-3)).value;
       AppFunc.playSound('gameover');
       window.alert('Highscore går til ' + maxParticipant + '!\nBest Worm til ANDRE var ' + playerOther + '\nWorst Worm til EGEN var ' + playerOwn);
+      AppFunc.downloadGameStats(this.state);
   }
-
- 
 
   onClickRandomize(e) {
     if (!AppFunc.checkStatusesAreClear()) {
