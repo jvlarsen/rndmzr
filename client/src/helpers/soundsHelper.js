@@ -35,6 +35,7 @@ const loadSounds = () => {
 		{ "id":"Best Worm Andre (grøn)", "sound": sounds['need a drink.wav']},
 		{ "id":"Bank", "sound": sounds['kaching.wav']},
 		{ "id":"terminate", "sound":sounds['cannon.wav']},
+		{ "id":"gameover", "sound":sounds['bigben.wav']},
 	]};
 
 	return allsounds;

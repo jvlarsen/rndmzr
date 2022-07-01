@@ -78,6 +78,15 @@ const updatePlayerStats = (playerStats, player) => {
   return {Stats: {Own: newStatOwn, Other: newStatOther}};
 }
 
+const hideElement = (elementId) => {
+console.log(elementId);
+  document.getElementById(elementId).setAttribute('hidden', true);
+}
+
+const showHiddenElement = (elementId) => {
+  document.getElementById(elementId).removeAttribute('hidden');
+}
+
 export default {
   getStatus,
   getBank,
@@ -89,4 +98,6 @@ export default {
   updateLoadedPlayers,
   setReferee,
   updatePlayerStats,
+  hideElement,
+  showHiddenElement,
 }

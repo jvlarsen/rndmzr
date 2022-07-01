@@ -1,3 +1,4 @@
+import Randomize from '../components/randomize';
 import Connector from './connector';
 import Sounds from './soundsHelper';
 
@@ -77,6 +78,8 @@ const findWorms = (ownOther) => {
   }
 
 const findWinner = (allDataSets) => {
+
+  //Mangler at få bygget logik, der håndterer uafgjort eller manglende dataset.
     var maxValue = 0;
     var winnerPlayer = '';
 

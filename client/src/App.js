@@ -135,20 +135,20 @@ class App extends Component {
   }
 
   toggleGameEnded() {
-      document.getElementById('eventLabel15').removeAttribute('hidden');
-      document.getElementById('eventLabel16').removeAttribute('hidden');
+      ElementsHelper.showHiddenElement('eventLabel15');
+      ElementsHelper.showHiddenElement('eventLabel16');
 
       var maxOther = AppFunc.findWorms('other');
       var maxOwn = AppFunc.findWorms('own');
       var maxParticipant = AppFunc.findWinner(this.state.dataSets);
 
-      document.getElementById(maxOther.player).classList.add('highlight');
-      document.getElementById(maxOwn.player).classList.add('highlight');
+      document.getElementById(maxOther.player).classList.add('highlightbest');
+      document.getElementById(maxOwn.player).classList.add('highlightworst');
 
       var playerOther = document.getElementById(maxOther.player.slice(0,-5)).value;
       var playerOwn = document.getElementById(maxOwn.player.slice(0,-3)).value;
-
-      window.alert('Vinderen er ' + maxParticipant + '\nBest Worm ANDRE at uddele var ' + playerOther + '\nWorst Worm EGEN egen var ' + playerOwn);
+      AppFunc.playSound('gameover');
+      window.alert('Highscore går til ' + maxParticipant + '!\nBest Worm til ANDRE var ' + playerOther + '\nWorst Worm til EGEN var ' + playerOwn);
   }
 
  
@@ -196,9 +196,8 @@ startTheGame = (e) => {
     this.updatePlayerAllocationKeys();
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
+    var bum = document.getElementById('eventLabel15');
     ElementsHelper.lockGame();
-    document.getElementById('eventLabel15').setAttribute('hidden', true);
-    document.getElementById('eventLabel16').setAttribute('hidden', true);
     Connector.saveToLocal(true, 'gameStarted');
   }
 

@@ -78,9 +78,14 @@ h1 {
   border-radius: 50%;
 }
 
-.highlight {
+.highlightbest {
     font-weight: bold;
-    background-color: orange !important;
+    background-color: black !important;
+}
+
+.highlightworst {
+  font-weight: bold;
+  background-color: orange !important;
 }
 
 .undo {
