@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 import Events from './events';
 import TeamBox from './components/team/teamBox';
@@ -11,6 +12,7 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
+import CountdownTimer from './components/game/countdown';
 
 class App extends Component {
 
@@ -92,7 +94,6 @@ class App extends Component {
     if (gameStarted && gameStarted === true) {
       this.setState({gameStarted:true});
     }
-
   }
 
   saveGame() {
@@ -126,6 +127,7 @@ class App extends Component {
             <ParticipantBox id='participantBox' addParticipant={this.addParticipant.bind(this)} startTheGame={this.startTheGame.bind(this)} participants={this.state.participants} />
           </div>
           <div className="inline">
+            <div id='countdownDiv'></div>
             <Undo className="rightCol"/>
             <input type='button' className='bottom' id='gameEnded' value="Kampen er slut" onClick={this.toggleGameEnded.bind(this)}/>
           </div>
@@ -137,11 +139,18 @@ class App extends Component {
   toggleGameEnded() {
       ElementsHelper.showHiddenElement('eventLabel15');
       ElementsHelper.showHiddenElement('eventLabel16');
+      ElementsHelper.showHiddenElement('countdownDiv');
+  
+      ReactDOM.render(
+        <CountdownTimer date={Date.now() + 10000} />,
+        document.getElementById('countdownDiv')
+      );
 
       var maxOther = AppFunc.findWorms('other');
       var maxOwn = AppFunc.findWorms('own');
       var maxParticipant = AppFunc.findWinner(this.state.dataSets);
 
+      //TODO Flyttes til ElementsHelper
       document.getElementById(maxOther.player).classList.add('highlightbest');
       document.getElementById(maxOwn.player).classList.add('highlightworst');
 
