@@ -5,7 +5,7 @@ export default class Team extends React.Component {
     render() {
         return(
             <div>
-                <input type="text" className="teamname" key="teamNameHome" placeholder={this.props.placeholder} />
+                <input id={this.props.id} type="text" className="teamname" key="teamNameHome" placeholder={this.props.placeholder} onBlur={this.props.addTeamName}/>
             </div>
         );
     }

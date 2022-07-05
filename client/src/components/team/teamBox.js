@@ -17,11 +17,11 @@ export default class TeamBox extends React.Component {
           <div className="teamboxdiv">
             <div className="flex-grid">
                 <div className="narrow">
-                    <Team placeholder='Home' />
+                    <Team id="hometeamname" placeholder='Home' addTeamName={this.props.addTeamName}/>
                     <PlayerNames selectedPlayer={this.props.selectedPlayer} onChange={this.props.onChange} addPlayerName={this.props.addPlayerName} team='Home'/>
                 </div>
                 <div className="narrow">
-                    <Team placeholder='Away' />
+                    <Team id="awayteamname" placeholder='Away' addTeamName={this.props.addTeamName}/>
                     <PlayerNames selectedPlayer={this.props.selectedPlayer} onChange={this.props.onChange} addPlayerName={this.props.addPlayerName} team='Away'/>
                 </div>
             </div>

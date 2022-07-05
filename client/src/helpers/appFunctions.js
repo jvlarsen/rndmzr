@@ -109,19 +109,8 @@ const playSound = (selectedEvent) => {
 }
 
 const downloadGameStats = (fullDataSet) => {
-  console.log(fullDataSet);
-  /*det er hele App.js this.state, der kommer ind.
-  Data skal itereres i de forskellige dataSets.
-  Strukturen til at lave en graf:
-  - Farvekode til hver deltager.
-  - Event-labels i rækkefølge.
-  - I Excel-termer: Events nedad, deltager henad, rullende total i cellerne.
-  - CSV-format: Husk lige mange datafelter eller kommaer i hver række.
-  - Deltagere øverst
-  - Én event per række, efterfulgt af saldo for hver respektiv deltager
-  - Se dataImport1.csv for et eksempel.
-
-  */
+  var homeTeam = fullDataSet.hometeamname;
+  var awayTeam = fullDataSet.awayteamname;
   var participants = fullDataSet.participants;
   var events = fullDataSet.labels;
   var dataSets = fullDataSet.dataSets;
@@ -152,34 +141,28 @@ const downloadGameStats = (fullDataSet) => {
     participantsRow += eventAndDataRow;
   }
   csvData.push(participantsRow);
-  downloadCsv(csvData);
+  downloadCsv(homeTeam, awayTeam, csvData);
 }
 
-const downloadCsv = (csv) => {
+const downloadCsv = (home, away, csv) => {
   var hiddenElement = document.createElement('a');  
   hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);  
   hiddenElement.target = '_blank';  
-    
-  //provide the name for the CSV file to be downloaded  
-  hiddenElement.download = 'GameStats.csv';  
+ 
+  var gameDate = formatGameDate();
+  hiddenElement.download = 'GameStats ' + home + ' vs. ' + away + ' on ' + gameDate + '.csv';  
   hiddenElement.click();  
 }
 
-const downloadFile = ({ data, fileName, fileType }) => {
-  // Create a blob with the data we want to download as a file
-  const blob = new Blob([data], { type: fileType })
-  // Create an anchor element and dispatch a click event on it
-  // to trigger a download
-  const a = document.createElement('a')
-  a.download = fileName
-  a.href = window.URL.createObjectURL(blob)
-  const clickEvt = new MouseEvent('click', {
-    view: window,
-    bubbles: true,
-    cancelable: true,
-  })
-  a.dispatchEvent(clickEvt)
-  a.remove()
+const formatGameDate = () => {
+  const date = new Date();
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const gameDate = [year, month, day].join('-');
+
+  return gameDate;
 }
 
 const exportToJson = (dataForDownload, fileName) => {

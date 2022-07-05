@@ -111,7 +111,7 @@ class App extends Component {
         <div className="flex-grid topgrid">
           <div className="flex-grid teamsandevents">
             <div className="flex-grid teamsgrid" id="teamsDiv">
-              <TeamBox onChange={this.onPlayerChange.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
+              <TeamBox onChange={this.onPlayerChange.bind(this)} addTeamName={this.addTeamName.bind(this)} selectedPlayer={this.state.selectedPlayer} onRefereeSelect={this.onRefereeRadioSelect.bind(this)} refereeSelected={this.state.refereeSelected} toggleReferee={this.onRefereeCheckboxToggle.bind(this)} addPlayerName={this.addPlayerName.bind(this)}/>
             </div>
             <div className="events" id="eventsDiv" >
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
@@ -309,6 +309,20 @@ startTheGame = (e) => {
       players[e.target.id] = {'Name': nameInput, AllocationKey:null, Own:0, Other:0};
     }
     this.setState({players: players});
+  }
+
+  addTeamName(e) {
+    //fang event her, læs hvor det kommer fra (Home eller Away) og sæt det i state.
+    if (e.target.value.length === 0) {
+      return;
+    }
+    if (e.target.id === 'hometeamname') {
+      this.setState({hometeamname: e.target.value});
+    }
+    if (e.target.id === 'awayteamname') {
+      this.setState({awayteamname: e.target.value});
+    }
+    console.log(e.target.id);
   }
 
   updatePlayerAllocationKeys() {
