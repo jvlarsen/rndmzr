@@ -109,8 +109,60 @@ const playSound = (selectedEvent) => {
 }
 
 const downloadGameStats = (fullDataSet) => {
-  //
   console.log(fullDataSet);
+  /*det er hele App.js this.state, der kommer ind.
+  Data skal itereres i de forskellige dataSets.
+  Strukturen til at lave en graf:
+  - Farvekode til hver deltager.
+  - Event-labels i rækkefølge.
+  - I Excel-termer: Events nedad, deltager henad, rullende total i cellerne.
+  - CSV-format: Husk lige mange datafelter eller kommaer i hver række.
+  - Deltagere øverst
+  - Én event per række, efterfulgt af saldo for hver respektiv deltager
+  - Se dataImport1.csv for et eksempel.
+
+  */
+  var participants = fullDataSet.participants;
+  var events = fullDataSet.labels;
+  var dataSets = fullDataSet.dataSets;
+
+  var csvData = [];
+  var counter = Object.keys(participants).length; //Easier than retrieving number of keys all the time for both Participants and Datasets.
+  var participantsRow = "";
+ 
+  for (let i=0;i<counter; i++) {
+    if (i != counter) {
+      participantsRow += ",";
+    }
+    participantsRow += participants[i].Name;
+  }
+ 
+  participantsRow = participantsRow + '\n';
+  var eventCounter = Object.keys(events).length;
+  var eventAndDataRow = "";
+  for (let i = 0; i < eventCounter; i++) {
+    eventAndDataRow = events[i] + ",";
+    for (let j = 0; j < counter; j++) {
+      eventAndDataRow += dataSets[j].dataset.data[i];
+      if (j < counter-1) {
+        eventAndDataRow += ",";
+      }
+    }
+    eventAndDataRow += '\n';
+    participantsRow += eventAndDataRow;
+  }
+  csvData.push(participantsRow);
+  downloadCsv(csvData);
+}
+
+const downloadCsv = (csv) => {
+  var hiddenElement = document.createElement('a');  
+  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);  
+  hiddenElement.target = '_blank';  
+    
+  //provide the name for the CSV file to be downloaded  
+  hiddenElement.download = 'GameStats.csv';  
+  hiddenElement.click();  
 }
 
 const downloadFile = ({ data, fileName, fileType }) => {
