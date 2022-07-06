@@ -78,6 +78,10 @@ const updatePlayerStats = (playerStats, player) => {
   return {Stats: {Own: newStatOwn, Other: newStatOther}};
 }
 
+const addClassToElement = (elementId, classToAdd) => {
+  document.getElementById(elementId).classList.add(classToAdd);
+}
+
 const hideElement = (elementId) => {
 console.log(elementId);
   document.getElementById(elementId).setAttribute('hidden', true);
@@ -98,6 +102,7 @@ export default {
   updateLoadedPlayers,
   setReferee,
   updatePlayerStats,
+  addClassToElement,
   hideElement,
   showHiddenElement,
 }

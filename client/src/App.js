@@ -137,6 +137,11 @@ class App extends Component {
   }
 
   toggleGameEnded() {
+
+    /*
+    TO DO: Alt det her flyttes til AppFunc, som udgangspunkt.
+    state.dataSets skal sendes med. Resten hentes fra elementer
+    */
       ElementsHelper.showHiddenElement('eventLabel15');
       ElementsHelper.showHiddenElement('eventLabel16');
       ElementsHelper.showHiddenElement('countdownDiv');
@@ -150,9 +155,8 @@ class App extends Component {
       var maxOwn = AppFunc.findWorms('own');
       var maxParticipant = AppFunc.findWinner(this.state.dataSets);
 
-      //TODO Flyttes til ElementsHelper
-      document.getElementById(maxOther.player).classList.add('highlightbest');
-      document.getElementById(maxOwn.player).classList.add('highlightworst');
+      ElementsHelper.addClassToElement(maxOther.player, 'highlightbest');
+      ElementsHelper.addClassToElement(maxOwn.player, 'highlightworst');
 
       var playerOther = document.getElementById(maxOther.player.slice(0,-5)).value;
       var playerOwn = document.getElementById(maxOwn.player.slice(0,-3)).value;
@@ -167,6 +171,7 @@ class App extends Component {
       return;
     }
 
+    //TO DO: AppFunc kan godt lave hele det her tjek for udfyldte radio buttons
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
     if (!selectedEvent || !selectedPlayer) {
@@ -193,9 +198,7 @@ class App extends Component {
     this.setState({players:currentPlayers});
   }
 
-//allocate tager også random for hvem der får hhv. 3 og 4 spillere.
 startTheGame = (e) => {
-
     AppFunc.playSound('Start');
     var refereeCheckbox = document.getElementById('refereeCheckbox');
     var numberOfParticipants = Object.keys(this.state.participants).length;
@@ -204,7 +207,6 @@ startTheGame = (e) => {
     this.updatePlayerAllocationKeys();
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});
-    var bum = document.getElementById('eventLabel15');
     ElementsHelper.lockGame();
     Connector.saveToLocal(true, 'gameStarted');
   }
@@ -312,7 +314,6 @@ startTheGame = (e) => {
   }
 
   addTeamName(e) {
-    //fang event her, læs hvor det kommer fra (Home eller Away) og sæt det i state.
     if (e.target.value.length === 0) {
       return;
     }
@@ -322,7 +323,6 @@ startTheGame = (e) => {
     if (e.target.id === 'awayteamname') {
       this.setState({awayteamname: e.target.value});
     }
-    console.log(e.target.id);
   }
 
   updatePlayerAllocationKeys() {
