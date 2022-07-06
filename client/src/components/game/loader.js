@@ -28,8 +28,8 @@ export default class Loader extends React.Component {
   render() {
     return (
         <form onSubmit={this.handleSubmit}>
-            <input id='gameIdInput' type='text' onChange={this.handleChange} placeholder='Game ID' />
-            <input type="submit" value="Load game ID" />
+            <input id='gameIdInput' type='text' onChange={this.handleChange} placeholder='Spil ID' />
+            <input type="submit" value="Indlæs spil ID" />
             <label id="formLabel">{this.state.formLabel}</label>
         </form>
 

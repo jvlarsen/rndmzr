@@ -8,7 +8,7 @@ export default class Undo extends React.Component {
 
 
     return(
-      <input type='button' className='undo' onClick={this.undoLatest} value='Undo' />
+      <input type='button' className='undo' onClick={this.undoLatest} value='Fortryd' />
     );
   }
 
