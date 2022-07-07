@@ -1,5 +1,6 @@
 import Connector from './connector';
 import Sounds from './soundsHelper';
+import Engine from './randomizer';
 
 const createDataSet = (name, color, borderColor) => {
   return {
@@ -34,6 +35,13 @@ const getSelectedPlayer = (state) => {
   return state.refereeSelected ? document.getElementById('referee') : state.selectedPlayer;
 }
 
+const startTheGame = (participantCount) => {
+  playSound('Start');
+  var refereeCheckbox =  document.getElementById('refereeCheckbox');;
+  if (participantCount === 0) { return; }
+  Engine.allocatePlayers(participantCount, refereeCheckbox.checked);
+}
+
 const resetGame = () => {
   var wipe = window.confirm('Er du sikker?');
   if (!wipe) {
@@ -62,7 +70,6 @@ const undoLatest = () => {
 }
 
 const findWorms = (ownOther) => {
-
     var allValues = document.getElementsByClassName(ownOther);
     var maxValue = 0;
     var maxPlayer = '';
@@ -72,13 +79,21 @@ const findWorms = (ownOther) => {
         maxPlayer = allValues[i].id;
       }
     }
-
+    if (maxPlayer === '') {
+      return findRandomMaxPlayerAndValue(allValues);
+    }
     return {player:maxPlayer, value:maxValue};
   }
 
-const findWinner = (allDataSets) => {
+const findRandomMaxPlayerAndValue = (allValues) => {
+  var selectedPlayerIndex = Math.floor(Math.random() * allValues.length);
+  let maxPlayer = allValues[selectedPlayerIndex].id;
+  let maxValue = Number.parseInt(allValues[selectedPlayerIndex].innerText);
 
-  //Mangler at få bygget logik, der håndterer uafgjort eller manglende dataset.
+  return {player:maxPlayer, value:maxValue};
+}
+
+const findWinner = (allDataSets) => {
     var maxValue = 0;
     var winnerPlayer = '';
 
@@ -168,6 +183,7 @@ export default {
   createDataSet,
   getSelectedEvent,
   getSelectedPlayer,
+  startTheGame,
   resetGame,
   undoLatest,
   findWorms,

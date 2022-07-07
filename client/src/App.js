@@ -38,7 +38,7 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.loadGame();
   }
 
@@ -199,11 +199,7 @@ class App extends Component {
   }
 
 startTheGame = (e) => {
-    AppFunc.playSound('Start');
-    var refereeCheckbox = document.getElementById('refereeCheckbox');
-    var numberOfParticipants = Object.keys(this.state.participants).length;
-    if (numberOfParticipants === 0) { return; }
-    Engine.allocatePlayers(numberOfParticipants, refereeCheckbox.checked);
+    AppFunc.startTheGame(Object.keys(this.state.participants).length);
     this.updatePlayerAllocationKeys();
     this.updateParticipantAllocationKeys();
     this.setState({gameId:123456, gameStarted: true});

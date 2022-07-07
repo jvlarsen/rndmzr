@@ -15,7 +15,7 @@ export default class Bank extends React.Component {
     Connector.saveCounter(this.state.counter, this.props.index);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     var allCounters = Connector.loadFromLocal('allCounters') || {};
     if (allCounters[this.props.index]) {
       this.setState({counter:allCounters[this.props.index]});

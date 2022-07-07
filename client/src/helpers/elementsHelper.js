@@ -83,7 +83,6 @@ const addClassToElement = (elementId, classToAdd) => {
 }
 
 const hideElement = (elementId) => {
-console.log(elementId);
   document.getElementById(elementId).setAttribute('hidden', true);
 }
 

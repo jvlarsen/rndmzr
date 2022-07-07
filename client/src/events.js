@@ -10,7 +10,7 @@ export default class Events extends React.Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     var self = this;
     Connector.getEvents().then(function(result) {
       self.setState({events:result});
