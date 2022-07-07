@@ -1,4 +1,3 @@
-import Randomize from '../components/randomize';
 import Connector from './connector';
 import Sounds from './soundsHelper';
 
@@ -120,7 +119,7 @@ const downloadGameStats = (fullDataSet) => {
   var participantsRow = "";
  
   for (let i=0;i<counter; i++) {
-    if (i != counter) {
+    if (i !== counter) {
       participantsRow += ",";
     }
     participantsRow += participants[i].Name;
@@ -163,14 +162,6 @@ const formatGameDate = () => {
   const gameDate = [year, month, day].join('-');
 
   return gameDate;
-}
-
-const exportToJson = (dataForDownload, fileName) => {
-  this.downloadFile({
-    data: dataForDownload,
-    fileName: fileName,
-    fileType: 'text/json',
-  })
 }
 
 export default {

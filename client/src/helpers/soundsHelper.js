@@ -48,9 +48,9 @@ const playSound = (id) => {
 	new Audio(currentSound.sound).play(); 
 }
 
-function importAll(s) {
+function importAll(importedFiles) {
 	let sounds = {};
-	s.keys().map((item, index) => { sounds[item.replace('./', '')] = s(item); });
+	importedFiles.keys().map((item, index) => { sounds[item.replace('./', '')] = importedFiles(item); });
 	return sounds;
 }
 
