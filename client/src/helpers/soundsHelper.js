@@ -26,7 +26,7 @@ const loadSounds = () => {
 		{ "id":"Fordelsregel", "sound": sounds['everything under control.wav']},
 		{ "id":"VARcheck sidelinje", "sound": sounds['no tv.wav']},
 		{ "id":"Taber ting", "sound": sounds['lost a nail.wav']},
-		{ "id":"2H 6+ min", "sound": sounds['waiting.wav']},
+		{ "id":"5. udskiftning", "sound": sounds['waiting.wav']},
 		{ "id":"Ramt af bold/spiller", "sound": sounds['jabba laugh.wav']},
 		{ "id":"Falder", "sound": sounds['bomb drop.wav']},
 		{ "id":"Udskiftes", "sound": sounds['you have failed me for the last time.wav']},
