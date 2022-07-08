@@ -47,12 +47,8 @@ class App extends Component {
     if (players) {
       this.playersWereLoaded(players);
     }
-    document.getElementById('refereeCheckbox').checked = this.state.refereeIncluded;
     if (this.state.refereeIncluded) {
-      var referee = Connector.loadFromLocal('referee');
-      if (referee) {
-        ElementsHelper.setReferee(referee);
-      }
+      ElementsHelper.setRefereeIncluded()
     }
 
     var dataSetsLocal = Connector.loadFromLocal('dataSets');
@@ -137,47 +133,23 @@ class App extends Component {
   }
 
   toggleGameEnded() {
+    AppFunc.endGame();
 
-    /*
-    TO DO: Alt det her flyttes til AppFunc, som udgangspunkt.
-    state.dataSets skal sendes med. Resten hentes fra elementer
-    */
-      ElementsHelper.showHiddenElement('eventLabel15');
-      ElementsHelper.showHiddenElement('eventLabel16');
-      ElementsHelper.showHiddenElement('countdownDiv');
-  
-      ReactDOM.render(
-        <CountdownTimer date={Date.now() + 10000} />,
-        document.getElementById('countdownDiv')
-      );
+    let winners = AppFunc.findWinners(this.state.dataSets);
 
-      var maxOther = AppFunc.findWorms('other');
-      var maxOwn = AppFunc.findWorms('own');
-      var maxParticipant = AppFunc.findWinner(this.state.dataSets);
-
-      ElementsHelper.addClassToElement(maxOther.player, 'highlightbest');
-      ElementsHelper.addClassToElement(maxOwn.player, 'highlightworst');
-
-      var playerOther = document.getElementById(maxOther.player.slice(0,-5)).value;
-      var playerOwn = document.getElementById(maxOwn.player.slice(0,-3)).value;
-      AppFunc.playSound('gameover');
-      window.alert('Highscore går til ' + maxParticipant + '!\nBest Worm til ANDRE var ' + playerOther + '\nWorst Worm til EGEN var ' + playerOwn);
-      AppFunc.downloadGameStats(this.state);
+    window.alert('Highscore går til ' + winners.maxParticipant + '!\nBest Worm til ANDRE var ' + winners.playerOther + '\nWorst Worm til EGEN var ' + winners.playerOwn);
+    AppFunc.downloadGameStats(this.state);
   }
 
   onClickRandomize(e) {
-    if (!AppFunc.checkStatusesAreClear()) {
-      window.alert("Terminate eller sæt i banken først!");
+    var message = AppFunc.validateReadyForNextRandomizer(this.state);
+    if (message.length !== 0) {
+      window.alert(message);
       return;
     }
 
-    //TO DO: AppFunc kan godt lave hele det her tjek for udfyldte radio buttons
     var selectedEvent = AppFunc.getSelectedEvent(this.state);
     var selectedPlayer = AppFunc.getSelectedPlayer(this.state);
-    if (!selectedEvent || !selectedPlayer) {
-      window.alert("Ro på, vælg en spiller og event først.");
-      return;}
-
     AppFunc.playSound(selectedEvent);
 
     this.addLabelToGraph(selectedEvent);

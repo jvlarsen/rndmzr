@@ -1,3 +1,8 @@
+import Connector from "./connector";
+import React from "react";
+import ReactDOM from "react-dom";
+import CountdownTimer from "../components/game/countdown";
+
 const getStatus = (index) => {
   var statusElement = document.getElementById('status'+index);
   return statusElement || null;
@@ -90,6 +95,20 @@ const showHiddenElement = (elementId) => {
   document.getElementById(elementId).removeAttribute('hidden');
 }
 
+const setRefereeIncluded = () => {
+  var referee = Connector.loadFromLocal('referee');
+  if (referee) {
+    setReferee(referee);
+  }
+}
+
+const showCountdown = (milliseconds) => {
+  ReactDOM.render(
+    <CountdownTimer date={Date.now() + 10000} />,
+    document.getElementById('countdownDiv')
+      );
+}
+
 export default {
   getStatus,
   getBank,
@@ -104,4 +123,6 @@ export default {
   addClassToElement,
   hideElement,
   showHiddenElement,
+  setRefereeIncluded,
+  showCountdown,
 }

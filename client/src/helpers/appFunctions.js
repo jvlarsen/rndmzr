@@ -1,6 +1,7 @@
 import Connector from './connector';
 import Sounds from './soundsHelper';
 import Engine from './randomizer';
+import ElementsHelper from './elementsHelper';
 
 const createDataSet = (name, color, borderColor) => {
   return {
@@ -179,6 +180,39 @@ const formatGameDate = () => {
   return gameDate;
 }
 
+const validateReadyForNextRandomizer = (state) => {
+  let message = '';
+  if (!checkStatusesAreClear()) {
+    message = 'Tøm lige jeres drinks først!';
+  }
+  if (!getSelectedEvent(state) || !getSelectedPlayer(state)) {
+    message = 'Vælg spiller og event først!';
+  }
+  return message;
+}
+
+const endGame = () => {
+  ElementsHelper.showHiddenElement('eventLabel15');
+  ElementsHelper.showHiddenElement('eventLabel16');
+  ElementsHelper.showHiddenElement('countdownDiv');
+  ElementsHelper.showCountdown(360000);
+  playSound('gameover');
+}
+
+const findWinners = (dataSets) => {
+  var maxOther = findWorms('other');
+  var maxOwn = findWorms('own');
+  var maxParticipant = findWinner(dataSets);
+
+  var playerOther = document.getElementById(maxOther.player.slice(0,-5)).value;
+  var playerOwn = document.getElementById(maxOwn.player.slice(0,-3)).value;
+
+  ElementsHelper.addClassToElement(maxOther.player, 'highlightbest');
+  ElementsHelper.addClassToElement(maxOwn.player, 'highlightworst');
+
+  return {maxOther: maxOther, maxOwn: maxOwn, maxParticipant: maxParticipant, playerOther:playerOther, playerOwn:playerOwn};
+}
+
 export default {
   createDataSet,
   getSelectedEvent,
@@ -191,4 +225,7 @@ export default {
   checkStatusesAreClear,
   playSound,
   downloadGameStats,
+  validateReadyForNextRandomizer,
+  endGame,
+  findWinners,
 }

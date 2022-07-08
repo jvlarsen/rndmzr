@@ -23,7 +23,7 @@ const loadSounds = () => {
 		{ "id":"Målspark i feltet", "sound": sounds['silly farts.wav']},
 		{ "id":"VARevognen", "sound": sounds['everything under control.wav']},
 		{ "id":"Dommerkast", "sound": sounds['need a drink.wav']},
-		{ "id":"Fordelsregel", "sound": sounds['everything under control.wav']},
+		{ "id":"Udskiftning 1. halvleg", "sound": sounds['everything under control.wav']},
 		{ "id":"VARcheck sidelinje", "sound": sounds['no tv.wav']},
 		{ "id":"Taber ting", "sound": sounds['lost a nail.wav']},
 		{ "id":"5. udskiftning", "sound": sounds['waiting.wav']},
