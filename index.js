@@ -29,15 +29,15 @@ app.get('/api/events', (req, res) => {
                   {Id:5, Name:'Medic!', RefereeName:'Målspark i feltet', Type:'Own1'},
                   {Id:6, Name:'Offside', RefereeName:'VARevognen', Type:'Own1'},
                   {Id:7, Name:'Frispark begået', RefereeName:'Dommerkast', Type:'Own1'},
-                  {Id:8, Name:'Skud udenfor mål', RefereeName:'Fordelsregel', Type:'Own1'},
-                  {Id:11, Name:'Udskiftet', RefereeName:'2H 6+ min', Type:'Own1'},
+                  {Id:8, Name:'Skud udenfor mål', RefereeName:'Udskiftning 1. halvleg', Type:'Own1'},
+                  {Id:11, Name:'Udskiftet', RefereeName:'5. udskiftning', Type:'Own1'},
                   {Id:9, Name:'Straffe begået', RefereeName:'VARcheck sidelinje', Type:'Own2'},
                   {Id:10, Name:'Gult kort', RefereeName:'Taber ting', Type:'Own2'},
                   {Id:12, Name:'Selvmål', RefereeName:'Ramt af bold/spiller', Type:'Own3'},
                   {Id:13, Name:'Brændt straffe', RefereeName:'Falder', Type:'Own3'},
                   {Id:14, Name:'Rødt kort', RefereeName:'Udskiftes', Type:'Own3'},
-                  {Id:15, Name:'Worst Worm Egen (rød)', RefereeName:'Worst Worm Egen (orange)', Type:'Other1'},
-                  {Id:16, Name:'Best Worm Andre (grøn)', RefereeName:'Best Worm Andre (sort)', Type:'Own1'},]);
+                  {Id:15, Name:'Worst Worm Egen (rød)', RefereeName:'Worst Worm Egen (rød)', Type:'Other1'},
+                  {Id:16, Name:'Best Worm Andre (grøn)', RefereeName:'Best Worm Andre (grøn)', Type:'Own1'},]);
 });
 
 app.get('/api/games/gameId/participants', (req, res) => {

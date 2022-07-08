@@ -115,7 +115,7 @@ class App extends Component {
             </div>
           </div>
           <div className="colwide graph" id="graphDiv" >
-            <LineGraph labels={this.state.labels} dataSets={this.state.dataSets} />
+            <LineGraph id="participantGraph" labels={this.state.labels} dataSets={this.state.dataSets} />
           </div>
         </div>
         <div className="flex-grid participantslist">
@@ -137,7 +137,7 @@ class App extends Component {
 
     let winners = AppFunc.findWinners(this.state.dataSets);
 
-    window.alert('Highscore går til ' + winners.maxParticipant + '!\nBest Worm til ANDRE var ' + winners.playerOther + '\nWorst Worm til EGEN var ' + winners.playerOwn);
+    window.alert('Highscorer: ' + winners.maxParticipant + '!\nBest Worm til ANDRE var ' + winners.playerOther + '\nWorst Worm til EGEN var ' + winners.playerOwn);
     AppFunc.downloadGameStats(this.state);
   }
 
