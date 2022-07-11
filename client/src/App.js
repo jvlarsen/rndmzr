@@ -157,7 +157,6 @@ var options = {
             </div>
           </div>
           <div className="colwide graph" id="graphDiv" >
-          <h1>GEEKSFORGEEKS BAR CHART REACTJS</h1>
       <div style={{ maxWidth: "650px" }}>
         <Bar
           data={data}
