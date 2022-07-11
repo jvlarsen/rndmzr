@@ -14,6 +14,8 @@ import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
 import CountdownTimer from './components/game/countdown';
 
+import { Bar } from "react-chartjs-2";
+
 class App extends Component {
 
   constructor(props){
@@ -29,6 +31,7 @@ class App extends Component {
       //Variables when loading and reloading
       participants:{},
       players: {},
+      playerNames: [],
       gameId: null,
       dataSet:{},
       labels:['Kick off'],
@@ -64,6 +67,7 @@ class App extends Component {
     if (gameStarted === true) {
       ElementsHelper.lockGame();
     }
+    this.getPlayerNames();
   }
 
   componentDidUpdate() {
@@ -97,7 +101,45 @@ class App extends Component {
   }
 
   render() {
+var data = {
+  labels: ["Chocolate", "Vanilla", "Strawberry"],
+  datasets: [
+      {
+          label: "Blue",
+          backgroundColor: "blue",
+          data: [3,7,4]
+      },
+      {
+          label: "Red",
+          backgroundColor: "red",
+          data: [4,3,5]
+      },
+      {
+          label: "Green",
+          backgroundColor: "green",
+          data: [7,2,6]
+      }
+  ]
+};
 
+var options = {
+  maintainAspectRatio: false,
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          // The y-axis value will start from zero
+          beginAtZero: true,
+        },
+      },
+    ],
+  },
+  legend: {
+    labels: {
+      fontSize: 15,
+    },
+  },
+};
     return (
       <div className="App">
 
@@ -115,7 +157,15 @@ class App extends Component {
             </div>
           </div>
           <div className="colwide graph" id="graphDiv" >
-            <LineGraph id="participantGraph" labels={this.state.labels} dataSets={this.state.dataSets} />
+          <h1>GEEKSFORGEEKS BAR CHART REACTJS</h1>
+      <div style={{ maxWidth: "650px" }}>
+        <Bar
+          data={data}
+          // Height of graph
+          height={400}
+          options={options}
+        />
+      </div>
           </div>
         </div>
         <div className="flex-grid participantslist">
@@ -169,6 +219,16 @@ class App extends Component {
     }
     this.setState({players:currentPlayers});
   }
+
+getPlayerNames = () => {
+  var players = this.state.players;
+  console.log(players);
+  for (let index = 0; index < Object.keys(players).length; index++) {
+    const element = players[index];
+    this.state.playerNames += element;
+  }
+  
+}
 
 startTheGame = (e) => {
     AppFunc.startTheGame(Object.keys(this.state.participants).length);
