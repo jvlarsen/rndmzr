@@ -94,15 +94,7 @@ class App extends Component {
     });
      
       var data = {
-        labels:  [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
-        ],
+        labels:  playerLabels,
         datasets: [
           {
             label: "Egen",
