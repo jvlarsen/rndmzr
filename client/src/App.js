@@ -12,9 +12,9 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
-import CountdownTimer from './components/game/countdown';
 
 import { Bar } from "react-chartjs-2";
+import { all } from 'express/lib/application';
 
 class App extends Component {
 
@@ -27,7 +27,7 @@ class App extends Component {
       graphColors: Connector.getGraphColors(),
       refereeIncluded: false,
       refereeSelected:false,
-      showParticipantGraph: true,
+      showParticipantGraph: false,
       //Variables when loading and reloading
       participants:{},
       players: {},
@@ -87,52 +87,85 @@ class App extends Component {
     }
     else {
       var allPlayers = this.state.players;
-  
+
       var playerLabels = [];
       Object.keys(allPlayers).forEach(function(k){
         playerLabels.push(allPlayers[k].Name);
     });
      
       var data = {
-        labels: playerLabels,
+        labels:  [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July"
+        ],
         datasets: [
-            {
-                label: "Blue",
-                backgroundColor: "blue",
-                data: [3,7]
-            },
-            {
-                label: "Red",
-                backgroundColor: "red",
-                data: [4,3]
-            },
-            {
-                label: "Green",
-                backgroundColor: "green",
-                data: [7,2]
-            }
-        ]
+          {
+            label: "Egen",
+            backgroundColor: "rgba(255,99,132,0.2)",
+            borderColor: "rgba(255,99,132,1)",
+            borderWidth: 1,
+            //stack: 1,
+            hoverBackgroundColor: "rgba(255,99,132,0.4)",
+            hoverBorderColor: "rgba(255,99,132,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+          },
+  
+          {
+            label: "Andre",
+            backgroundColor: "rgba(155,231,91,0.2)",
+            borderColor: "rgba(255,99,132,1)",
+            borderWidth: 1,
+            //stack: 1,
+            hoverBackgroundColor: "rgba(255,99,132,0.4)",
+            hoverBorderColor: "rgba(255,99,132,1)",
+            data: [45, 79, 50, 41, 16, 85, 20]
+          }
+        ],
       };
       var options = {
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                // The y-axis value will start from zero
-                beginAtZero: true,
-              },
-            },
-          ],
-        },
+        responsive: true,
         legend: {
-          labels: {
-            fontSize: 15,
-          },
+          display: false
         },
+        type: "bar"
       };
 
       ReactDOM.render(<Bar data={data} options={options} />, document.getElementById('graphDiv'));
+    }
+  }
+
+  getGraphPlayerDatasets = (players) => {
+
+    return {
+     
+      datasets: [
+        {
+          label: "My First dataset",
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          borderWidth: 1,
+          //stack: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: [65, 59, 80, 81, 56, 55, 40]
+        },
+
+        {
+          label: "My second dataset",
+          backgroundColor: "rgba(155,231,91,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          borderWidth: 1,
+          //stack: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: [45, 79, 50, 41, 16, 85, 20]
+        }
+      ]
     }
   }
 
