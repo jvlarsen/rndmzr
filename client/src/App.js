@@ -27,7 +27,7 @@ class App extends Component {
       graphColors: Connector.getGraphColors(),
       refereeIncluded: false,
       refereeSelected:false,
-      showParticipantGraph: false,
+      showParticipantGraph: true,
       //Variables when loading and reloading
       participants:{},
       players: {},
@@ -78,7 +78,7 @@ class App extends Component {
 
   toggleGraphs = (showParticipantGraph) => {
     if (showParticipantGraph) {
-      return;
+      ReactDOM.render(<LineGraph id="participantGraph" labels={this.state.labels} dataSets={this.state.dataSets} />, document.getElementById('graphDiv') );
     }
     else {
       var allPlayers = this.state.players;
