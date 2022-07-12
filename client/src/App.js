@@ -92,7 +92,8 @@ class App extends Component {
       Object.keys(allPlayers).forEach(function(k){
         playerLabels.push(allPlayers[k].Name);
     });
-     
+     var allPlayerData = this.getBarChartData(allPlayers);
+  
       var data = {
         labels:  playerLabels,
         datasets: [
@@ -101,10 +102,9 @@ class App extends Component {
             backgroundColor: "rgba(255,99,132,0.2)",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 1,
-            //stack: 1,
             hoverBackgroundColor: "rgba(255,99,132,0.4)",
             hoverBorderColor: "rgba(255,99,132,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: allPlayerData.own
           },
   
           {
@@ -112,10 +112,9 @@ class App extends Component {
             backgroundColor: "rgba(155,231,91,0.2)",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 1,
-            //stack: 1,
             hoverBackgroundColor: "rgba(255,99,132,0.4)",
             hoverBorderColor: "rgba(255,99,132,1)",
-            data: [45, 79, 50, 41, 16, 85, 20]
+            data: allPlayerData.other
           }
         ],
       };
@@ -129,6 +128,27 @@ class App extends Component {
 
       ReactDOM.render(<Bar data={data} options={options} />, document.getElementById('graphDiv'));
     }
+  }
+
+  getBarChartData = (allPlayers) => {
+    var playerData = {own: this.getOwnData(allPlayers), other: this.getOtherData(allPlayers)};
+    return playerData;
+  }
+
+  getOwnData = (allPlayers) => {
+    var ownData = [];
+    Object.keys(allPlayers).forEach(function(player) {
+      ownData.push(allPlayers[player].Own);
+    })
+    return ownData;
+  }
+
+  getOtherData = (allPlayers) => {
+    var otherData = [];
+    Object.keys(allPlayers).forEach(function(player) {
+      otherData.push(allPlayers[player].Other);
+    })
+    return otherData;
   }
 
   getGraphPlayerDatasets = (players) => {
