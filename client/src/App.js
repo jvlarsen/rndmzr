@@ -87,11 +87,6 @@ class App extends Component {
       Object.keys(allPlayers).forEach(function(k){
         playerLabels.push(allPlayers[k].Name);
     });
-
-    /*if (this.state.refereeIncluded) {
-      playerLabels += this
-    }
-    */
      
       var data = {
         labels: playerLabels,
