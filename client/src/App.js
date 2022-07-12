@@ -76,6 +76,11 @@ class App extends Component {
     this.saveGame();
   }
 
+  changeGraph = () => {
+    var newStatus = !this.state.showParticipantGraph;
+    this.setState({showParticipantGraph: newStatus});
+  }
+
   toggleGraphs = (showParticipantGraph) => {
     if (showParticipantGraph) {
       ReactDOM.render(<LineGraph id="participantGraph" labels={this.state.labels} dataSets={this.state.dataSets} />, document.getElementById('graphDiv') );
@@ -166,7 +171,7 @@ class App extends Component {
       <div className="App">
 
         <div className="wipediv">         
-            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)}/>
+            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)} onClick={this.changeGraph.bind(this)} />
         </div>
         <div className="flex-grid topgrid">
           <div className="flex-grid teamsandevents">
@@ -222,6 +227,14 @@ class App extends Component {
     this.updateWhatToDrink(JSON.parse(randomizerResult.result));
 
     var currentPlayers = this.state.players;
+
+    /*
+      Her har jeg logikken til at finde Bar Chart data for hver spiller.
+      Til datasets skal:
+      - Label = playerName
+      - Data = [own, other]
+      - Backgroundcolor = player.getGraphColor //eller hvad det nu hedder.
+    */
 
     if (selectedPlayer.id === 'referee') {
       currentPlayers['referee'].Own = randomizerResult.stats.Stats.Own;
