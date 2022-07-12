@@ -27,7 +27,7 @@ class App extends Component {
       graphColors: Connector.getGraphColors(),
       refereeIncluded: false,
       refereeSelected:false,
-
+      showParticipantGraph: false,
       //Variables when loading and reloading
       participants:{},
       players: {},
@@ -71,7 +71,69 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    console.log('didUpdate runs');
+    this.toggleGraphs(this.state.showParticipantGraph);
     this.saveGame();
+  }
+
+  toggleGraphs = (showParticipantGraph) => {
+    if (showParticipantGraph) {
+      return;
+    }
+    else {
+      var allPlayers = this.state.players;
+  
+      var playerLabels = [];
+      Object.keys(allPlayers).forEach(function(k){
+        playerLabels.push(allPlayers[k].Name);
+    });
+
+    /*if (this.state.refereeIncluded) {
+      playerLabels += this
+    }
+    */
+     
+      var data = {
+        labels: playerLabels,
+        datasets: [
+            {
+                label: "Blue",
+                backgroundColor: "blue",
+                data: [3,7]
+            },
+            {
+                label: "Red",
+                backgroundColor: "red",
+                data: [4,3]
+            },
+            {
+                label: "Green",
+                backgroundColor: "green",
+                data: [7,2]
+            }
+        ]
+      };
+      var options = {
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                // The y-axis value will start from zero
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+        legend: {
+          labels: {
+            fontSize: 15,
+          },
+        },
+      };
+
+      ReactDOM.render(<Bar data={data} options={options} />, document.getElementById('graphDiv'));
+    }
   }
 
   loadGame() {
@@ -101,45 +163,10 @@ class App extends Component {
   }
 
   render() {
-var data = {
-  labels: ["Chocolate", "Vanilla", "Strawberry"],
-  datasets: [
-      {
-          label: "Blue",
-          backgroundColor: "blue",
-          data: [3,7,4]
-      },
-      {
-          label: "Red",
-          backgroundColor: "red",
-          data: [4,3,5]
-      },
-      {
-          label: "Green",
-          backgroundColor: "green",
-          data: [7,2,6]
-      }
-  ]
-};
+    console.log('render runs');
 
-var options = {
-  maintainAspectRatio: false,
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          // The y-axis value will start from zero
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
-  legend: {
-    labels: {
-      fontSize: 15,
-    },
-  },
-};
+
+
     return (
       <div className="App">
 
@@ -157,14 +184,7 @@ var options = {
             </div>
           </div>
           <div className="colwide graph" id="graphDiv" >
-      <div style={{ maxWidth: "650px" }}>
-        <Bar
-          data={data}
-          // Height of graph
-          height={400}
-          options={options}
-        />
-      </div>
+      
           </div>
         </div>
         <div className="flex-grid participantslist">
