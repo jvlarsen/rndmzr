@@ -2,6 +2,9 @@ import Connector from "./connector";
 import React from "react";
 import ReactDOM from "react-dom";
 import CountdownTimer from "../components/game/countdown";
+import LineGraph from '../components/graph/lineGraph';
+import AppFunc from "./appFunctions";
+import { Bar } from "react-chartjs-2";
 
 const getStatus = (index) => {
   var statusElement = document.getElementById('status'+index);
@@ -109,6 +112,55 @@ const showCountdown = (milliseconds) => {
       );
 }
 
+const toggleGraphs = (showParticipantGraph, state) => {
+  if (showParticipantGraph) {
+    ReactDOM.render(<LineGraph id="participantGraph" labels={state.labels} dataSets={state.dataSets} />, document.getElementById('graphDiv') );
+  }
+  else {
+    var allPlayers = state.players;
+
+    var playerLabels = [];
+    Object.keys(allPlayers).forEach(function(k){
+      playerLabels.push(allPlayers[k].Name);
+  });
+   var allPlayerData = AppFunc.getBarChartData(allPlayers);
+
+    var data = {
+      labels:  playerLabels,
+      datasets: [
+        {
+          label: "Egen",
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          borderWidth: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: allPlayerData.own
+        },
+
+        {
+          label: "Andre",
+          backgroundColor: "rgba(155,231,91,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          borderWidth: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: allPlayerData.other
+        }
+      ],
+    };
+    var options = {
+      responsive: true,
+      legend: {
+        display: false
+      },
+      type: "bar"
+    };
+
+    ReactDOM.render(<Bar data={data} options={options} />, document.getElementById('graphDiv'));
+  }
+}
+
 export default {
   getStatus,
   getBank,
@@ -125,4 +177,5 @@ export default {
   showHiddenElement,
   setRefereeIncluded,
   showCountdown,
+  toggleGraphs,
 }

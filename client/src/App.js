@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 import Events from './events';
 import TeamBox from './components/team/teamBox';
@@ -7,14 +6,10 @@ import Randomize from './components/randomize';
 import ParticipantBox from './components/participantComponents/participantBox';
 import Engine from './helpers/randomizer';
 import ElementsHelper from './helpers/elementsHelper';
-import LineGraph from './components/graph/lineGraph';
 import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
-
-import { Bar } from "react-chartjs-2";
-import { all } from 'express/lib/application';
 
 class App extends Component {
 
@@ -82,103 +77,8 @@ class App extends Component {
   }
 
   toggleGraphs = (showParticipantGraph) => {
-    if (showParticipantGraph) {
-      ReactDOM.render(<LineGraph id="participantGraph" labels={this.state.labels} dataSets={this.state.dataSets} />, document.getElementById('graphDiv') );
-    }
-    else {
-      var allPlayers = this.state.players;
-
-      var playerLabels = [];
-      Object.keys(allPlayers).forEach(function(k){
-        playerLabels.push(allPlayers[k].Name);
-    });
-     var allPlayerData = this.getBarChartData(allPlayers);
-  
-      var data = {
-        labels:  playerLabels,
-        datasets: [
-          {
-            label: "Egen",
-            backgroundColor: "rgba(255,99,132,0.2)",
-            borderColor: "rgba(255,99,132,1)",
-            borderWidth: 1,
-            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-            hoverBorderColor: "rgba(255,99,132,1)",
-            data: allPlayerData.own
-          },
-  
-          {
-            label: "Andre",
-            backgroundColor: "rgba(155,231,91,0.2)",
-            borderColor: "rgba(255,99,132,1)",
-            borderWidth: 1,
-            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-            hoverBorderColor: "rgba(255,99,132,1)",
-            data: allPlayerData.other
-          }
-        ],
-      };
-      var options = {
-        responsive: true,
-        legend: {
-          display: false
-        },
-        type: "bar"
-      };
-
-      ReactDOM.render(<Bar data={data} options={options} />, document.getElementById('graphDiv'));
-    }
-  }
-
-  getBarChartData = (allPlayers) => {
-    var playerData = {own: this.getOwnData(allPlayers), other: this.getOtherData(allPlayers)};
-    return playerData;
-  }
-
-  getOwnData = (allPlayers) => {
-    var ownData = [];
-    Object.keys(allPlayers).forEach(function(player) {
-      ownData.push(allPlayers[player].Own);
-    })
-    return ownData;
-  }
-
-  getOtherData = (allPlayers) => {
-    var otherData = [];
-    Object.keys(allPlayers).forEach(function(player) {
-      otherData.push(allPlayers[player].Other);
-    })
-    return otherData;
-  }
-
-  getGraphPlayerDatasets = (players) => {
-
-    return {
-     
-      datasets: [
-        {
-          label: "My First dataset",
-          backgroundColor: "rgba(255,99,132,0.2)",
-          borderColor: "rgba(255,99,132,1)",
-          borderWidth: 1,
-          //stack: 1,
-          hoverBackgroundColor: "rgba(255,99,132,0.4)",
-          hoverBorderColor: "rgba(255,99,132,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-
-        {
-          label: "My second dataset",
-          backgroundColor: "rgba(155,231,91,0.2)",
-          borderColor: "rgba(255,99,132,1)",
-          borderWidth: 1,
-          //stack: 1,
-          hoverBackgroundColor: "rgba(255,99,132,0.4)",
-          hoverBorderColor: "rgba(255,99,132,1)",
-          data: [45, 79, 50, 41, 16, 85, 20]
-        }
-      ]
-    }
+    //Alt trækkes ud af App.js
+    ElementsHelper.toggleGraphs(showParticipantGraph, this.state);
   }
 
   loadGame() {
@@ -208,10 +108,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('render runs');
-
-
-
     return (
       <div className="App">
 
@@ -272,14 +168,6 @@ class App extends Component {
     this.updateWhatToDrink(JSON.parse(randomizerResult.result));
 
     var currentPlayers = this.state.players;
-
-    /*
-      Her har jeg logikken til at finde Bar Chart data for hver spiller.
-      Til datasets skal:
-      - Label = playerName
-      - Data = [own, other]
-      - Backgroundcolor = player.getGraphColor //eller hvad det nu hedder.
-    */
 
     if (selectedPlayer.id === 'referee') {
       currentPlayers['referee'].Own = randomizerResult.stats.Stats.Own;
@@ -426,12 +314,7 @@ startTheGame = (e) => {
   }
 
   updatePlayerAllocationKeys() {
-    var currPlayers = this.state.players;
-    for (var player in currPlayers) {
-      var playerField = document.getElementById(player);
-      currPlayers[player].AllocationKey = playerField.getAttribute('allocationkey');
-    }
-    this.setState({players: currPlayers});
+    this.setState({players: AppFunc.updatePlayerAllocationKeys(this.state.players)});
   }
 
   updateParticipantAllocationKeys() {

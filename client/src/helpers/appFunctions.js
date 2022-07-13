@@ -71,6 +71,7 @@ const undoLatest = () => {
 }
 
 const findWorms = (ownOther) => {
+  //Den her skal omskrives, hvis jeg fjerner visning af Own/Other ved siden af spillerne.
     var allValues = document.getElementsByClassName(ownOther);
     var maxValue = 0;
     var maxPlayer = '';
@@ -199,6 +200,14 @@ const endGame = () => {
   playSound('gameover');
 }
 
+const updatePlayerAllocationKeys = (currPlayers) => {
+    for (var player in currPlayers) {
+      var playerField = document.getElementById(player);
+      currPlayers[player].AllocationKey = playerField.getAttribute('allocationkey');
+    }
+    return currPlayers;
+}
+
 const findWinners = (dataSets) => {
   var maxOther = findWorms('other');
   var maxOwn = findWorms('own');
@@ -211,6 +220,27 @@ const findWinners = (dataSets) => {
   ElementsHelper.addClassToElement(maxOwn.player, 'highlightworst');
 
   return {maxOther: maxOther, maxOwn: maxOwn, maxParticipant: maxParticipant, playerOther:playerOther, playerOwn:playerOwn};
+}
+
+const getBarChartData = (allPlayers) => {
+  var playerData = {own: getOwnData(allPlayers), other: getOtherData(allPlayers)};
+  return playerData;
+}
+
+const getOwnData = (allPlayers) => {
+  var ownData = [];
+  Object.keys(allPlayers).forEach(function(player) {
+    ownData.push(allPlayers[player].Own);
+  })
+  return ownData;
+}
+
+const getOtherData = (allPlayers) => {
+  var otherData = [];
+  Object.keys(allPlayers).forEach(function(player) {
+    otherData.push(allPlayers[player].Other);
+  })
+  return otherData;
 }
 
 export default {
@@ -228,4 +258,6 @@ export default {
   validateReadyForNextRandomizer,
   endGame,
   findWinners,
+  getBarChartData,
+  updatePlayerAllocationKeys,
 }
