@@ -40,47 +40,6 @@ class App extends Component {
     this.loadGame();
   }
 
-  componentDidMount() {
-    var players = JSON.parse(localStorage.getItem('players'));
-    if (players) {
-      this.playersWereLoaded(players);
-    }
-    if (this.state.refereeIncluded) {
-      ElementsHelper.setRefereeIncluded()
-    }
-
-    var dataSetsLocal = Connector.loadFromLocal('dataSets');
-    if (dataSetsLocal) {
-      var currDataSets = this.state.dataSets;
-      for (var i = 0; i < Object.keys(currDataSets).length; i++) {
-        currDataSets[i].dataset.data = dataSetsLocal[i];
-      }
-      this.setState({dataSets: currDataSets});
-    }
-
-    var gameStarted = this.state.gameStarted;
-    if (gameStarted === true) {
-      ElementsHelper.lockGame();
-    }
-    this.getPlayerNames();
-  }
-
-  componentDidUpdate() {
-    console.log('didUpdate runs');
-    this.toggleGraphs(this.state.showParticipantGraph);
-    this.saveGame();
-  }
-
-  changeGraph = () => {
-    var newStatus = !this.state.showParticipantGraph;
-    this.setState({showParticipantGraph: newStatus});
-  }
-
-  toggleGraphs = (showParticipantGraph) => {
-    //Alt trækkes ud af App.js
-    ElementsHelper.toggleGraphs(showParticipantGraph, this.state);
-  }
-
   loadGame() {
     var localLabels = Connector.loadFromLocal('labels');
     if (localLabels) {
@@ -103,8 +62,17 @@ class App extends Component {
     }
   }
 
-  saveGame() {
-    Connector.saveGame(this.state.dataSets, this.state.labels, this.state.participants, this.state.players, this.state.refereeIncluded);
+  labelsWereLoaded(labels) {
+    for (var i = 0; i < labels.length; i++) {
+      this.addLabelToGraph(labels[i]);
+    }
+  }
+
+  participantsWereLoaded(participantsJson) {
+    //Omskriv alle loops til map-functions.
+    for (var i = 0; i < Object.keys(participantsJson).length; i++) {
+      this.addParticipant(participantsJson[i]);
+    }
   }
 
   render() {
@@ -140,6 +108,67 @@ class App extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    //Denne eksekverer efter render, så jeg kan få fat i ElementById.
+    //Så kan jeg indlæse gemte værdier for hold, spillere, deltagere og grafer.
+    var players = Connector.loadFromLocal('players');
+    if (players) {
+      this.playersWereLoaded(players);
+    }
+    if (this.state.refereeIncluded) {
+      ElementsHelper.setRefereeIncluded()
+    }
+
+    var dataSetsLocal = Connector.loadFromLocal('dataSets');
+    if (dataSetsLocal) {
+      var currDataSets = this.state.dataSets;
+      for (var i = 0; i < Object.keys(currDataSets).length; i++) {
+        currDataSets[i].dataset.data = dataSetsLocal[i];
+      }
+      this.setState({dataSets: currDataSets});
+    }
+
+    var gameStarted = this.state.gameStarted;
+    if (gameStarted === true) {
+      ElementsHelper.lockGame();
+    }
+    var teamNames = Connector.getTeamNames();
+    this.setState({hometeamname: teamNames.homeTeam, awayteamname: teamNames.awayTeam});
+    ElementsHelper.updateTeamNames(teamNames);
+    this.getPlayerNames();
+  }
+
+  playersWereLoaded(playersJson) {
+    ElementsHelper.updateLoadedPlayers(playersJson);
+    this.setState({players:playersJson});
+  }
+
+  getPlayerNames = () => {
+    var players = this.state.players;
+    for (let index = 0; index < Object.keys(players).length; index++) {
+      const element = players[index];
+      this.setState({playerNames: [...this.state.playerNames, element]});
+    }
+  }
+
+  componentDidUpdate() {
+    this.toggleGraphs(this.state.showParticipantGraph);
+    this.saveGame();
+  }
+
+  toggleGraphs = (showParticipantGraph) => {
+    ElementsHelper.toggleGraphs(showParticipantGraph, this.state);
+  }
+
+  saveGame() {
+    Connector.saveGame(this.state.dataSets, this.state.labels, this.state.participants, this.state.players, this.state.refereeIncluded);
+  }
+
+  changeGraph = () => {
+    var newStatus = !this.state.showParticipantGraph;
+    this.setState({showParticipantGraph: newStatus});
   }
 
   toggleGameEnded() {
@@ -180,15 +209,7 @@ class App extends Component {
     this.setState({players:currentPlayers});
   }
 
-getPlayerNames = () => {
-  var players = this.state.players;
-  console.log(players);
-  for (let index = 0; index < Object.keys(players).length; index++) {
-    const element = players[index];
-    this.state.playerNames += element;
-  }
-  
-}
+
 
 startTheGame = (e) => {
     AppFunc.startTheGame(Object.keys(this.state.participants).length);
@@ -245,36 +266,23 @@ startTheGame = (e) => {
     currDataSets[allocationKey].dataset.data.push(newTotal);
   }
 
-  participantsWereLoaded(participantsJson) {
-    //Omskriv alle loops til map-functions.
-    for (var i = 0; i < Object.keys(participantsJson).length; i++) {
-      this.addParticipant(participantsJson[i]);
-    }
-  }
-
-  playersWereLoaded(playersJson) {
-    ElementsHelper.updateLoadedPlayers(playersJson);
-    this.setState({players:playersJson});
-  }
-
   gameWasLoaded(loadedGameData) {
+    console.log('12');
     this.dataSetsWereLoaded(loadedGameData.dataSets);
     this.labelsWereLoaded(loadedGameData.labels);
   }
 
   dataSetsWereLoaded(dataSets) {
+    console.log('13');
     for (var dataArrayIndex in dataSets) {
       this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
     }
   }
 
-  labelsWereLoaded(labels) {
-    for (var i = 0; i < labels.length; i++) {
-      this.addLabelToGraph(labels[i]);
-    }
-  }
+ 
 
   gameDataLoaded(gameData) {
+    console.log('15');
     this.participantsWereLoaded(gameData[1]);
     this.playersWereLoaded(gameData[0].players);
     this.gameWasLoaded(gameData[0]);
@@ -307,10 +315,13 @@ startTheGame = (e) => {
     }
     if (e.target.id === 'hometeamname') {
       this.setState({hometeamname: e.target.value});
+      Connector.saveToLocal(e.target.value, 'homeTeam');
     }
     if (e.target.id === 'awayteamname') {
       this.setState({awayteamname: e.target.value});
+      Connector.saveToLocal(e.target.value, 'awayTeam');
     }
+    
   }
 
   updatePlayerAllocationKeys() {

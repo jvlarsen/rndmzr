@@ -59,6 +59,10 @@ const updateLoadedPlayers = (playersJson) => {
   }
 }
 
+const updateTeamNames = (teams) => {
+  document.getElementById('hometeamname').value = teams.homeTeam;
+  document.getElementById('awayteamname').value = teams.awayTeam;
+}
 const setReferee = (referee) => {
   var refEle = document.getElementById('referee');
   refEle.value = referee.Name;
@@ -152,7 +156,7 @@ const toggleGraphs = (showParticipantGraph, state) => {
     var options = {
       responsive: true,
       legend: {
-        display: false
+        display: true
       },
       type: "bar"
     };
@@ -178,4 +182,5 @@ export default {
   setRefereeIncluded,
   showCountdown,
   toggleGraphs,
+  updateTeamNames,
 }

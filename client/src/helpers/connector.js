@@ -156,6 +156,12 @@ const saveCounter = (counter, index) => {
   saveToLocal(allCounters, 'allCounters');
 }
 
+const getTeamNames = () => {
+  var homeTeam = loadFromLocal('homeTeam');
+  var awayTeam = loadFromLocal('awayTeam');
+  return {homeTeam: homeTeam, awayTeam:awayTeam};
+}
+
 export default {
   randomize,
   getParticipants,
@@ -169,4 +175,5 @@ export default {
   saveToLocal,
   loadFromLocal,
   saveCounter,
+  getTeamNames,
 }
