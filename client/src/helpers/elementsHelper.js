@@ -111,7 +111,7 @@ const setRefereeIncluded = () => {
 
 const showCountdown = (milliseconds) => {
   ReactDOM.render(
-    <CountdownTimer date={Date.now() + 10000} />,
+    <CountdownTimer date={Date.now() + 20000} />,
     document.getElementById('countdownDiv')
       );
 }
