@@ -10,6 +10,7 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
+import connector from './helpers/connector';
 
 class App extends Component {
 
@@ -233,8 +234,6 @@ startTheGame = (e) => {
   }
 
   addParticipantToGraph = (participantName) => {
-    debugger;
-    console.log('adding participant to graph');
     var index = Object.keys(this.state.participants).length-1;
     var color = this.state.graphColors[index].color;
     var borderColor = this.state.graphColors[index].borderColor;
@@ -244,7 +243,6 @@ startTheGame = (e) => {
   }
 
   updateWhatToDrink(randomizerResult) {
-    debugger;
     for (var i = 0; i < randomizerResult.length; i++) {
       this.addEventToGraph(i, randomizerResult[i].value.NumericMeasure);
       var currStatus = ElementsHelper.getStatus(randomizerResult[i].status);
@@ -270,22 +268,17 @@ startTheGame = (e) => {
   }
 
   gameWasLoaded(loadedGameData) {
-    console.log('12');
     this.dataSetsWereLoaded(loadedGameData.dataSets);
     this.labelsWereLoaded(loadedGameData.labels);
   }
 
   dataSetsWereLoaded(dataSets) {
-    console.log('13');
     for (var dataArrayIndex in dataSets) {
       this.addEventArrayToGraph(dataArrayIndex, dataSets[dataArrayIndex]);
     }
   }
 
- 
-
   gameDataLoaded(gameData) {
-    console.log('15');
     this.participantsWereLoaded(gameData[1]);
     this.playersWereLoaded(gameData[0].players);
     this.gameWasLoaded(gameData[0]);
