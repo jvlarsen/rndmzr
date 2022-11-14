@@ -10,6 +10,7 @@ body {
     overflow-x: auto;
     white-space: nowrap;
     padding: 10px;
+    background-image: url('trophy2.jpeg');
 }
 
 h1 {
@@ -146,13 +147,13 @@ input[allocationKey='3'], span[allocationKey='3']  {
     color: white;
 }
 input[allocationKey='4'], span[allocationKey='4']  {
-    background-color: rgba(246, 250, 17);
+    background-color: rgba(51, 102, 0);
 }
 input[allocationKey='5'], span[allocationKey='5']  {
-    background-color: rgb(247, 15, 240);
+    background-color: rgb(255, 255, 0);
 }
 input[allocationKey='6'], span[allocationKey='6']  {
-    background-color: rgba(6, 64, 10);
+    background-color: rgba(153, 0, 204);
     color: white;
 }
 input[allocationKey='7'], span[allocationKey='7']  {

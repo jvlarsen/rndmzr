@@ -233,6 +233,8 @@ startTheGame = (e) => {
   }
 
   addParticipantToGraph = (participantName) => {
+    debugger;
+    console.log('adding participant to graph');
     var index = Object.keys(this.state.participants).length-1;
     var color = this.state.graphColors[index].color;
     var borderColor = this.state.graphColors[index].borderColor;
@@ -242,6 +244,7 @@ startTheGame = (e) => {
   }
 
   updateWhatToDrink(randomizerResult) {
+    debugger;
     for (var i = 0; i < randomizerResult.length; i++) {
       this.addEventToGraph(i, randomizerResult[i].value.NumericMeasure);
       var currStatus = ElementsHelper.getStatus(randomizerResult[i].status);
