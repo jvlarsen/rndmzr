@@ -10,7 +10,6 @@ import Connector from './helpers/connector'
 import AppFunc from './helpers/appFunctions';
 import GameMenu from './components/game/gameMenu';
 import Undo from './components/game/undo';
-import connector from './helpers/connector';
 
 class App extends Component {
 
@@ -81,7 +80,7 @@ class App extends Component {
       <div className="App">
 
         <div className="wipediv">         
-            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)} onClick={this.changeGraph.bind(this)} />
+            <GameMenu wipe={AppFunc.resetGame.bind(this)} gameDataLoaded={this.gameDataLoaded.bind(this)} onClick={this.changeGraph.bind(this)} soundToggle={this.toggleSound.bind(this)}/>
         </div>
         <div className="flex-grid topgrid">
           <div className="flex-grid teamsandevents">
@@ -346,6 +345,10 @@ startTheGame = (e) => {
   onRefereeCheckboxToggle(e) {
     const newState = !this.state.refereeIncluded;
     this.setState({refereeIncluded:newState})
+  }
+
+  toggleSound(e) {
+    AppFunc.toggleSound();
   }
 }
 

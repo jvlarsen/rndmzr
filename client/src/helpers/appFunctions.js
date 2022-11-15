@@ -3,6 +3,8 @@ import Sounds from './soundsHelper';
 import Engine from './randomizer';
 import ElementsHelper from './elementsHelper';
 
+let soundEnabled = true;
+
 const createDataSet = (name, color, borderColor) => {
   return {
     dataset:{
@@ -26,6 +28,10 @@ const createDataSet = (name, color, borderColor) => {
       pointRadius: 1,
       pointHitRadius: 10}
     }
+}
+
+const toggleSound = () => {
+  soundEnabled = !soundEnabled;
 }
 
 const getSelectedEvent = (state) => {
@@ -121,7 +127,9 @@ const checkStatusesAreClear = () => {
 }
 
 const playSound = (selectedEvent) => {
-  Sounds.playSound(selectedEvent);
+  if (soundEnabled) {
+    Sounds.playSound(selectedEvent);
+  }
 }
 
 const downloadGameStats = (fullDataSet) => {
@@ -260,4 +268,5 @@ export default {
   findWinners,
   getBarChartData,
   updatePlayerAllocationKeys,
+  toggleSound,
 }
