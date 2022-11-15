@@ -91,9 +91,11 @@ class App extends Component {
               <Events onOptionChange={this.onEventChange.bind(this)} selectedOption={this.state.selectedEvent} refereeSelected={this.state.refereeSelected}/>
               <Randomize onClick={this.onClickRandomize.bind(this)} />
             </div>
+            <div className="randomizerButton" id="randomizerDiv">
+              
+            </div>
           </div>
           <div className="colwide graph" id="graphDiv" >
-      
           </div>
         </div>
         <div className="flex-grid participantslist">

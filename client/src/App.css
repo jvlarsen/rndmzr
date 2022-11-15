@@ -89,6 +89,10 @@ h1 {
   background-color: orange !important;
 }
 
+.graph {
+  border:#000;
+}
+
 .undo {
   margin-top: 200px;
   height: 50px;
@@ -177,7 +181,7 @@ input[allocationKey], span[allocationKey] {
 
 .participantslist {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .inline {

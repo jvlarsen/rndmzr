@@ -42,3 +42,11 @@
   height: 1.3em; 
 }
 
+.teamsgrid {
+  height: 370px;
+}
+
+.teamboxdiv {
+  width: 430px;
+  height: 370px;
+}

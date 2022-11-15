@@ -11,7 +11,7 @@ export default class LineSample extends React.Component {
     var data = this.getData();
     var options = this.getOptions();
     return (
-      <div className="graph">
+      <div className="graph" >
         <Line data={data} options={options} />
       </div>
     );
@@ -25,22 +25,37 @@ export default class LineSample extends React.Component {
 
     getOptions = () => {
     return {
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: {
-            // This more specific font property overrides the global property
-            font: {
-                size: 19,
-                color: "red",
-            }
+      legend: {
+        labels: {
+            fontColor: "black",
+            fontSize: 18
         }
-        },
+    },
+      responsive: true,
+        scales: {
+          yAxes: [{
+              ticks: {
+                  fontColor: "black",
+                  fontSize: 18,
+                  stepSize: 1,
+                  beginAtZero: true,
+              }
+          }],
+          xAxes: [{
+              ticks: {
+                  fontColor: "black",
+                  fontSize: 14,
+                  stepSize: 1,
+                  beginAtZero: true,
+              }
+          }]
+      },
         title: {
           display: true,
-          text: 'Måltavlen',
+          text: 'MÅLTAVLEN',
+          fontColor: "red",
+          fontSize: 24,
         },
-      },
     };
   }
 

@@ -134,20 +134,20 @@ const toggleGraphs = (showParticipantGraph, state) => {
       datasets: [
         {
           label: "Egen",
-          backgroundColor: "rgba(255,99,132,0.2)",
+          backgroundColor: "red",
           borderColor: "rgba(255,99,132,1)",
           borderWidth: 1,
-          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBackgroundColor: "orange",
           hoverBorderColor: "rgba(255,99,132,1)",
           data: allPlayerData.own
         },
 
         {
           label: "Andre",
-          backgroundColor: "rgba(155,231,91,0.2)",
+          backgroundColor: "green",
           borderColor: "rgba(255,99,132,1)",
           borderWidth: 1,
-          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBackgroundColor: "lightgreen",
           hoverBorderColor: "rgba(255,99,132,1)",
           data: allPlayerData.other
         }
@@ -156,9 +156,38 @@ const toggleGraphs = (showParticipantGraph, state) => {
     var options = {
       responsive: true,
       legend: {
-        display: true
+        display: true,
+        labels: {
+          fontColor: "black",
+          fontSize: 18
+      }
       },
-      type: "bar"
+      type: "bar",
+      responsive: true,
+        scales: {
+          yAxes: [{
+              ticks: {
+                  fontColor: "black",
+                  fontSize: 18,
+                  stepSize: 1,
+                  beginAtZero: true,
+              }
+          }],
+          xAxes: [{
+              ticks: {
+                  fontColor: "black",
+                  fontSize: 14,
+                  stepSize: 1,
+                  beginAtZero: true,
+              }
+          }]
+      },
+        title: {
+          display: true,
+          text: 'SPILLERSTATS',
+          fontColor: "red",
+          fontSize: 24,
+        },
     };
 
     ReactDOM.render(<Bar data={data} options={options} />, document.getElementById('graphDiv'));
