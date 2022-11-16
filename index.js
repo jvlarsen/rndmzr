@@ -3,7 +3,7 @@ const path = require('path');
 const generatePassword = require('password-generator');
 const app = express();
 
-const DataConnector = require('./backend/dataConnector');
+//const DataConnector = require('./backend/dataConnector');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -40,6 +40,7 @@ app.get('/api/events', (req, res) => {
                   {Id:16, Name:'Best Worm Andre (grøn)', RefereeName:'Best Worm Andre (grøn)', Type:'Own1'},]);
 });
 
+/* Commenting out to remove "require". I am not using the load game functionality anyway.
 app.get('/api/games/gameId/participants', (req, res) => {
   var loadedParticipants = DataConnector.getParticipants(req.query['gameId']);
   res.json(loadedParticipants);
@@ -58,7 +59,7 @@ app.get('/api/games/gameId', (req, res) => {
   gameData.push(loadedParticipants);
   res.json(gameData);
 })
-
+*/
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
